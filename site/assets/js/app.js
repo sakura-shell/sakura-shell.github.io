@@ -10,6 +10,7 @@ import * as identify from './views/identify.js';
 import * as box from './views/box.js';
 import * as scan from './views/scan.js';
 import * as about from './views/about.js';
+import * as guide from './views/guide.js';
 
 const routes = [
   { re: /^\/$/, view: home, tab: 'home' },
@@ -20,12 +21,13 @@ const routes = [
   { re: /^\/box$/, view: box, tab: 'box' },
   { re: /^\/scan$/, view: scan, tab: 'box' },
   { re: /^\/about$/, view: about, tab: 'home' },
+  { re: /^\/guide$/, view: guide, tab: 'home' },
 ];
 
 const TABS = [
   { key: 'home', href: '#/', label: 'ホーム', icon: 'home' },
-  { key: 'list', href: '#/list', label: '貝を探す', icon: 'search' },
-  { key: 'identify', href: '#/identify', label: 'なんだろう', icon: 'camera' },
+  { key: 'list', href: '#/list', label: '図鑑', icon: 'search' },
+  { key: 'identify', href: '#/identify', label: '写真で調べる', icon: 'camera' },
   { key: 'box', href: '#/box', label: '収集箱', icon: 'box' },
 ];
 

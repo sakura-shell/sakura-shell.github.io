@@ -30,7 +30,7 @@ export function filterChips(data, state, rec, onChange) {
     wrap.replaceChildren();
     if (shapes.length) {
       const row = h('div', { class: 'chip-wrap', role: 'group', 'aria-label': '形で絞り込む' });
-      row.append(chip('すべて', !state.shape, () => { state.shape = ''; }));
+      row.append(chip('すべての形', !state.shape, () => { state.shape = ''; }));
       for (const key of shapes) row.append(chip(data.shapes[key].label, state.shape === key, () => { state.shape = key; }, shapeIc(key)));
       wrap.append(row);
     }
@@ -45,6 +45,7 @@ export function filterChips(data, state, rec, onChange) {
     }
     if (colors.length) {
       const row = h('div', { class: 'chip-wrap', role: 'group', 'aria-label': '色で絞り込む' });
+      row.append(chip('すべての色', !state.color, () => { state.color = ''; }));
       for (const key of colors) {
         const col = data.colorPalette[key];
         row.append(chip(col.label, state.color === key, () => { state.color = state.color === key ? '' : key; },
@@ -70,6 +71,16 @@ export function applyFilters(list, state, rec) {
     if (state.color && !sp.v.colors.includes(state.color)) return false;
     return true;
   });
+}
+
+// 今の絞り込み条件を短い言葉で（例：「さくら」・二枚貝・ピンク）
+export function filterLabels(data, state) {
+  const out = [];
+  if (state.q) out.push(`「${state.q}」`);
+  if (state.shape) out.push(data.shapes[state.shape]?.label);
+  if (state.color) out.push(data.colorPalette[state.color]?.label);
+  if (state.box) out.push({ empty: '空きマスの貝', check: '要確認', unknown: '未記録' }[state.box]);
+  return out.filter(Boolean);
 }
 
 export function hasFilter(state) {

@@ -88,7 +88,7 @@ export function pendingTag(text = '照合待ち') {
 }
 
 export function stars(n) {
-  return h('span', { class: 'stars', 'aria-label': `星${n}つ` }, '★'.repeat(n));
+  return h('span', { class: 'stars', 'aria-label': `レア度 星${n}つ` }, h('span', { class: 'stars-label' }, 'レア度'), '★'.repeat(n));
 }
 
 export function shapeTag(data, sp) {
@@ -129,6 +129,17 @@ function remember() {
 
 // ---- トースト ----
 let toastTimer;
+// 操作ボタン付きのお知らせ（「取り消す」など）
+export function toastAction(msg, label, onAction, ms = 6000) {
+  document.querySelector('.toast')?.remove();
+  const btn = h('button', { class: 'toast-action', type: 'button' }, label);
+  const t = h('div', { class: 'toast has-action', role: 'status' }, h('span', null, msg), btn);
+  btn.addEventListener('click', () => { t.remove(); onAction(); });
+  document.body.append(t);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.remove(), ms);
+}
+
 export function toast(msg, ms = 2600) {
   document.querySelector('.toast')?.remove();
   const t = h('div', { class: 'toast', role: 'status' }, msg);

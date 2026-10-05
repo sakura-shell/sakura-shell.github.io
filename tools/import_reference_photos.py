@@ -187,7 +187,7 @@ def find_subject(img):
     return (x0 * sx, y0 * sy, (x1 + 1) * sx, (y1 + 1) * sy), bg
 
 
-def square_crop(img, box, bg, margin=0.22):
+def square_crop(img, box, bg, margin=0.12):
     """貝を中心に、余白を付けた正方形に切り出す（はみ出す所は背景の色で埋める）"""
     if box is None:
         side = min(img.size)

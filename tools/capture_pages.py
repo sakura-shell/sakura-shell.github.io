@@ -184,18 +184,20 @@ def pages(only):
     out = [
         ("home", "ホーム（記録なし）", "#/", "clear"),
         ("home-rec", "ホーム（記録あり：見本）", "#/", "sample"),
-        ("list", "貝を探す（一覧）", "#/list", "sample"),
+        ("guide", "初めての方へ", "#/guide", "sample"),
+        ("list", "貝の図鑑（一覧）", "#/list", "sample"),
     ]
     for sp in data["species"]:
         out.append((f"shell-{sp['no']:02d}", f"貝の詳細 {sp['no']}番 {sp['name']['text']}", f"#/shell/{sp['no']}", "sample"))
     out += [
-        ("identify", "この貝はなんだろう（撮影前）", "#/identify", "clear"),
-        ("identify-result", "この貝はなんだろう（AI判定の結果）", "#/identify", "photo"),
+        ("identify", "写真で調べる：この貝はなんだろう（撮影前）", "#/identify", "clear"),
+        ("identify-result", "写真で調べる（AI判定の結果）", "#/identify", "photo"),
         ("check", "この貝かな？（見比べチェック）", "#/compare/photo/5", "photo-then"),
         ("compare", "見比べる（2つの貝）", "#/compare/5/6", "sample"),
         ("box", "収集箱の記録（記録なし）", "#/box", "clear"),
         ("box-rec", "収集箱の記録（記録あり：見本）", "#/box", "sample"),
-        ("box-edit", "収集箱を手で記録する", "#/box", "sample-edit"),
+        ("box-list", "収集箱の記録（番号順リスト）", "#/box?view=list", "sample"),
+        ("box-sel", "収集箱の記録（マスを選んだところ）", "#/box?sel=12", "sample"),
         ("scan", "収集箱を撮って読み取る（試験版・読み取り結果）", "#/scan", "scan"),
         ("about", "このサイトについて", "#/about", "sample"),
     ]

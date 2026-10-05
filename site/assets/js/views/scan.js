@@ -26,7 +26,7 @@ export function render(ctx) {
     return page(ctx, { title: '収集箱を読み取る', back: '#/box' },
       h('div', { class: 'stack' },
         notice('', 'info', h('p', null, '箱を撮って読み取る機能は、いま試験中です。実物の箱を見ながら、手で記録してください。')),
-        h('a', { class: 'btn block', href: '#/box?edit=1' }, ic('edit'), '手で記録する')));
+        h('a', { class: 'btn block', href: '#/box?view=list' }, ic('edit'), '手で記録する')));
   }
 
   const s = {
@@ -74,7 +74,7 @@ export function render(ctx) {
         h('button', { class: 'btn block secondary', type: 'button', onclick: fromFile }, ic('image'), '写真を選ぶ')),
       h('p', { class: 'small muted' }, '読み取りはこの端末の中だけで行い、写真は送信しません。保存するのは、各マスの小さな切り抜き画像と状態だけです。'),
       prevRec && !isTemp(prevRec) ? notice('ok', 'save', h('p', { class: 'small' }, `前の記録（${formatDate(prevRec.savedAt)}・貝あり ${counts(prevRec).filled}/36）は、確認して保存するまで変わりません。`)) : null,
-      h('a', { class: 'btn block ghost', href: '#/box?edit=1' }, ic('edit'), '写真を使わず手で記録する'),
+      h('a', { class: 'btn block ghost', href: '#/box?view=list' }, ic('edit'), '写真を使わず手で記録する'),
     );
   }
 
@@ -254,7 +254,7 @@ export function render(ctx) {
           h('button', { class: 'btn small secondary', type: 'button', onclick: () => rotate(2) }, ic('rotate'), '上下を反対に'),
           h('button', { class: 'btn small secondary', type: 'button', onclick: () => rotate(1) }, ic('rotate'), '90°回す')),
         h('label', { class: 'check-row', for: 'orient-ok' }, okCheck, h('span', null, '「1」が1番のマスに重なっている')),
-        h('a', { class: 'btn small ghost', href: '#/box?edit=1' }, '空の箱などで向きが分からない → 手で記録する')),
+        h('a', { class: 'btn small ghost', href: '#/box?view=list' }, '空の箱などで向きが分からない → 手で記録する')),
       h('details', { class: 'card flat adjust-tools' },
         h('summary', null, '角を細かく動かす'),
         h('div', { class: 'stack-sm' }, h('p', { class: 'xsmall muted' }, '角を選んで、矢印で少しずつ動かせます。写真の上をドラッグしても動かせます。'), cornerSeg, pad)),

@@ -1,27 +1,29 @@
 import { h, ic, svg, formatDate, phrase, ring } from '../ui.js';
 import { artIcon } from '../icons.js';
 import { loadBox, counts, storageAvailable, isTemp } from '../store.js';
-import { brandShown, scanAvailable } from '../data.js';
+import { brandShown } from '../data.js';
 
 export function render(ctx) {
   const { data } = ctx;
   const rec = loadBox();
   const c = counts(rec);
-  const main = h('main', { class: 'page stack', id: 'main' });
+  const main = h('main', { class: 'page home', id: 'main' });
+  const left = h('div', { class: 'home-brand stack' });
+  const right = h('div', { class: 'home-actions stack' });
+  main.append(left, right);
 
   // ロゴ（再訪時は小さく）
   if (brandShown(data)) {
-    main.append(h('div', { class: `hero${rec ? ' compact' : ''}` },
+    left.append(h('div', { class: `hero${rec ? ' compact' : ''}` },
       h('img', { src: 'assets/img/brand/hero.jpg', alt: 'MASUHOGAURA 36 shells Collection　Beachcombing SHIKA TOWN NOTO ISHIKAWA', width: 685, height: 464 })),
       h('div', { class: 'wave-band', 'aria-hidden': 'true' }));
   } else {
-    main.append(h('p', { class: 'text-logo' }, 'MASUHOGAURA 36 shells Collection'));
+    left.append(h('p', { class: 'text-logo' }, 'MASUHOGAURA 36 shells Collection'));
   }
-  main.append(h('div', { class: 'stack-sm' },
-    h('h1', { class: 'lead' }, h('span', null, '増穂浦海岸で、'), h('span', null, '36種類の秘貝を探そう。'))));
+  left.append(h('h1', { class: 'lead' }, h('span', null, '増穂浦海岸で、'), h('span', null, '36種類の秘貝を探そう。')));
 
   if (rec) {
-    main.append(h('a', { class: 'record-strip', href: '#/box' },
+    right.append(h('a', { class: 'record-strip', href: '#/box' },
       ring(c.filled, 36, true),
       h('span', { class: 'grow' },
         h('span', { class: 'phrase' }, h('strong', null, '収集箱の記録'), c.check ? h('span', { class: 'warn-text' }, `要確認 ${c.check}`) : null),
@@ -30,19 +32,25 @@ export function render(ctx) {
       h('span', { class: 'go-label' }, '見る', ic('chevron'))));
   }
 
-  const scan = scanAvailable(data);
-  main.append(h('nav', { class: 'actions', 'aria-label': 'おもな操作' },
-    action('#/list', 'cream', 'search', '貝を探す', phrase('36種類の', '貝の写真を見る')),
-    action('#/identify', 'pink', 'identify', 'この貝はなんだろう', phrase('拾った貝を、', '写真で見比べる')),
-    action(scan ? '#/box' : '#/box?edit=1', 'sky', 'box', '収集箱を記録する', phrase('取った貝を', '記録する')),
+  // おもな操作：現地では「写真で調べる」が中心
+  right.append(h('nav', { class: 'actions', 'aria-label': 'おもな操作' },
+    action('#/identify', 'pink primary', 'identify', '写真で調べる', phrase('この貝はなんだろう？', '拾った貝を撮って調べる')),
+    action('#/list', 'cream', 'search', '貝の図鑑', phrase('36種類の', '貝の写真を見る')),
+    action('#/box', 'sky', 'box', '収集箱を記録する', phrase('取った貝を', '記録する')),
   ));
 
+  if (data.config.event?.status === 'confirmed') {
+    right.append(h('a', { class: 'guide-link', href: '#/guide' }, ic('guide'),
+      h('span', { class: 'grow' }, h('strong', { class: 'block' }, '初めての方へ'), h('span', { class: 'small' }, phrase('参加のしかた・', '収集箱の受け取り・', '景品'))),
+      ic('chevron')));
+  }
+
   if (!storageAvailable()) {
-    main.append(h('div', { class: 'notice warn' }, ic('alert'),
+    right.append(h('div', { class: 'notice warn' }, ic('alert'),
       h('p', null, 'この画面では記録を保存できません（プライベートモードなど）。記録は「この画面を開いている間だけ」使えます。')));
   }
 
-  main.append(h('div', { class: 'footer-links' },
+  right.append(h('div', { class: 'footer-links' },
     h('a', { href: '#/about' }, 'このサイトについて')));
   return main;
 }

@@ -1,8 +1,8 @@
 // 貝の詳細：写真 → 名前 → 見分けるポイント → 見比べ → 箱の位置 の順
-import { h, ic, shellName, stars, shapeTag, lightbox, notice, formatDate, pendingTag, shellImg, photoThumbs } from '../ui.js';
-import { loadBox, STATE_LABEL } from '../store.js';
+import { h, ic, shellName, stars, shapeTag, lightbox, notice, pendingTag, shellImg, photoThumbs } from '../ui.js';
 import { positionLabel } from '../data.js';
 import { hasModel, mount3D } from '../lib/viewer3d.js';
+import { recordBlock } from './record.js';
 import { page } from './common.js';
 import { boxGrid } from './boxgrid.js';
 
@@ -17,7 +17,6 @@ export function render(ctx) {
     return page(ctx, { title: '見つかりません', back: '#/list' },
       h('div', { class: 'card stack' }, h('p', null, '1〜36の番号を選んでください。'), h('a', { class: 'btn', href: '#/list' }, '一覧へ')));
   }
-  const rec = loadBox();
   const main = page(ctx, { title: `${sp.no}番 ${sp.v.name}`, back: '#/list' });
   const photos = sp.v.photos;
 
@@ -82,16 +81,12 @@ export function render(ctx) {
     h('a', { class: 'btn block soft', href: `#/compare/${sp.no}` }, ic('compare'), '見比べる貝を選ぶ'));
 
   // 箱の位置と記録
-  const cell = rec?.cells?.[sp.no];
-  const state = cell?.s || 'unknown';
   const boxCard = h('section', { class: 'card stack-sm' },
     h('h3', { class: 'section-title' }, '収集箱の位置'),
     h('p', { class: 'small' }, positionLabel(sp)),
-    boxGrid(data, { mini: true, highlight: sp.no }),
-    h('div', { class: 'row between wrap' },
-      h('p', { class: 'small' }, '記録：', h('span', { class: 'state-pill', dataset: { state } }, STATE_LABEL[state]),
-        cell?.t && !rec.temp ? h('span', { class: 'xsmall muted' }, `　${formatDate(cell.t)}`) : null),
-      h('a', { class: 'btn small secondary', href: `#/box?edit=1&sel=${sp.no}` }, ic('edit'), '記録を直す')));
+    boxGrid(data, { mini: true, highlight: sp.no }));
+  // 収集箱への記録（名前のすぐ下に置く）
+  const recordCard = h('section', { class: 'card stack-sm record-card' }, recordBlock(data, sp));
 
   // 3D・AR（実物に基づくモデルがあるときだけ）
   let modelCard = null;
@@ -119,6 +114,6 @@ export function render(ctx) {
       h('span', null, h('span', { class: 'dir' }, '次の貝'), h('span', { class: 'pn' }, `${next.no} ${next.v.name}`)), ic('chevron')) : h('span'));
 
   // 3Dは写真のすぐ下（いろいろな角度から見られる）
-  main.append(h('div', { class: 'stack' }, photoBox, modelCard, title, featureCard, compareCard, boxCard, pager));
+  main.append(h('div', { class: 'stack' }, photoBox, modelCard, title, recordCard, featureCard, compareCard, boxCard, pager));
   return main;
 }

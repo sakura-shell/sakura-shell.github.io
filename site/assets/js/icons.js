@@ -24,6 +24,8 @@ const ui = {
   ar: `<svg viewBox="0 0 24 24" ${S}><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><path d="M12 7.5l4 2.2v4.6l-4 2.2-4-2.2V9.7z"/></svg>`,
   hand: `<svg viewBox="0 0 24 24" ${S}><path d="M8 12V6.5a1.5 1.5 0 0 1 3 0V11M11 10.5V5a1.5 1.5 0 0 1 3 0v5.5M14 10.5V6.5a1.5 1.5 0 0 1 3 0V14c0 3.6-2.4 6-6 6-2.4 0-3.8-1-5-3l-2-3.5a1.4 1.4 0 0 1 2.3-1.6L8 13.5"/></svg>`,
   flip: `<svg viewBox="0 0 24 24" ${S}><path d="M12 3v18M8 7L3.5 17H8zM16 7l4.5 10H16z"/></svg>`,
+  map: `<svg viewBox="0 0 24 24" ${S}><path d="M12 20.5s-6-5.6-6-10.2a6 6 0 0 1 12 0c0 4.6-6 10.2-6 10.2z"/><circle cx="12" cy="10.3" r="2.2"/></svg>`,
+  guide: `<svg viewBox="0 0 24 24" ${S}><path d="M5 4.5h10.5L19 8v11.5H5z"/><path d="M8.5 10h7M8.5 13.5h7M8.5 17h4.5"/></svg>`,
   plus: `<svg viewBox="0 0 24 24" ${S}><path d="M12 5v14M5 12h14"/></svg>`,
   save: `<svg viewBox="0 0 24 24" ${S}><path d="M5 4.5h11l3 3V19.5H5z"/><path d="M8 4.5v5h7v-5M8 19.5v-5.5h8v5.5"/></svg>`,
   retake: `<svg viewBox="0 0 24 24" ${S}><path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3v10H4z"/><path d="M14.8 12.2a3 3 0 1 1-1-1.9M14.8 9.6v2.6h-2.6"/></svg>`,

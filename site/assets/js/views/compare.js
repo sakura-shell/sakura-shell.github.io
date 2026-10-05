@@ -48,16 +48,69 @@ export function render(ctx) {
         grid)), isPhoto);
   }
 
-  const left = isPhoto ? photoColumn() : shellColumn(data, a);
-  const right = shellColumn(data, b);
+  const left = isPhoto ? photoColumn() : shellColumn(a);
+  const right = shellColumn(b);
   return tab(page(ctx, { title: isPhoto ? 'この貝かな？' : '見比べる', back: backTo },
     h('div', { class: 'stack' },
       h('div', { class: 'compare' }, left, right),
       h('p', { class: 'xsmall muted' }, '写真の大きさは実物の大きさとは関係ありません。'),
+      isPhoto ? featureCard(data, b) : compareTable(data, a, b),
       isPhoto ? matchCheck(data, b, session) : null,
       h('div', { class: 'btn-row' },
         h('a', { class: 'btn small secondary', href: `#/compare/${aRaw}` }, ic('compare'), '貝を変える'),
         isPhoto ? h('a', { class: 'btn small soft', href: '#/identify' }, '一覧へ戻る') : null))), isPhoto);
+
+  // 貝の写真（名前を写真の上に置き、写真の枚数が違っても左右の名前がそろうようにする）
+  function shellColumn(x) {
+    const photos = x.v.photos;
+    const sw = photos.length ? photoSwitcher(photos, `${x.no}番 ${x.v.name}の写真`) : null;
+    return h('div', { class: 'col' },
+      h('div', { class: 'col-head' },
+        h('span', { class: 'no-badge' }, x.no),
+        h('a', { class: 'nm', href: `#/shell/${x.no}` }, x.v.name)),
+      sw
+        ? h('button', { class: 'ph', type: 'button', 'aria-label': `${x.v.name}の写真を拡大`, onclick: () => lightbox(sw.current().src, `${x.no}番 ${x.v.name}`) }, sw.img)
+        : h('div', { class: 'ph' }, shellImg(x)),
+      sw?.seg ? h('div', { class: 'col-thumbs' }, sw.seg) : null);
+  }
+}
+
+const KINDS = [['shape', '形'], ['color', '色・模様'], ['surface', '表面'], ['other', 'そのほか']];
+
+// 2つの貝の特徴を、同じ項目ごとに左右に並べる
+function compareTable(data, a, b) {
+  const cell = (sp, kind) => {
+    const items = sp.v.features.filter((f) => (f.kind || 'other') === kind);
+    return h('div', { class: 'cmp-cell' }, items.length ? items.map((f) => h('p', null, f.text)) : h('p', { class: 'muted' }, '―'));
+  };
+  const rows = [];
+  if (a.v.shape || b.v.shape) {
+    rows.push(h('div', { class: 'cmp-row' },
+      h('div', { class: 'cmp-label' }, '分類'),
+      h('div', { class: 'cmp-cell' }, shapeTag(data, a) || h('p', { class: 'muted' }, '―')),
+      h('div', { class: 'cmp-cell' }, shapeTag(data, b) || h('p', { class: 'muted' }, '―'))));
+  }
+  for (const [kind, label] of KINDS) {
+    if (![a, b].some((sp) => sp.v.features.some((f) => (f.kind || 'other') === kind))) continue;
+    rows.push(h('div', { class: 'cmp-row' }, h('div', { class: 'cmp-label' }, label), cell(a, kind), cell(b, kind)));
+  }
+  if (!rows.length) return h('p', { class: 'small muted' }, '見分けるポイントは準備中です。写真を見比べて確かめてください。');
+  const pending = [a, b].some((sp) => sp.v.features.some((f) => f.status !== 'confirmed'));
+  return h('section', { class: 'card stack-sm cmp-card' },
+    h('h3', { class: 'section-title' }, '見比べるポイント'),
+    h('div', { class: 'cmp-names', 'aria-hidden': 'true' }, h('span', null, `${a.no} ${a.v.name}`), h('span', null, `${b.no} ${b.v.name}`)),
+    ...rows,
+    pending && data.preview ? h('p', { class: 'xsmall muted' }, pendingTag('照合待ち'), ' 特徴の内容は確認中です') : null);
+}
+
+// 撮った写真と見比べるとき：相手の貝の見分けるポイント
+function featureCard(data, sp) {
+  if (!sp.v.features.length) return null;
+  const pending = sp.v.features.some((f) => f.status !== 'confirmed');
+  return h('section', { class: 'card stack-sm' },
+    h('h3', { class: 'section-title' }, `${sp.v.name}の見分けるポイント`),
+    h('ul', { class: 'feature-list small' }, sp.v.features.map((f) => h('li', null, ic('shell'), h('div', null, f.text)))),
+    pending && data.preview ? h('p', { class: 'xsmall muted' }, pendingTag('照合待ち'), ' 特徴の内容は確認中です') : null);
 }
 
 function tab(main, isPhoto) {
@@ -73,27 +126,10 @@ function photoSwitcher(items, alt) {
   return { img, seg, current: () => items[i] };
 }
 
-function shellColumn(data, sp) {
-  const photos = sp.v.photos;
-  const sw = photos.length ? photoSwitcher(photos, `${sp.v.name}の参考写真`) : null;
-  return h('div', { class: 'col' },
-    h('div', { class: 'compare-label' }, '図鑑の写真'),
-    sw
-      ? h('button', { class: 'ph', type: 'button', style: { border: 0, cursor: 'zoom-in' }, 'aria-label': `${sp.v.name}の写真を拡大`, onclick: () => lightbox(sw.current().src, `${sp.no}番 ${sp.v.name}`) }, sw.img)
-      : h('div', { class: 'ph' }, shellImg(sp)),
-    h('div', { class: 'body' },
-      sw?.seg,
-      h('div', null, h('span', { class: 'no-badge' }, sp.no)),
-      h('div', { class: 'nm' }, sp.v.name),
-      h('div', { class: 'tags' }, shapeTag(data, sp)),
-      sp.v.features.length ? h('ul', { class: 'feature-list small' }, sp.v.features.map((f) => h('li', null, f.text, f.status !== 'confirmed' ? pendingTag() : null))) : null,
-      h('a', { class: 'btn small secondary', href: `#/shell/${sp.no}` }, '詳細')));
-}
-
 function photoColumn() {
   const sw = photoSwitcher(session.photos, 'あなたが撮った貝の写真');
   return h('div', { class: 'col' },
-    h('div', { class: 'compare-label' }, 'あなたの写真'),
-    h('button', { class: 'ph user', type: 'button', style: { border: 0, cursor: 'zoom-in' }, 'aria-label': '写真を拡大', onclick: () => lightbox(sw.current().src, `あなたの写真（${sw.current().label}）`) }, sw.img),
-    h('div', { class: 'body' }, sw.seg));
+    h('div', { class: 'col-head' }, h('span', { class: 'nm' }, 'あなたの写真')),
+    h('button', { class: 'ph user', type: 'button', 'aria-label': '写真を拡大', onclick: () => lightbox(sw.current().src, `あなたの写真（${sw.current().label}）`) }, sw.img),
+    sw.seg ? h('div', { class: 'col-thumbs' }, sw.seg) : null);
 }

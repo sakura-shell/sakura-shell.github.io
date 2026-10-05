@@ -171,7 +171,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "横長のだ円形の二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -179,7 +180,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "輪のような細かいすじが、ふちまで並ぶ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -187,7 +189,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "すじに沿って、茶色の点線のような模様",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     }
    ],
    "similar": [
@@ -197,7 +200,7 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "no": 2,
-     "point": "どちらも肌色で、すじのある二枚貝"
+     "point": "どちらも肌色ですじがある"
     }
    ],
    "colors": {
@@ -355,7 +358,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ふっくらした、三角に近い丸形の二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -363,7 +367,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "淡い肌色に、うすむらさきの放射状の帯",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -371,7 +376,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "細い輪のすじ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [
@@ -381,7 +387,7 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "no": 1,
-     "point": "どちらも肌色で、すじのある二枚貝"
+     "point": "どちらも肌色ですじがある"
     },
     {
      "status": "transcribed",
@@ -389,7 +395,7 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "no": 31,
-     "point": "どちらも放射状のうすむらさきの帯"
+     "point": "どちらもうすむらさきの帯"
     }
    ],
    "colors": {
@@ -527,7 +533,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白くて丸い、小さな二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -535,7 +542,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "丸くふくらみ、表面はなめらか",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [
@@ -682,7 +690,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白くうすい二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -690,7 +699,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "前後に少し長いだ円形",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -698,7 +708,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "輪のすじが波のように目立つ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [],
@@ -787,7 +798,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "光にすけるほどうすい、淡いピンク色",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -795,7 +807,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "真珠のようなつやがある",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -803,7 +816,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "2枚が開いた、ちょうのような形で見つかることもある",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [
@@ -821,7 +835,7 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "no": 28,
-     "point": "どちらも2枚が開いた形で見つかる"
+     "point": "どちらも2枚が開いた形"
     }
    ],
    "colors": {
@@ -972,7 +986,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "あざやかなピンク（サーモン色）",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -980,7 +995,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "細長く、片側がとがった形",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -988,7 +1004,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "つやのある表面",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [
@@ -1115,7 +1132,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "紫色のだ円形の二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -1123,7 +1141,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "輪のような濃い・うすいのしま",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -1131,7 +1150,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ふちは茶色っぽい",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     }
    ],
    "similar": [
@@ -1299,7 +1319,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白〜クリーム色の丸い二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -1307,7 +1328,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "平たく、細い線が入る",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [
@@ -1447,7 +1469,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "あざやかな朱色（赤みのオレンジ）",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -1455,7 +1478,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "表面がでこぼこして、うろこのようなとげがある",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -1463,7 +1487,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "形は少しいびつ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [
@@ -1589,7 +1614,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "だいだい色〜肌色",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -1597,7 +1623,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "うすい層が重なったような、ざらざらの表面",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -1605,7 +1632,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "丸くて少しいびつな形",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [
@@ -1724,7 +1752,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白く細長い、長方形に近い二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -1732,7 +1761,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "表面に細かいすじ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [
@@ -1879,7 +1909,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白くうすい、すけるような二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -1887,7 +1918,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "横長で、片方が少し曲がった形",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [
@@ -2048,7 +2080,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ほたてのような扇形で、根もとに耳のようなでっぱり",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -2056,7 +2089,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ピンク〜オレンジのまだら模様",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     }
    ],
    "similar": [
@@ -2197,7 +2231,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "あざやかなオレンジ色",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -2205,7 +2240,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ムール貝のような細長いくさび形",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -2213,7 +2249,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "輪のしまがある",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     }
    ],
    "similar": [],
@@ -2365,7 +2402,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "巻きがとがった巻貝で、口が大きい",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -2373,7 +2411,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "オレンジ〜茶色のしま模様",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -2381,7 +2420,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "巻きにこぶのようなでっぱり",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [],
@@ -2520,7 +2560,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "両はしが細い、小さな紡錘形の巻貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -2528,7 +2569,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "オレンジ色に、点線のような帯",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -2536,7 +2578,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "口のふちがぎざぎざ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [
@@ -2546,7 +2589,7 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "no": 36,
-     "point": "どちらもオレンジ色の小さな巻貝"
+     "point": "どちらもオレンジ色の巻貝"
     }
    ],
    "colors": {
@@ -2676,7 +2719,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白〜クリーム色の巻貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -2684,7 +2728,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "まわりに星のようなとげがたくさん",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -2692,7 +2737,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "平たいうずまき",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [],
@@ -2865,7 +2911,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "茶色と白のまだら模様の巻貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -2873,7 +2920,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "表面にでこぼこのすじ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -2881,7 +2929,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "口が丸く大きい",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [],
@@ -3040,7 +3089,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白い笠形（ぼうしのような形）",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -3048,7 +3098,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "放射状のすじ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -3056,7 +3107,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "切れ目がある",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [
@@ -3245,7 +3297,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ぼうしのような形で、てっぺんが小さく巻く",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -3253,7 +3306,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "クリーム色〜黄色",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     }
    ],
    "similar": [
@@ -3373,7 +3427,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ほたてのような扇形",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -3381,7 +3436,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "太い放射状のすじ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     },
     {
      "status": "transcribed",
@@ -3389,7 +3445,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "赤茶色の模様",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     }
    ],
    "similar": [
@@ -3509,7 +3566,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "茶色〜黄土色",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -3517,7 +3575,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "うすい板がめくれたような、ひだやとげ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [],
@@ -3648,7 +3707,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "平たいお皿のような、だ円形",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -3656,7 +3716,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "緑がかった茶色",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -3664,7 +3725,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ふちに沿って小さな穴が並ぶ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [],
@@ -3838,7 +3900,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白い笠形（ぼうしのような形）",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -3846,7 +3909,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "放射状のすじと、ぎざぎざのふち",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [
@@ -3944,7 +4008,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白く、たまごのような丸み",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -3952,7 +4017,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "うすくて軽い",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [],
@@ -4125,7 +4191,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "火山のような形で、てっぺんに穴があく",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -4133,7 +4200,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ピンク〜むらさきのすじ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [],
@@ -4307,7 +4375,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ふっくらしただ円形の二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -4315,7 +4384,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "茶色のしまと、白い模様",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -4323,7 +4393,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "表面に格子のような細かいすじ",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [],
@@ -4434,7 +4505,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白く小さな二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -4442,7 +4514,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "ふちに、うすいむらさき色",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -4450,7 +4523,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "2枚が開いた形で見つかることもある",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [
@@ -4460,7 +4534,7 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "no": 5,
-     "point": "どちらも2枚が開いた形で見つかる"
+     "point": "どちらも2枚が開いた形"
     }
    ],
    "colors": {
@@ -4675,7 +4749,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "茶色〜黄土色の、丸い巻貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -4683,7 +4758,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "大きくふくらんだ巻きと、広い口",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [
@@ -4844,7 +4920,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白くて丸い巻貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -4852,7 +4929,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "黄土色のまだら",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -4860,7 +4938,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "巻きが低く、かたつむりのような形",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [
@@ -5008,7 +5087,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "うすいクリーム色に、うすむらさきの放射状の帯",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -5016,7 +5096,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "三角に近い丸形の二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -5024,7 +5105,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "つやがある",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [
@@ -5042,7 +5124,7 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "no": 2,
-     "point": "どちらも放射状のうすむらさきの帯"
+     "point": "どちらもうすむらさきの帯"
     }
    ],
    "colors": {
@@ -5173,7 +5255,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "細長い長方形の二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -5181,7 +5264,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "うすむらさき色で、白い帯が入る",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     }
    ],
    "similar": [
@@ -5349,7 +5433,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "三角に近い丸形で、ふっくら",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -5357,7 +5442,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "つやがあり、茶色の放射状の模様",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     }
    ],
    "similar": [
@@ -5477,7 +5563,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "黄色〜クリーム色の二枚貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -5485,7 +5572,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "てっぺんの部分がむらさき色",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     }
    ],
    "similar": [],
@@ -5750,7 +5838,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "5種類の小さな貝をまとめた枠",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "other"
     },
     {
      "status": "transcribed",
@@ -5758,7 +5847,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白い角のような細長い管（ツノガイ）",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     },
     {
      "status": "transcribed",
@@ -5766,7 +5856,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "細長い塔のような巻貝なども入る",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "shape"
     }
    ],
    "similar": [],
@@ -5906,7 +5997,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "オレンジ〜茶色の小さな巻貝",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -5914,7 +6006,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "白い帯と細かい模様",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "color"
     },
     {
      "status": "transcribed",
@@ -5922,7 +6015,8 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "text": "口が広い",
-     "note": "要確認（写真の見た目から作成）"
+     "note": "要確認（写真の見た目から作成）",
+     "kind": "surface"
     }
    ],
    "similar": [
@@ -5932,7 +6026,7 @@
      "reviewedBy": null,
      "reviewedAt": null,
      "no": 16,
-     "point": "どちらもオレンジ色の小さな巻貝"
+     "point": "どちらもオレンジ色の巻貝"
     }
    ],
    "colors": {

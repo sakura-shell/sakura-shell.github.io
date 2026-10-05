@@ -128,6 +128,36 @@ export function saveBox({ source = 'manual', cells }) {
   }
 }
 
+// 1マスだけ記録してすぐ保存する（手で記録するときはこれを使う。押すたびに保存）
+// 戻り値: { ok, prev（取り消し用の元の状態。未記録なら null）, temp?, error? }
+export function setCell(no, state) {
+  const rec = loadBox();
+  const cells = {};
+  for (const [k, c] of Object.entries(rec?.cells || {})) cells[k] = { ...c };
+  const prev = cells[no] ? { ...cells[no] } : null;
+  if (state === 'unknown') delete cells[no]; // 未記録に戻す（写真・日時も消す）
+  else {
+    cells[no] = { s: state, t: new Date().toISOString() };
+    if (state === 'filled' && prev?.s === 'filled' && prev.img) cells[no].img = prev.img; // 箱の写真は貝ありのときだけ残す
+  }
+  return { ...writeCells(cells, rec), prev };
+}
+
+// 取り消し：1マスを元の状態に戻す
+export function restoreCell(no, prev) {
+  const rec = loadBox();
+  const cells = {};
+  for (const [k, c] of Object.entries(rec?.cells || {})) cells[k] = { ...c };
+  if (prev) cells[no] = prev; else delete cells[no];
+  return writeCells(cells, rec);
+}
+
+function writeCells(cells, rec) {
+  if (isTemp(rec)) { useTemp(cells); return { ok: true, temp: true }; }
+  const res = saveBox({ source: 'manual', cells });
+  return res.ok ? { ok: true, droppedImages: res.droppedImages } : { ok: false, error: res.error, cells };
+}
+
 // この画面を開いている間だけ使う記録。永続記録は変えない
 export function useTemp(cells) {
   temp = { v: 2, temp: true, savedAt: null, source: 'temp', cells };

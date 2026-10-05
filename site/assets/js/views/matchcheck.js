@@ -44,7 +44,7 @@ export function matchCheck(data, sp, session) {
         h('p', { class: 'small' }, h('strong', null, `${sp.no}番 ${sp.v.name}かもしれません。`), '箱に入れる前に、もう一度写真とよく見比べてね。'),
         h('div', { class: 'btn-row' },
           h('a', { class: 'btn small secondary', href: `#/shell/${sp.no}` }, '詳細を見る'),
-          h('a', { class: 'btn small', href: `#/box?edit=1&sel=${sp.no}` }, ic('box'), `${sp.no}番を記録`)));
+          h('a', { class: 'btn small', href: `#/box?sel=${sp.no}` }, ic('box'), `${sp.no}番を記録`)));
     } else {
       msg = h('p', { class: 'small' }, 'わからないところは、裏側も撮ったり、写真を拡大したりすると見比べやすくなります。');
     }

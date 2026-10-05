@@ -2,7 +2,7 @@ import { h, ic } from '../ui.js';
 import { searchSpecies } from '../data.js';
 import { loadBox } from '../store.js';
 import { page } from './common.js';
-import { shellCard, filterChips, applyFilters, noResult } from './parts.js';
+import { shellCard, filterChips, applyFilters, noResult, filterLabels, hasFilter } from './parts.js';
 
 export function render(ctx) {
   const { data, query } = ctx;
@@ -15,8 +15,23 @@ export function render(ctx) {
     box: rec && ['empty', 'check', 'unknown'].includes(box) ? box : '',
   };
 
-  const grid = h('div', { class: 'shell-grid' });
-  const count = h('p', { class: 'small muted', 'aria-live': 'polite' });
+  // 写真の大きさ（大きく＝2列／小さく＝3列）。端末ごとに覚えておく
+  let big = true;
+  try { big = localStorage.getItem('m36shells:list-size') !== 'small'; } catch { /* 既定は大きく */ }
+  const grid = h('div', { class: `shell-grid${big ? ' big' : ''}` });
+  const count = h('p', { class: 'filter-count', 'aria-live': 'polite' });
+  const conds = h('p', { class: 'small filter-conds' });
+  const clearBtn = h('button', { class: 'btn small secondary', type: 'button', onclick: () => reset() }, ic('close'), '条件をクリア');
+  const status = h('div', { class: 'filter-status' }, h('div', { class: 'grow' }, count, conds), clearBtn);
+  const sizeSeg = h('div', { class: 'seg', role: 'group', 'aria-label': '写真の大きさ' },
+    [[true, '大きく'], [false, '小さく']].map(([v, label]) => h('button', {
+      type: 'button', 'aria-pressed': String(big === v),
+      onclick: (e) => {
+        big = v; grid.classList.toggle('big', big);
+        try { localStorage.setItem('m36shells:list-size', big ? 'big' : 'small'); } catch { /* 覚えなくても動く */ }
+        sizeSeg.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === e.currentTarget)));
+      },
+    }, label)));
   const chipsHolder = h('div');
 
   const reset = () => {
@@ -28,7 +43,11 @@ export function render(ctx) {
 
   function update() {
     const found = applyFilters(searchSpecies(data, state.q), state, rec);
-    count.textContent = `${found.length}種類`;
+    const labels = filterLabels(data, state);
+    count.textContent = labels.length ? `36種類中 ${found.length}種類` : `36種類すべて`;
+    conds.textContent = labels.length ? `絞り込み：${labels.join('・')}` : '';
+    conds.hidden = !labels.length;
+    clearBtn.hidden = !hasFilter(state);
     if (found.length) grid.replaceChildren(...found.map((sp) => shellCard(data, sp, rec, { href: `#/shell/${sp.no}` })));
     else grid.replaceChildren(noResult(reset));
     const params = {};
@@ -50,6 +69,6 @@ export function render(ctx) {
 
   chipsHolder.append(filterChips(data, state, rec, update));
   update();
-  return page(ctx, { title: '貝を探す', back: '#/' },
-    h('div', { class: 'stack' }, form, chipsHolder, count, grid));
+  return page(ctx, { title: '貝の図鑑', back: '#/' },
+    h('div', { class: 'stack' }, form, chipsHolder, status, h('div', { class: 'row between' }, h('span', { class: 'xsmall muted' }, '写真の大きさ'), sizeSeg), grid));
 }
