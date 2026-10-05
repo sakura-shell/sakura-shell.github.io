@@ -1,0 +1,5959 @@
+{
+ "version": 2,
+ "updated": "2026-10-05",
+ "title": "MASUHOGAURA 36 shells Collection",
+ "box": {
+  "rows": 4,
+  "cols": 9,
+  "orientationHint": "1番（すだれ貝）のマスが右上",
+  "layoutSource": "36種類一覧（IMG_0429）の並びと、完成見本の箱の写真（box_sample.jpeg・チラシ掲載写真）を照合",
+  "layoutStatus": "checked-by-photo",
+  "aspect": 1.4,
+  "innerMargin": {
+   "x": 0.018,
+   "y": 0.026
+  },
+  "status": "transcribed",
+  "note": "箱の比率・枠の厚さは写真からの目測。1番の目印の有無は未確認"
+ },
+ "shapes": {
+  "bivalve": {
+   "label": "二枚貝",
+   "source": "36種類一覧の凡例アイコン"
+  },
+  "gastropod": {
+   "label": "巻貝",
+   "source": "36種類一覧の凡例アイコン"
+  },
+  "limpet": {
+   "label": "笠貝",
+   "source": "36種類一覧の凡例アイコン"
+  }
+ },
+ "colorPalette": {
+  "white": {
+   "label": "白",
+   "hex": "#F4F1EA"
+  },
+  "pink": {
+   "label": "ピンク",
+   "hex": "#F3B6C8"
+  },
+  "orange": {
+   "label": "オレンジ",
+   "hex": "#F2A36B"
+  },
+  "brown": {
+   "label": "茶",
+   "hex": "#A87B5A"
+  },
+  "purple": {
+   "label": "むらさき",
+   "hex": "#9C8BC4"
+  },
+  "green": {
+   "label": "みどり",
+   "hex": "#A9BE7B"
+  }
+ },
+ "species": [
+  {
+   "no": 1,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "すだれ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "サツマアカガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 3,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 1,
+    "col": 9
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/01-p1.jpg",
+     "thumb": "assets/img/shells/01-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "4.すだれ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/01-p2.jpg",
+     "thumb": "assets/img/shells/01-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "4.すだれ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/01-p3.jpg",
+     "thumb": "assets/img/shells/01-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "4.すだれ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "横長のだ円形の二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "輪のような細かいすじが、ふちまで並ぶ",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "すじに沿って、茶色の点線のような模様",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 2,
+     "point": "どちらも肌色で、すじのある二枚貝"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 2,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "忘れ貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "忘",
+    "text": "わす"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "マツヤマワスレ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 2,
+    "col": 9
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/02-p1.jpg",
+     "thumb": "assets/img/shells/02-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "3.わすれ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/02-p2.jpg",
+     "thumb": "assets/img/shells/02-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "3.わすれ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/02-p3.jpg",
+     "thumb": "assets/img/shells/02-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "3.わすれ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/02-p4.jpg",
+     "thumb": "assets/img/shells/02-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "3.わすれ貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ふっくらした、三角に近い丸形の二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "淡い肌色に、うすむらさきの放射状の帯",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "細い輪のすじ",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 1,
+     "point": "どちらも肌色で、すじのある二枚貝"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 31,
+     "point": "どちらも放射状のうすむらさきの帯"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "pink",
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 3,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "梅の花貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "梅の花",
+    "text": "うめのはな"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ヤヘウメ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 3,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 3,
+    "col": 9
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/03-p1.jpg",
+     "thumb": "assets/img/shells/03-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "8.梅の花貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/03-p2.jpg",
+     "thumb": "assets/img/shells/03-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "8.梅の花貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/03-p3.jpg",
+     "thumb": "assets/img/shells/03-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "8.梅の花貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白くて丸い、小さな二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "丸くふくらみ、表面はなめらか",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 8,
+     "point": "どちらも白くて丸い二枚貝"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 4,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "花貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "花",
+    "text": "はな"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "チョウハナガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 4,
+    "col": 9
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/04-p1.jpg",
+     "thumb": "assets/img/shells/04-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "7.千代の花貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/04-p2.jpg",
+     "thumb": "assets/img/shells/04-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "7.千代の花貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/04-p3.jpg",
+     "thumb": "assets/img/shells/04-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "7.千代の花貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白くうすい二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "前後に少し長いだ円形",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "輪のすじが波のように目立つ",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 5,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "さくら貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "サクラガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 1,
+    "col": 8
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/05-p1.jpg",
+     "thumb": "assets/img/shells/05-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "12.さくら貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "光にすけるほどうすい、淡いピンク色",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "真珠のようなつやがある",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "2枚が開いた、ちょうのような形で見つかることもある",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 6,
+     "point": "どちらもピンク色"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 28,
+     "point": "どちらも2枚が開いた形で見つかる"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "pink"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 6,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ますほ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ベニガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 2,
+    "col": 8
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/06-p1.jpg",
+     "thumb": "assets/img/shells/06-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "11.ますほ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/06-p2.jpg",
+     "thumb": "assets/img/shells/06-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "11.ますほ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/06-p3.jpg",
+     "thumb": "assets/img/shells/06-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "11.ますほ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/06-p4.jpg",
+     "thumb": "assets/img/shells/06-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "11.ますほ貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "あざやかなピンク（サーモン色）",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "細長く、片側がとがった形",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "つやのある表面",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 5,
+     "point": "どちらもピンク色"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "pink",
+     "orange"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 7,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "紫貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "紫",
+    "text": "むらさき"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "フジナミガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 3,
+    "col": 8
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/07-p1.jpg",
+     "thumb": "assets/img/shells/07-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "16.むらさき貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/07-p2.jpg",
+     "thumb": "assets/img/shells/07-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "16.むらさき貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "紫色のだ円形の二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "輪のような濃い・うすいのしま",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ふちは茶色っぽい",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 32,
+     "point": "どちらも紫色"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "purple"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 8,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "白貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "白",
+    "text": "しら"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "カガミガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 4,
+    "col": 8
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/08-p1.jpg",
+     "thumb": "assets/img/shells/08-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "15.しろ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/08-p2.jpg",
+     "thumb": "assets/img/shells/08-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "15.しろ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/08-p3.jpg",
+     "thumb": "assets/img/shells/08-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "15.しろ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/08-p4.jpg",
+     "thumb": "assets/img/shells/08-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "15.しろ貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白〜クリーム色の丸い二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "平たく、細い線が入る",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 3,
+     "point": "どちらも白くて丸い二枚貝"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 9,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "なでしこ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "チリボタン",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 1,
+    "col": 7
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/09-p1.jpg",
+     "thumb": "assets/img/shells/09-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "20.なでしこ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/09-p2.jpg",
+     "thumb": "assets/img/shells/09-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "20.なでしこ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/09-p3.jpg",
+     "thumb": "assets/img/shells/09-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "20.なでしこ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "あざやかな朱色（赤みのオレンジ）",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "表面がでこぼこして、うろこのようなとげがある",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "形は少しいびつ",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 10,
+     "point": "どちらもオレンジ色で、ざらざら"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "orange"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 10,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "波間柏貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "波間柏",
+    "text": "なみまがしは"
+   },
+   "sheetName": {
+    "status": "unclear",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ナミハガシハ",
+    "note": "画像が不鮮明"
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 2,
+    "col": 7
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/10-p1.jpg",
+     "thumb": "assets/img/shells/10-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "19.波間柏.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/10-p2.jpg",
+     "thumb": "assets/img/shells/10-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "19.波間柏2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "だいだい色〜肌色",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "うすい層が重なったような、ざらざらの表面",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "丸くて少しいびつな形",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 9,
+     "point": "どちらもオレンジ色で、ざらざら"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "orange"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 11,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "きぬた貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "キヌタアゲマキ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 3,
+    "col": 7
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/11-p1.jpg",
+     "thumb": "assets/img/shells/11-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "24.きぬた貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/11-p2.jpg",
+     "thumb": "assets/img/shells/11-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "24.きぬた貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白く細長い、長方形に近い二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "表面に細かいすじ",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 12,
+     "point": "どちらも白く細長い"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 12,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "枕貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "枕",
+    "text": "まくら"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "オキナガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 3,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 4,
+    "col": 7
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/12-p1.jpg",
+     "thumb": "assets/img/shells/12-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "23.まくら貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/12-p2.jpg",
+     "thumb": "assets/img/shells/12-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "23.まくら貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/12-p3.jpg",
+     "thumb": "assets/img/shells/12-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "23.まくら貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白くうすい、すけるような二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "横長で、片方が少し曲がった形",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 11,
+     "point": "どちらも白く細長い"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 13,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "にしき貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ナデシコガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 1,
+    "col": 6
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/13-p1.jpg",
+     "thumb": "assets/img/shells/13-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "28.にしき貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/13-p2.jpg",
+     "thumb": "assets/img/shells/13-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "28.にしき貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/13-p3.jpg",
+     "thumb": "assets/img/shells/13-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "28.にしき貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/13-p4.jpg",
+     "thumb": "assets/img/shells/13-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "28.にしき貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ほたてのような扇形で、根もとに耳のようなでっぱり",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ピンク〜オレンジのまだら模様",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 21,
+     "point": "どちらも扇形"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "pink",
+     "orange"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 14,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "いろ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ヒバリガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 2,
+    "col": 6
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/14-p1.jpg",
+     "thumb": "assets/img/shells/14-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "27.色貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/14-p2.jpg",
+     "thumb": "assets/img/shells/14-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "27.色貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/14-p3.jpg",
+     "thumb": "assets/img/shells/14-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "27.色貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "あざやかなオレンジ色",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ムール貝のような細長いくさび形",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "輪のしまがある",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "orange"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 15,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ほら貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "unclear",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "オウウヤウラク／イソバセウ",
+    "note": "画像が不鮮明"
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 3,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 3,
+    "col": 6
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/15-p1.jpg",
+     "thumb": "assets/img/shells/15-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "32.ほら貝 (2).jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/15-p2.jpg",
+     "thumb": "assets/img/shells/15-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "32.ほら貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/15-p3.jpg",
+     "thumb": "assets/img/shells/15-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "32.ほら貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/15-p4.jpg",
+     "thumb": "assets/img/shells/15-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "32.ほら貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "巻きがとがった巻貝で、口が大きい",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "オレンジ〜茶色のしま模様",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "巻きにこぶのようなでっぱり",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "orange",
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 16,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "都貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "都",
+    "text": "みやこ"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "マツムシ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 4,
+    "col": 6
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/16-p1.jpg",
+     "thumb": "assets/img/shells/16-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "31.みやこ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/16-p2.jpg",
+     "thumb": "assets/img/shells/16-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "31.みやこ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/16-p3.jpg",
+     "thumb": "assets/img/shells/16-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "31.みやこ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "両はしが細い、小さな紡錘形の巻貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "オレンジ色に、点線のような帯",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "口のふちがぎざぎざ",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 36,
+     "point": "どちらもオレンジ色の小さな巻貝"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "orange"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 17,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "うらうづ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ウラウツガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 1,
+    "col": 5
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/17-p1.jpg",
+     "thumb": "assets/img/shells/17-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "36.うらうず貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/17-p2.jpg",
+     "thumb": "assets/img/shells/17-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "36.うらうず貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/17-p3.jpg",
+     "thumb": "assets/img/shells/17-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "36.うらうず貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白〜クリーム色の巻貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "まわりに星のようなとげがたくさん",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "平たいうずまき",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 18,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "さたべ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "サザエ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 2,
+    "col": 5
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/18-p1.jpg",
+     "thumb": "assets/img/shells/18-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "35.さたべ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/18-p2.jpg",
+     "thumb": "assets/img/shells/18-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "35.さたべ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/18-p3.jpg",
+     "thumb": "assets/img/shells/18-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "35.さたべ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/18-p4.jpg",
+     "thumb": "assets/img/shells/18-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "35.さたべ貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真5",
+     "src": "assets/img/shells/18-p5.jpg",
+     "thumb": "assets/img/shells/18-p5-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "35.さたべ貝5.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "茶色と白のまだら模様の巻貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "表面にでこぼこのすじ",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "口が丸く大きい",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 19,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "千鳥貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "千鳥",
+    "text": "ちどり"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "スソキレガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "limpet",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 3,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 3,
+    "col": 5
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/19-p1.jpg",
+     "thumb": "assets/img/shells/19-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "2.千鳥貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/19-p2.jpg",
+     "thumb": "assets/img/shells/19-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "2.千鳥貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/19-p3.jpg",
+     "thumb": "assets/img/shells/19-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "2.千鳥貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/19-p4.jpg",
+     "thumb": "assets/img/shells/19-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "2.千鳥貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白い笠形（ぼうしのような形）",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "放射状のすじ",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "切れ目がある",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 24,
+     "point": "どちらも白い笠形"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 20,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "雀貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "雀",
+    "text": "すずめ"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "キクスズメ",
+    "note": null
+   },
+   "shape": {
+    "status": "unclear",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": "アイコンの判別を要確認"
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 4,
+    "col": 5
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/20-p1.jpg",
+     "thumb": "assets/img/shells/20-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "1.すずめ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/20-p2.jpg",
+     "thumb": "assets/img/shells/20-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "1.すずめ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/20-p3.jpg",
+     "thumb": "assets/img/shells/20-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "1.すずめ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/20-p4.jpg",
+     "thumb": "assets/img/shells/20-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "1.すずめ貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真5",
+     "src": "assets/img/shells/20-p5.jpg",
+     "thumb": "assets/img/shells/20-p5-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "1.すずめ貝5.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ぼうしのような形で、てっぺんが小さく巻く",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "クリーム色〜黄色",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 30,
+     "point": "どちらも丸く、クリーム色"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "orange",
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 21,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "いたや貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "イタヤガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 1,
+    "col": 4
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/21-p1.jpg",
+     "thumb": "assets/img/shells/21-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "6.いたや貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/21-p2.jpg",
+     "thumb": "assets/img/shells/21-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "6.いたや貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ほたてのような扇形",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "太い放射状のすじ",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "赤茶色の模様",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 13,
+     "point": "どちらも扇形"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "pink",
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 22,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "あこや貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "カキ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 3,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 2,
+    "col": 4
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/22-p1.jpg",
+     "thumb": "assets/img/shells/22-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "5.あこや貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/22-p2.jpg",
+     "thumb": "assets/img/shells/22-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "5.あこや貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "茶色〜黄土色",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "うすい板がめくれたような、ひだやとげ",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 23,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "あわび貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "アワビ／トコブシ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 3,
+    "col": 4
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/23-p1.jpg",
+     "thumb": "assets/img/shells/23-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "10.あわび貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/23-p2.jpg",
+     "thumb": "assets/img/shells/23-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "10.あわび貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/23-p3.jpg",
+     "thumb": "assets/img/shells/23-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "10.あわび貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "平たいお皿のような、だ円形",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "緑がかった茶色",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ふちに沿って小さな穴が並ぶ",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "green",
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 24,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "かたし貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ユキノカサ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "limpet",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 4,
+    "col": 4
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/24-p1.jpg",
+     "thumb": "assets/img/shells/24-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "9.かたし貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/24-p2.jpg",
+     "thumb": "assets/img/shells/24-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "9.かたし貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/24-p3.jpg",
+     "thumb": "assets/img/shells/24-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "9.かたし貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/24-p4.jpg",
+     "thumb": "assets/img/shells/24-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "DSC_2477.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真5",
+     "src": "assets/img/shells/24-p5.jpg",
+     "thumb": "assets/img/shells/24-p5-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "DSC_2479.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白い笠形（ぼうしのような形）",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "放射状のすじと、ぎざぎざのふち",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 19,
+     "point": "どちらも白い笠形"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 25,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "うつせ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "キセワタ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 3,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 1,
+    "col": 3
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/25-p1.jpg",
+     "thumb": "assets/img/shells/25-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "14.うつせ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白く、たまごのような丸み",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "うすくて軽い",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 26,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "みなし貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "アカフジツボ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": null,
+    "note": "一覧表に分類アイコンの記載なし（分類を断定しない）"
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 2,
+    "col": 3
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/26-p1.jpg",
+     "thumb": "assets/img/shells/26-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "13.みなし貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/26-p2.jpg",
+     "thumb": "assets/img/shells/26-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "13.みなし貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/26-p3.jpg",
+     "thumb": "assets/img/shells/26-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "13.みなし貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/26-p4.jpg",
+     "thumb": "assets/img/shells/26-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "13.みなし貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真5",
+     "src": "assets/img/shells/26-p5.jpg",
+     "thumb": "assets/img/shells/26-p5-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "13.みなし貝5.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "火山のような形で、てっぺんに穴があく",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ピンク〜むらさきのすじ",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "pink",
+     "purple"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 27,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "あさり貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ヒメアサリ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 3,
+    "col": 3
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/27-p1.jpg",
+     "thumb": "assets/img/shells/27-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "18.あさり貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/27-p2.jpg",
+     "thumb": "assets/img/shells/27-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "18.あさり貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/27-p3.jpg",
+     "thumb": "assets/img/shells/27-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "18.あさり貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/27-p4.jpg",
+     "thumb": "assets/img/shells/27-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "18.あさり貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真5",
+     "src": "assets/img/shells/27-p5.jpg",
+     "thumb": "assets/img/shells/27-p5-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "18.あさり貝5.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ふっくらしただ円形の二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "茶色のしまと、白い模様",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "表面に格子のような細かいすじ",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "brown",
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 28,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "しお貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "フジノハナガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 4,
+    "col": 3
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/28-p1.jpg",
+     "thumb": "assets/img/shells/28-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "17.しほ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/28-p2.jpg",
+     "thumb": "assets/img/shells/28-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "17.しほ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白く小さな二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "ふちに、うすいむらさき色",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "2枚が開いた形で見つかることもある",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 5,
+     "point": "どちらも2枚が開いた形で見つかる"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white",
+     "purple"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 29,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ものあら貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "モノアラガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 3,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 1,
+    "col": 2
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/29-p1.jpg",
+     "thumb": "assets/img/shells/29-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "22.ものあら貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/29-p2.jpg",
+     "thumb": "assets/img/shells/29-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "22.ものあら貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/29-p3.jpg",
+     "thumb": "assets/img/shells/29-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "22.ものあら貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/29-p4.jpg",
+     "thumb": "assets/img/shells/29-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "24.ものあら貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真5",
+     "src": "assets/img/shells/29-p5.jpg",
+     "thumb": "assets/img/shells/29-p5-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "24.ものあら貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真6",
+     "src": "assets/img/shells/29-p6.jpg",
+     "thumb": "assets/img/shells/29-p6-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "24.ものあら貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真7",
+     "src": "assets/img/shells/29-p7.jpg",
+     "thumb": "assets/img/shells/29-p7-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "24.ものあら貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "茶色〜黄土色の、丸い巻貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "大きくふくらんだ巻きと、広い口",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 30,
+     "point": "どちらも丸い巻貝"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 30,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "かたつ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ネコガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 3,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 2,
+    "col": 2
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/30-p1.jpg",
+     "thumb": "assets/img/shells/30-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "21.かたつ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/30-p2.jpg",
+     "thumb": "assets/img/shells/30-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "21.かたつ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/30-p3.jpg",
+     "thumb": "assets/img/shells/30-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "21.かたつ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/30-p4.jpg",
+     "thumb": "assets/img/shells/30-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "21.かたつ貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白くて丸い巻貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "黄土色のまだら",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "巻きが低く、かたつむりのような形",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 29,
+     "point": "どちらも丸い巻貝"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 20,
+     "point": "どちらも丸く、クリーム色"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 31,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "あし貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "バカガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 3,
+    "col": 2
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/31-p1.jpg",
+     "thumb": "assets/img/shells/31-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "26.あし貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/31-p2.jpg",
+     "thumb": "assets/img/shells/31-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "26.あし貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/31-p3.jpg",
+     "thumb": "assets/img/shells/31-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "26.あし貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "うすいクリーム色に、うすむらさきの放射状の帯",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "三角に近い丸形の二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "つやがある",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 33,
+     "point": "どちらも三角に近い丸形"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 2,
+     "point": "どちらも放射状のうすむらさきの帯"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white",
+     "purple"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 32,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "みぞ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ミゾガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 4,
+    "col": 2
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/32-p1.jpg",
+     "thumb": "assets/img/shells/32-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "25.みぞ貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/32-p2.jpg",
+     "thumb": "assets/img/shells/32-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "25.みぞ貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/32-p3.jpg",
+     "thumb": "assets/img/shells/32-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "25.みぞ貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "細長い長方形の二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "うすむらさき色で、白い帯が入る",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 7,
+     "point": "どちらも紫色"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "purple"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 33,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "蛤貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "蛤",
+    "text": "はまぐり"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ハマグリ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 1,
+    "col": 1
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/33-p1.jpg",
+     "thumb": "assets/img/shells/33-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "30.はまぐり貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/33-p2.jpg",
+     "thumb": "assets/img/shells/33-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "30.はまぐり貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/33-p3.jpg",
+     "thumb": "assets/img/shells/33-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "30.はまぐり貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/33-p4.jpg",
+     "thumb": "assets/img/shells/33-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "30.はまぐり貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "三角に近い丸形で、ふっくら",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "つやがあり、茶色の放射状の模様",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 31,
+     "point": "どちらも三角に近い丸形"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white",
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 34,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "しじみ貝"
+   },
+   "ruby": null,
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "シジミ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "bivalve",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 1,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 2,
+    "col": 1
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/34-p1.jpg",
+     "thumb": "assets/img/shells/34-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "29.しじみ貝 (2).jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/34-p2.jpg",
+     "thumb": "assets/img/shells/34-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "29.しじみ貝2 (2).jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "黄色〜クリーム色の二枚貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "てっぺんの部分がむらさき色",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white",
+     "purple"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 35,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "小貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "小",
+    "text": "こ"
+   },
+   "sheetName": {
+    "status": "unclear",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "ツノガイ・ナワガイ・クワガラ・オダマキ・アミガイ（5種）",
+    "note": "画像が不鮮明"
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": null,
+    "note": "一覧表に分類アイコンの記載なし（分類を断定しない）"
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 3,
+    "col": 1
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/35-p1.jpg",
+     "thumb": "assets/img/shells/35-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝1.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/35-p2.jpg",
+     "thumb": "assets/img/shells/35-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/35-p3.jpg",
+     "thumb": "assets/img/shells/35-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真4",
+     "src": "assets/img/shells/35-p4.jpg",
+     "thumb": "assets/img/shells/35-p4-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝4.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真5",
+     "src": "assets/img/shells/35-p5.jpg",
+     "thumb": "assets/img/shells/35-p5-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝5.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真6",
+     "src": "assets/img/shells/35-p6.jpg",
+     "thumb": "assets/img/shells/35-p6-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝6.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真7",
+     "src": "assets/img/shells/35-p7.jpg",
+     "thumb": "assets/img/shells/35-p7-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝7.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真8",
+     "src": "assets/img/shells/35-p8.jpg",
+     "thumb": "assets/img/shells/35-p8-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝8.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真9",
+     "src": "assets/img/shells/35-p9.jpg",
+     "thumb": "assets/img/shells/35-p9-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝9.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "5種類の小さな貝をまとめた枠",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白い角のような細長い管（ツノガイ）",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "細長い塔のような巻貝なども入る",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "white",
+     "brown",
+     "orange"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  },
+  {
+   "no": 36,
+   "name": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "千種貝"
+   },
+   "ruby": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "base": "千種",
+    "text": "ちぐさ"
+   },
+   "sheetName": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "text": "チグサガイ",
+    "note": null
+   },
+   "shape": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": "gastropod",
+    "note": null
+   },
+   "rarity": {
+    "status": "transcribed",
+    "source": "36種類一覧（references/IMG_0429.jpeg）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "value": 2,
+    "note": "★の意味（見つけにくさ等）は未確認"
+   },
+   "box": {
+    "status": "transcribed",
+    "source": "一覧表の並びと完成見本の箱の写真（box_sample.jpeg）を照合",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "row": 4,
+    "col": 1
+   },
+   "photos": [
+    {
+     "view": "photo",
+     "label": "写真1",
+     "src": "assets/img/shells/36-p1.jpg",
+     "thumb": "assets/img/shells/36-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "33.千草貝.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真2",
+     "src": "assets/img/shells/36-p2.jpg",
+     "thumb": "assets/img/shells/36-p2-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "33.千草貝2.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真3",
+     "src": "assets/img/shells/36-p3.jpg",
+     "thumb": "assets/img/shells/36-p3-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "33.千草貝3.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    }
+   ],
+   "features": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "オレンジ〜茶色の小さな巻貝",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "白い帯と細かい模様",
+     "note": "要確認（写真の見た目から作成）"
+    },
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "text": "口が広い",
+     "note": "要確認（写真の見た目から作成）"
+    }
+   ],
+   "similar": [
+    {
+     "status": "transcribed",
+     "source": "撮影写真の見た目から作成（2026-10-05）",
+     "reviewedBy": null,
+     "reviewedAt": null,
+     "no": 16,
+     "point": "どちらもオレンジ色の小さな巻貝"
+    }
+   ],
+   "colors": {
+    "status": "transcribed",
+    "source": "撮影写真の見た目から作成（2026-10-05）",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "values": [
+     "orange",
+     "brown"
+    ]
+   },
+   "scientificName": null,
+   "specimenSize": null,
+   "model": null
+  }
+ ],
+ "statusDefinitions": {
+  "confirmed": "原本・実物で確認済み（reviewedBy・reviewedAt を記入）。一般公開の画面に出す",
+  "transcribed": "資料から転記しただけで、照合がまだ。確認用プレビューでだけ「照合待ち」として出す",
+  "unclear": "資料が不鮮明など疑義あり。どの画面にも出さない",
+  "unconfirmed": "未確認・未登録。どの画面にも出さない"
+ }
+}

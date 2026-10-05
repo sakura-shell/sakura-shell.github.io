@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D表示 検証</title>
+<link rel="stylesheet" href="../site/assets/css/style.css">
+</head>
+<body>
+<main class="page stack" style="padding-top:16px">
+  <h1 style="font-size:20px">3D表示の部品の検証（開発用）</h1>
+  <p class="small">貝ではない公開サンプルモデル（model-viewer の Astronaut）を72方向から撮影した画像を合成し、tools/bin/make3d（Object Capture）→ tools/obj2glb.py で作った3Dモデル（tools/fixtures/pg-test.glb）を表示して、写真→3Dモデル→表示の流れを確認するページです。サイト本体では使いません。</p>
+  <div id="v" class="stack-sm"></div>
+  <div id="msg"></div>
+  <pre id="log"></pre>
+</main>
+<script type="module">
+import { mount3D, hasModel, arReady } from '../site/assets/js/lib/viewer3d.js';
+const fake = {
+  no: 0, name: '検証用サンプル', v: { name: '検証用サンプル' },
+  model: { src: '/tools/fixtures/pg-test.glb', status: 'confirmed', unit: 'm' },
+  specimenSize: { lengthMm: 42, status: 'confirmed' },
+};
+const log = (t) => (document.getElementById('log').textContent += t + '\n');
+log(`hasModel=${hasModel(fake)} arReady=${arReady(fake)}`);
+const r = await mount3D(document.getElementById('v'), fake, { onMessage: (m) => (document.getElementById('msg').textContent = m) });
+log(`mount ok=${r.ok}`);
+const mv = document.querySelector('model-viewer');
+mv?.addEventListener('load', () => log(`loaded canActivateAR=${mv.canActivateAR}`));
+window.__log = () => document.getElementById('log').textContent;
+</script>
+</body>
+</html>

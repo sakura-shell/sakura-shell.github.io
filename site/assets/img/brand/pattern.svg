@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="260" viewBox="0 0 260 260" fill="none" stroke="#262C74" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".11">
+  <!-- チラシの線画に合わせた、淡い背景の模様（このサイト用に作成） -->
+  <g transform="translate(34 40) rotate(-14)">
+    <path d="M0 18C0 6 10-4 24-4s24 10 24 22c0 4-2 7-5 9H5C2 25 0 22 0 18z" fill="#F6C3D5"/>
+    <path d="M24-4v31M14-1l4 28M34-1l-4 28M5 6l7 21M43 6l-7 21"/>
+  </g>
+  <g transform="translate(170 36) rotate(18)">
+    <path d="M0 26c7-15 20-26 40-30-2 13-10 29-26 33-7 2-12 0-14-3z" fill="#A9DDF0"/>
+    <path d="M9 27c3-3 5-7 5-12M18 24c3-4 5-9 4-14M27 18c2-4 3-8 3-12"/>
+  </g>
+  <g transform="translate(112 120) rotate(8)">
+    <path d="M0 22C3 8 10 0 20 0s17 8 20 22z" fill="#FBE39A"/>
+    <path d="M20 0v22M11 4L8 22M29 4l3 18"/>
+  </g>
+  <g transform="translate(26 176) rotate(20)">
+    <path d="M18 0C8 0 0 8 0 18s8 16 18 16 18-7 18-16S28 0 18 0z" fill="#fff"/>
+    <path d="M18 8c-5 0-9 4-9 9s4 8 9 8 8-3 8-8M18 14c-2 0-3 1-3 3"/>
+  </g>
+  <g transform="translate(196 170) rotate(-24)">
+    <path d="M0 12C10 0 24 0 34 12 24 24 10 24 0 12z" fill="#F6C3D5"/>
+    <path d="M17 3v18"/>
+  </g>
+  <g fill="#262C74" stroke="none">
+    <circle cx="120" cy="40" r="1.8"/><circle cx="128" cy="46" r="1.4"/><circle cx="116" cy="50" r="1.2"/>
+    <circle cx="232" cy="120" r="1.8"/><circle cx="240" cy="128" r="1.3"/>
+    <circle cx="96" cy="222" r="1.6"/><circle cx="104" cy="230" r="1.2"/><circle cx="88" cy="230" r="1.2"/>
+  </g>
+  <path d="M70 110c6-4 12-4 18 0s12 4 18 0" />
+  <path d="M150 232c6-4 12-4 18 0s12 4 18 0" />
+</svg>

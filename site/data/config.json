@@ -1,0 +1,26 @@
+{
+ "appVersion": "2026.10.05-r7",
+ "contentUpdated": "2026-10-05",
+ "mode": "preview",
+ "modeNote": "preview＝確認用（照合待ちの情報・許諾確認中の写真を表示）。public＝一般公開用（confirmed の情報と許諾済みの素材だけを表示）",
+ "features": {
+  "boxScan": "preview",
+  "boxScanNote": "off＝使わない。dev＝開発用モード（?dev=1）だけ。preview＝確認用プレビューで試験版として表示。public＝一般向け（実物での試験に合格してから）",
+  "identify": "preview",
+  "identifyNote": "off＝使わない。dev＝開発用モード（?dev=1）だけ。preview＝確認用プレビュー（mode が preview）で試験版として表示。public＝一般向け。評価用の実物写真で正解率を確かめ、運営が決めた基準を満たしたら public にする",
+  "model3d": false,
+  "model3dNote": "3D表示は見送り（2026-10-05）。作成した試作は materials/3d-archive/ に保管。再開するときは true にして shells.json の model を登録する"
+ },
+ "brandAssets": {
+  "status": "unconfirmed",
+  "note": "チラシのロゴ・イラストのWeb利用許諾"
+ },
+ "operator": {
+  "name": null,
+  "status": "unconfirmed"
+ },
+ "contact": {
+  "text": null,
+  "status": "unconfirmed"
+ }
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>3D作成の検証用 撮影画像の合成</title>
+<style>body { font-family: system-ui, sans-serif; margin: 16px; } model-viewer { width: 640px; height: 640px; background: #fff; }</style>
+</head>
+<body>
+<h1>3Dモデル作成の検証用（開発用）</h1>
+<p>公開サンプルの3Dモデル（model-viewer の Astronaut）を、高さを変えて3周×24方向から「撮影」した画像を作り、tools/fixtures/pg-test/ に保存します。実物の貝の写真の代わりに、写真→3Dモデル→表示の流れを確かめるためだけに使います。</p>
+<model-viewer id="mv" src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" camera-orbit="0deg 75deg 105%" field-of-view="30deg" interaction-prompt="none" exposure="1" shadow-intensity="0" environment-image="neutral"></model-viewer>
+<pre id="log"></pre>
+<script type="module">
+import '../site/vendor/model-viewer/model-viewer.min.js';
+const mv = document.getElementById('mv');
+const log = (t) => (document.getElementById('log').textContent += t + '\n');
+await new Promise((r) => (mv.loaded ? r() : mv.addEventListener('load', r, { once: true })));
+const frame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+let n = 0;
+for (const polar of [55, 80, 105]) {
+  for (let az = 0; az < 360; az += 15) {
+    mv.cameraOrbit = `${az}deg ${polar}deg 105%`;
+    mv.jumpCameraToGoal();
+    await frame(); await frame();
+    const blob = await mv.toBlob({ mimeType: 'image/png' });
+    const name = String(n).padStart(3, '0');
+    await fetch(`/__save/pg-test/${name}.png`, { method: 'POST', body: blob });
+    n++;
+  }
+}
+log(`保存しました：${n}枚`);
+window.__done = n;
+</script>
+</body>
+</html>

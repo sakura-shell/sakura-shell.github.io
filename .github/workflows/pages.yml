@@ -1,0 +1,49 @@
+# site/ フォルダを GitHub Pages に公開する（無料。https://<ユーザー名>.github.io/）
+#
+# main に push すると自動で公開する。
+# ・site/data/config.json の mode が "preview"（確認用プレビュー）のとき：
+#     検索エンジンに載らないよう noindex を付けて公開する（URL を知っている人は見られる）
+# ・mode が "public"（一般公開）のとき：
+#     一般公開の条件（tools/check_release.py --strict）を満たすときだけ公開する
+# 手動で実行することもできる（Actions → サイトを公開 → Run workflow）
+name: サイトを公開
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 公開の種類を確かめる
+        id: mode
+        run: echo "mode=$(python3 -c 'import json;print(json.load(open("site/data/config.json"))["mode"])')" >> "$GITHUB_OUTPUT"
+      - name: 一般公開の条件を確認
+        if: ${{ steps.mode.outputs.mode == 'public' }}
+        run: python3 tools/check_release.py --strict
+      - name: 確認用プレビューに noindex を付ける
+        if: ${{ steps.mode.outputs.mode != 'public' }}
+        run: |
+          python3 tools/check_release.py || true
+          sed -i 's#<meta charset="utf-8">#<meta charset="utf-8">\n<meta name="robots" content="noindex, nofollow">#' site/index.html
+          printf 'User-agent: *\nDisallow: /\n' > site/robots.txt
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

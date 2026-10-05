@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+
+# 公開リポジトリに入れないもの（利用許諾が未確認の原本・検証用の画像）
+# リポジトリを作る前から除外しておくこと。一度コミットすると履歴に残る
+references/
+tools/fixtures/
+training/
+materials/
+tools/bin/
+
+# 確認用に作るもの（公開しない）
+docs/pages/
+docs/*.pdf
+
+# このMac用の設定（公開しない）
+.claude/

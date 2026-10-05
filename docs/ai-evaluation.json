@@ -1,0 +1,36 @@
+{
+ "date": "2026-10-05T02:55:57.187Z",
+ "backbone": "mobilenet_v1_0.50_224",
+ "labels": 36,
+ "trainImages": 130,
+ "augment": 12,
+ "val": {
+  "n": 31,
+  "top1": 77.4,
+  "top3": 83.9,
+  "top5": 93.5,
+  "meanTrueP": 68.6,
+  "meanTopP": 74,
+  "status": {
+   "likely": 21,
+   "unclear": 1,
+   "similar": 9
+  },
+  "likelyPrecision": 100
+ },
+ "box": {
+  "n": 36,
+  "top1": 44.4,
+  "top3": 61.1,
+  "top5": 72.2,
+  "meanTrueP": 28.4,
+  "meanTopP": 47.8,
+  "status": {
+   "similar": 20,
+   "unclear": 4,
+   "outside": 5,
+   "likely": 7
+  },
+  "likelyPrecision": 85.7
+ }
+}

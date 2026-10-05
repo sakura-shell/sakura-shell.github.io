@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>箱の読み取り 検証</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 16px; background: #fff; color: #222; }
+  .case { margin-bottom: 32px; }
+  canvas { max-width: 100%; border: 1px solid #ccc; }
+  table { border-collapse: collapse; font-size: 13px; }
+  td, th { border: 1px solid #ccc; padding: 2px 6px; }
+  .ng { background: #fdd; }
+  .warn { background: #ffd; }
+  pre { background: #f6f6f6; padding: 8px; }
+</style>
+</head>
+<body>
+<h1>箱の読み取り 検証（開発用）</h1>
+<p>プロジェクトの直下でサーバーを起動し <code>/tools/box-test.html</code> を開く。期待値との一致数を表示します。</p>
+<div id="out"></div>
+<pre id="summary"></pre>
+<script type="module">
+import { detectBox, orderClockwise, guessBoxCorners, rectify, readCells, cellRect } from '../site/assets/js/lib/boxreader.js';
+
+const data = await (await fetch('../site/data/shells.json')).json();
+const layout = data.box;
+const byPos = {};
+for (const s of data.species) byPos[`${s.box.row}-${s.box.col}`] = s.no;
+
+const cases = [
+  { name: '見本の箱（斜めから撮影・36マスすべて貝あり）', src: '../references/box_sample.jpeg', empty: [] },
+  { name: 'チラシの箱写真（真上・36マスすべて貝あり）', src: 'fixtures/flyer_box.jpg', empty: [] },
+  { name: '合成：一部のマスを空にした画像', src: 'fixtures/flyer_box_empty.jpg', emptyFrom: 'fixtures/flyer_box_empty.json' },
+];
+
+function loadImg(src) {
+  return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+}
+
+const summary = [];
+for (const c of cases) {
+  const empty = c.emptyFrom ? (await (await fetch(c.emptyFrom)).json()).empty : c.empty;
+  const img = await loadImg(c.src);
+  const cv = document.createElement('canvas');
+  cv.width = img.naturalWidth; cv.height = img.naturalHeight;
+  const ctx = cv.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  const id = ctx.getImageData(0, 0, cv.width, cv.height);
+  const t0 = performance.now();
+  const det = detectBox(id);
+  const t1 = performance.now();
+  const sec = document.createElement('div');
+  sec.className = 'case';
+  sec.innerHTML = `<h2>${c.name}</h2><p>detect: ${det.reason} fill=${(det.fill||0).toFixed(2)} area=${det.areaRatio.toFixed(2)} (${(t1-t0).toFixed(0)}ms)</p>`;
+  document.getElementById('out').append(sec);
+  if (!det.quad) { summary.push(`${c.name}: 箱を検出できず`); continue; }
+  const corners = guessBoxCorners(orderClockwise(det.quad));
+  ctx.strokeStyle = '#f0f'; ctx.lineWidth = 3; ctx.beginPath();
+  corners.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.closePath(); ctx.stroke();
+  ctx.fillStyle = '#f0f'; ctx.font = 'bold 24px sans-serif';
+  corners.forEach(([x, y], i) => ctx.fillText(['左上', '右上', '右下', '左下'][i], x + 4, y + 20));
+  sec.append(cv);
+
+  const W = 900, H = Math.round(900 / layout.aspect);
+  const t2 = performance.now();
+  const rect = rectify(id, corners, W, H);
+  const res = readCells(rect, layout);
+  const t3 = performance.now();
+  const rc = document.createElement('canvas'); rc.width = W; rc.height = H;
+  const rctx = rc.getContext('2d');
+  rctx.putImageData(new ImageData(rect.data, W, H), 0, 0);
+  let ok = 0, ng = [], checks = [];
+  for (const cell of res.cells) {
+    const no = byPos[`${cell.row}-${cell.col}`];
+    const expect = empty.includes(no) ? 'empty' : 'filled';
+    const r = cellRect(rect, cell.row, cell.col, layout);
+    rctx.strokeStyle = cell.state === 'filled' ? '#0a0' : cell.state === 'empty' ? '#00f' : '#f90';
+    rctx.lineWidth = 3; rctx.strokeRect(r.x + 3, r.y + 3, r.w - 6, r.h - 6);
+    rctx.fillStyle = '#000'; rctx.font = 'bold 16px sans-serif';
+    rctx.fillText(`${no} ${cell.score.toFixed(2)}`, r.x + 6, r.y + 20);
+    if (cell.state === expect) ok++;
+    else if (cell.state === 'check') checks.push(no);
+    else ng.push(`${no}(${cell.state})`);
+  }
+  sec.append(rc);
+  const p = document.createElement('p');
+  p.textContent = `一致 ${ok}/36・要確認 ${checks.length} [${checks.join(',')}]・誤り ${ng.length} [${ng.join(',')}]・baseHue ${res.baseHue.toFixed(0)}・blue ${res.blueRatio.toFixed(2)}・warning ${res.warning}・${(t3 - t2).toFixed(0)}ms`;
+  if (ng.length) p.className = 'ng'; else if (checks.length) p.className = 'warn';
+  sec.append(p);
+  summary.push(`${c.name}: ${p.textContent}`);
+}
+document.getElementById('summary').textContent = summary.join('\n');
+window.__done = summary;
+</script>
+</body>
+</html>
