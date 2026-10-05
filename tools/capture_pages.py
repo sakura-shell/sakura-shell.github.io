@@ -304,6 +304,10 @@ def main():
         time.sleep(2)
         # オフライン用の保存（Service Worker）は使わない（いつも最新のファイルで撮る）
         cdp.js("for (const r of await navigator.serviceWorker.getRegistrations()) await r.unregister(); return true;")
+        # 合言葉の画面を通す（確認用プレビューの合言葉が設定されているとき）
+        gate = json.loads((ROOT / "site/data/config.json").read_text(encoding="utf-8")).get("previewGate")
+        if gate:
+            cdp.js(f"localStorage.setItem('m36shells:gate', {json.dumps(gate['hash'])}); return true;")
         cdp.send("Network.enable")
         cdp.send("Network.setBypassServiceWorker", {"bypass": True})
 

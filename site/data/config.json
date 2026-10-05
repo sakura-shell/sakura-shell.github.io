@@ -22,5 +22,10 @@
  "contact": {
   "text": null,
   "status": "unconfirmed"
+ },
+ "previewGate": {
+  "salt": "435be5b0c24dac96",
+  "hash": "bc6edaec440da37040b6a94fb49d88d7913a3f8fc258a4a62fdff8541c0ad665",
+  "note": "確認用プレビューの合言葉（tools/set_passphrase.py で設定。合言葉そのものは書かない）"
  }
 }

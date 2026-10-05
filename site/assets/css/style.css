@@ -760,3 +760,14 @@ h1, h2, h3, .btn, .chip { text-wrap: balance; }
 }
 .chip-wrap { gap: 6px; }
 .chip { padding: 5px 12px; font-size: 14px; min-height: 44px; }
+
+/* ---------- 確認用プレビューの合言葉 ---------- */
+.gate { padding-top: 48px; max-width: 420px; margin: 0 auto; }
+.gate .text-logo { text-align: center; }
+.gate-input {
+  width: 100%; min-height: 48px; padding: 10px 14px; font: inherit; font-size: 18px; color: var(--ink);
+  border: 2px solid var(--line); border-radius: var(--radius-sm); background: var(--white);
+}
+.gate-input:focus { outline: 3px solid var(--sky-300); outline-offset: 1px; border-color: var(--box); }
+.gate-show { gap: 8px; align-items: center; color: var(--ink-2); }
+.gate-msg { color: var(--danger); min-height: 1.5em; }

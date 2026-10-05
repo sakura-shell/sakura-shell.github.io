@@ -1,5 +1,6 @@
 // 画面の切り替え（ハッシュ #/... によるルーティング）
 import { loadData, setDevFromQuery, isDev } from './data.js';
+import { gateNeeded, showGate } from './lib/gate.js';
 import { h, ic } from './ui.js';
 import * as home from './views/home.js';
 import * as list from './views/list.js';
@@ -149,6 +150,8 @@ async function boot() {
         h('button', { class: 'btn', onclick: () => location.reload() }, '再読み込み'))));
     return;
   }
+  // 確認用プレビューの合言葉（設定されているときだけ）
+  if (gateNeeded(data.config)) await showGate(root, data.config);
   window.addEventListener('hashchange', onHashChange);
   window.addEventListener('beforeunload', (e) => {
     if (current?.dirty?.()) { e.preventDefault(); e.returnValue = ''; }
