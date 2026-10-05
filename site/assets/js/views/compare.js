@@ -129,7 +129,11 @@ function tab(main, isPhoto) {
 function photoSwitcher(items, alt) {
   let i = 0;
   const img = h('img', { src: items[0].src, alt });
-  const seg = items.length > 1 ? photoThumbs(items, (k) => { i = k; img.src = items[k].src; }, { label: '写真を選ぶ', small: true }) : null;
+  const counter = h('p', { class: 'thumbs-count' });
+  const setCount = () => { counter.textContent = `写真 ${i + 1}/${items.length}${items.length > 3 ? '・横に送れます' : ''}`; };
+  const strip = items.length > 1 ? photoThumbs(items, (k) => { i = k; img.src = items[k].src; setCount(); }, { label: '写真を選ぶ', small: true }) : null;
+  setCount();
+  const seg = strip ? h('div', null, counter, strip) : null;
   return { img, seg, current: () => items[i] };
 }
 

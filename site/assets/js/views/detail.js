@@ -61,15 +61,15 @@ export function render(ctx) {
 
   // 見分けるポイント（表示してよいものがあるときだけ）
   const feats = sp.v.features;
-  const featureCard = feats.length
-    ? h('section', { class: 'card stack-sm' },
-      h('h3', { class: 'section-title' }, '見分けるポイント'),
+  const featureCard = feats.length > 2
+    ? h('section', { class: 'card stack-sm', id: 'all-features' },
+      h('h3', { class: 'section-title' }, '見分けるポイント（すべて）'),
       h('ul', { class: 'feature-list' }, feats.map((f) => h('li', null, ic('shell'), h('div', null, f.text)))),
       feats.some((f) => f.status !== 'confirmed') && data.preview ? pendingTag('照合待ち：内容を確認中') : null)
     : null;
 
   // 見比べ
-  const compareCard = h('section', { class: 'card stack-sm' },
+  const compareCard = h('section', { class: 'card stack-sm', id: 'compare-card' },
     h('h3', { class: 'section-title' }, feats.length ? 'ほかの貝と見比べる' : '見比べて確かめる'),
     feats.length ? null : h('p', { class: 'small muted' }, '見分けるポイントは準備中です。写真を見比べて確かめてください。'),
     sp.v.similar.length
@@ -85,8 +85,18 @@ export function render(ctx) {
     h('h3', { class: 'section-title' }, '収集箱の位置'),
     h('p', { class: 'small' }, positionLabel(sp)),
     boxGrid(data, { mini: true, highlight: sp.no }));
-  // 収集箱への記録（名前のすぐ下に置く）
-  const recordCard = h('section', { class: 'card stack-sm found-card' }, recordBlock(data, sp));
+  // 名前のすぐ下：見分けるポイント（2つまで）と「見つけた！」。特徴を確かめてから記録できるように
+  const jump = (id) => () => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const keyPoints = feats.length
+    ? h('div', { class: 'key-points' },
+      h('p', { class: 'kp-label' }, '見分けるポイント',
+        feats.slice(0, 2).some((f) => f.status !== 'confirmed') && data.preview ? pendingTag('照合待ち') : null),
+      h('ul', { class: 'feature-list compact' }, feats.slice(0, 2).map((f) => h('li', null, ic('shell'), h('div', null, f.text)))),
+      h('div', { class: 'kp-links' },
+        feats.length > 2 ? h('button', { class: 'link-btn', type: 'button', onclick: jump('all-features') }, `ほかに${feats.length - 2}つ`) : null,
+        h('button', { class: 'link-btn', type: 'button', onclick: jump('compare-card') }, ic('compare'), '似ている貝と見比べる')))
+    : null;
+  const recordCard = h('section', { class: 'card stack-sm found-card' }, keyPoints, recordBlock(data, sp));
 
   // 3D・AR（実物に基づくモデルがあるときだけ）
   let modelCard = null;

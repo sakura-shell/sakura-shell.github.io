@@ -1,28 +1,34 @@
 import { h, ic } from '../ui.js';
 import { searchSpecies } from '../data.js';
-import { loadBox } from '../store.js';
+import { loadBox, counts } from '../store.js';
 import { page } from './common.js';
-import { shellCard, filterChips, applyFilters, noResult, filterLabels, hasFilter } from './parts.js';
+import { shellCard, filterChips, applyFilters, noResult, hasFilter, BOX_FILTERS, boxMatch } from './parts.js';
+
+const OPEN_KEY = 'm36shells:list-filter-open';
 
 export function render(ctx) {
   const { data, query } = ctx;
   const rec = loadBox();
-  const box = query.get('box') || (query.get('todo') === '1' ? 'empty' : '');
+  const box = query.get('box') || (query.get('todo') === '1' ? 'todo' : '');
   const state = {
     q: query.get('q') || '',
     shape: query.get('shape') || '',
     color: query.get('color') || '',
-    box: rec && ['empty', 'check', 'unknown'].includes(box) ? box : '',
+    box: rec && BOX_FILTERS.some((f) => f.key === box) ? box : '',
   };
 
   // 写真の大きさ（大きく＝2列／小さく＝3列）。端末ごとに覚えておく
   let big = true;
   try { big = localStorage.getItem('m36shells:list-size') !== 'small'; } catch { /* 既定は大きく */ }
+  // 絞り込みの開閉（閉じても条件は残る）
+  let open = false;
+  try { open = sessionStorage.getItem(OPEN_KEY) === '1'; } catch { /* 既定は閉じる */ }
+
   const grid = h('div', { class: `shell-grid${big ? ' big' : ''}` });
   const count = h('p', { class: 'filter-count', 'aria-live': 'polite' });
-  const conds = h('p', { class: 'small filter-conds' });
-  const clearBtn = h('button', { class: 'btn small secondary', type: 'button', onclick: () => reset() }, ic('close'), '条件をクリア');
-  const status = h('div', { class: 'filter-status' }, h('div', { class: 'grow' }, count, conds), clearBtn);
+  const tags = h('div', { class: 'filter-tags' });
+  const panel = h('div', { class: 'filter-panel card flat', id: 'filter-panel' });
+  const toggleBtn = h('button', { class: 'chip filter-toggle', type: 'button', 'aria-controls': 'filter-panel', onclick: () => setOpen(!open) });
   const sizeSeg = h('div', { class: 'seg', role: 'group', 'aria-label': '写真の大きさ' },
     [[true, '大きく'], [false, '小さく']].map(([v, label]) => h('button', {
       type: 'button', 'aria-pressed': String(big === v),
@@ -32,24 +38,74 @@ export function render(ctx) {
         sizeSeg.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === e.currentTarget)));
       },
     }, label)));
-  const chipsHolder = h('div');
+  const chips = filterChips(data, state, rec, () => update());
+  panel.append(chips);
+
+  function setOpen(v) {
+    open = v;
+    try { sessionStorage.setItem(OPEN_KEY, open ? '1' : '0'); } catch { /* 覚えなくても動く */ }
+    drawToggle();
+  }
+
+  function activeCount() {
+    return [state.shape, state.color, state.box].filter(Boolean).length;
+  }
+
+  function drawToggle() {
+    panel.hidden = !open;
+    toggleBtn.setAttribute('aria-expanded', String(open));
+    const n = activeCount();
+    toggleBtn.replaceChildren(ic('search'), '絞り込み', n ? h('span', { class: 'badge' }, n) : null, h('span', { class: `caret${open ? ' up' : ''}`, 'aria-hidden': 'true' }, '▾'));
+  }
 
   const reset = () => {
     state.q = ''; state.shape = ''; state.color = ''; state.box = '';
     input.value = '';
-    chipsHolder.replaceChildren(filterChips(data, state, rec, update));
+    chips.redraw();
     update();
   };
 
+  // 選んでいる条件を、外せるタグで出す
+  function drawTags() {
+    const list = [];
+    const tag = (label, clear) => h('button', { class: 'chip tag-chip', type: 'button', 'aria-label': `「${label}」の条件を外す`, onclick: () => { clear(); chips.redraw(); update(); } }, label, ic('close'));
+    if (state.q) list.push(tag(`「${state.q}」`, () => { state.q = ''; input.value = ''; }));
+    if (state.shape) list.push(tag(data.shapes[state.shape]?.label, () => { state.shape = ''; }));
+    if (state.box) list.push(tag(BOX_FILTERS.find((f) => f.key === state.box)?.label, () => { state.box = ''; }));
+    if (state.color) list.push(tag(data.colorPalette[state.color]?.label, () => { state.color = ''; }));
+    if (list.length > 1 || (list.length && !state.q)) list.push(h('button', { class: 'btn small ghost', type: 'button', onclick: reset }, 'すべて解除'));
+    tags.replaceChildren(...list);
+    tags.hidden = !list.length;
+  }
+
+  // 0件のとき：理由が記録の絞り込みなら、その説明と次の操作を出す
+  function reasonFor(found) {
+    if (found.length || !state.box) return null;
+    const withoutBox = applyFilters(searchSpecies(data, state.q), { ...state, box: '' }, rec);
+    if (!withoutBox.length) return null; // 記録以外の条件でも0件なら、ふつうの案内
+    const n = (key) => data.species.filter((sp) => boxMatch(rec, sp.no, key)).length;
+    const go = (key) => () => { state.box = key; chips.redraw(); update(); };
+    const c = counts(rec);
+    const actions = [];
+    if (state.box !== 'unknown' && n('unknown')) actions.push({ label: `まだ記録していない ${n('unknown')}種類を見る`, onclick: go('unknown') });
+    if (state.box !== 'todo' && n('todo')) actions.push({ label: `これから探す ${n('todo')}種類を見る`, onclick: go('todo') });
+    const titles = {
+      empty: '空きと記録したマスはありません。',
+      unknown: 'まだ記録していない貝はありません。',
+      check: '要確認のマスはありません。',
+      filled: c.filled ? 'この条件で集めた貝はありません。' : 'まだ集めた貝はありません。',
+      todo: 'これから探す貝はありません。すべて集まっています！',
+    };
+    return { title: titles[state.box] || '見つかりませんでした。', actions };
+  }
+
   function update() {
     const found = applyFilters(searchSpecies(data, state.q), state, rec);
-    const labels = filterLabels(data, state);
-    count.textContent = labels.length ? `36種類中 ${found.length}種類` : `36種類すべて`;
-    conds.textContent = labels.length ? `絞り込み：${labels.join('・')}` : '';
-    conds.hidden = !labels.length;
-    clearBtn.hidden = !hasFilter(state);
+    count.textContent = hasFilter(state) ? `${found.length}種類（36種類中）` : '36種類';
+    drawTags();
+    drawToggle();
     if (found.length) grid.replaceChildren(...found.map((sp) => shellCard(data, sp, rec, { href: `#/shell/${sp.no}` })));
-    else grid.replaceChildren(noResult(reset));
+    else grid.replaceChildren(noResult(reset, reasonFor(found)));
     const params = {};
     if (state.q) params.q = state.q;
     if (state.shape) params.shape = state.shape;
@@ -67,8 +123,12 @@ export function render(ctx) {
     ic('search'), input,
     h('button', { type: 'button', class: 'icon-btn', 'aria-label': '入力を消す', onclick: () => { input.value = ''; state.q = ''; update(); input.focus(); } }, ic('close')));
 
-  chipsHolder.append(filterChips(data, state, rec, update));
   update();
   return page(ctx, { title: '貝の図鑑', back: '#/' },
-    h('div', { class: 'stack' }, form, chipsHolder, status, h('div', { class: 'row between' }, h('span', { class: 'xsmall muted' }, '写真の大きさ'), sizeSeg), grid));
+    h('div', { class: 'stack list-top' },
+      form,
+      h('div', { class: 'filter-bar' }, toggleBtn, tags),
+      panel,
+      h('div', { class: 'row between list-meta' }, count, sizeSeg),
+      grid));
 }

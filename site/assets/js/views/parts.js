@@ -21,27 +21,42 @@ export function shellCard(data, sp, rec, { href, onclick } = {}) {
     sp.v.shape ? h('div', { class: 'sub' }, data.shapes[sp.v.shape].label) : null));
 }
 
-// 絞り込み。state = { shape, color, box }（box: '' | 'empty' | 'check' | 'unknown'）
+// 収集箱の記録での絞り込み（「これから探す」＝空きとして記録＋まだ記録していない。未記録を空きと決めつけない）
+export const BOX_FILTERS = [
+  { key: 'todo', label: 'これから探す', hint: '空き＋まだ記録していない' },
+  { key: 'unknown', label: 'まだ記録していない' },
+  { key: 'empty', label: '空きと記録した' },
+  { key: 'check', label: '要確認' },
+  { key: 'filled', label: '集めた（貝あり）' },
+];
+
+export function boxMatch(rec, no, key) {
+  const s = cellState(rec, no);
+  return key === 'todo' ? s === 'empty' || s === 'unknown' : s === key;
+}
+
+// 絞り込み。state = { shape, color, box }（box: '' | 'todo' | 'unknown' | 'empty' | 'check' | 'filled'）
 export function filterChips(data, state, rec, onChange) {
-  const wrap = h('div', { class: 'stack-sm' });
+  const wrap = h('div', { class: 'stack-sm filter-groups' });
   const shapes = availableShapes(data);
   const colors = availableColors(data);
+  const group = (label, row, note) => h('div', { class: 'filter-group' }, h('p', { class: 'filter-label' }, label), row, note || null);
   const draw = () => {
     wrap.replaceChildren();
     if (shapes.length) {
       const row = h('div', { class: 'chip-wrap', role: 'group', 'aria-label': '形で絞り込む' });
       row.append(chip('すべての形', !state.shape, () => { state.shape = ''; }));
       for (const key of shapes) row.append(chip(data.shapes[key].label, state.shape === key, () => { state.shape = key; }, shapeIc(key)));
-      wrap.append(row);
+      wrap.append(group('形', row));
     }
     if (rec) {
-      const c = counts(rec);
       const row = h('div', { class: 'chip-wrap', role: 'group', 'aria-label': '収集箱の記録で絞り込む' });
-      const boxChip = (key, label, n) => chip(`${label}（${n}）`, state.box === key, () => { state.box = state.box === key ? '' : key; }, key === 'empty' ? ic('box') : null);
-      row.append(boxChip('empty', '空きマスの貝', c.empty));
-      if (c.check) row.append(boxChip('check', '要確認', c.check));
-      if (c.unknown) row.append(boxChip('unknown', '未記録', c.unknown));
-      wrap.append(row);
+      for (const f of BOX_FILTERS) {
+        const n = data.species.filter((sp) => boxMatch(rec, sp.no, f.key)).length;
+        if (!n && f.key !== 'todo' && state.box !== f.key) continue; // 0件の条件は出さない（これから探すは常に出す）
+        row.append(chip(`${f.label}（${n}）`, state.box === f.key, () => { state.box = state.box === f.key ? '' : f.key; }, f.key === 'todo' ? ic('box') : null));
+      }
+      wrap.append(group('収集箱の記録', row, h('p', { class: 'xsmall muted' }, '「空き」は、箱を見て空いていると記録したマス。「まだ記録していない」は、記録をつけていない貝です。')));
     }
     if (colors.length) {
       const row = h('div', { class: 'chip-wrap', role: 'group', 'aria-label': '色で絞り込む' });
@@ -51,7 +66,7 @@ export function filterChips(data, state, rec, onChange) {
         row.append(chip(col.label, state.color === key, () => { state.color = state.color === key ? '' : key; },
           h('span', { class: 'dot', style: { background: col.hex } })));
       }
-      wrap.append(row);
+      wrap.append(group('色', row));
     }
   };
   function chip(label, pressed, set, icon) {
@@ -61,13 +76,14 @@ export function filterChips(data, state, rec, onChange) {
     }, icon, label);
   }
   draw();
+  wrap.redraw = draw;
   return wrap;
 }
 
 export function applyFilters(list, state, rec) {
   return list.filter((sp) => {
     if (state.shape && sp.v.shape !== state.shape) return false;
-    if (state.box && cellState(rec, sp.no) !== state.box) return false;
+    if (state.box && !boxMatch(rec, sp.no, state.box)) return false;
     if (state.color && !sp.v.colors.includes(state.color)) return false;
     return true;
   });
@@ -79,7 +95,7 @@ export function filterLabels(data, state) {
   if (state.q) out.push(`「${state.q}」`);
   if (state.shape) out.push(data.shapes[state.shape]?.label);
   if (state.color) out.push(data.colorPalette[state.color]?.label);
-  if (state.box) out.push({ empty: '空きマスの貝', check: '要確認', unknown: '未記録' }[state.box]);
+  if (state.box) out.push(BOX_FILTERS.find((f) => f.key === state.box)?.label);
   return out.filter(Boolean);
 }
 
@@ -87,10 +103,12 @@ export function hasFilter(state) {
   return !!(state.shape || state.box || state.color || state.q);
 }
 
-// 0件のとき
-export function noResult(onReset) {
+// 0件のとき。reason があれば、0件になった理由と次の操作を出す
+export function noResult(onReset, reason) {
   return h('div', { class: 'empty-state', style: { gridColumn: '1 / -1' } },
-    h('p', null, '見つかりませんでした。'),
-    h('p', { class: 'small' }, '番号（1〜36）や、ひらがなの名前でも探せます。'),
-    h('button', { class: 'btn small secondary', type: 'button', onclick: onReset }, '条件を解除してすべて見る'));
+    h('p', null, reason?.title || '見つかりませんでした。'),
+    reason ? null : h('p', { class: 'small' }, '番号（1〜36）や、ひらがなの名前でも探せます。'),
+    h('div', { class: 'stack-sm', style: { maxWidth: '320px', margin: '8px auto 0' } },
+      ...(reason?.actions || []).map((a) => h('button', { class: 'btn small', type: 'button', onclick: a.onclick }, a.label)),
+      h('button', { class: 'btn small secondary', type: 'button', onclick: onReset }, '条件を解除してすべて見る')));
 }

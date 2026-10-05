@@ -21,8 +21,8 @@ export function render(ctx) {
         h('h2', null, '三十六歌仙貝のデジタルガイド'),
         h('p', { class: 'small' }, '増穂浦海岸で36種類の貝を集める「MASUHOGAURA 36 shells Collection」のための道具です。実物のコレクションBOXと一緒に使います。'),
         h('dl', { class: 'kv small' },
-          h('dt', null, '運営'), h('dd', null, operator || (data.preview ? '（確認中）' : '―')),
-          contact || data.preview ? h('dt', null, '問い合わせ') : null,
+          h('dt', null, 'サイトの運営'), h('dd', null, operator || (data.preview ? '（確認中）' : '―')),
+          contact || data.preview ? h('dt', null, 'イベント・サイトのお問い合わせ') : null,
           contact || data.preview ? h('dd', null, contact || '（確認中）', cfg.contact?.status === 'confirmed' && cfg.contact.tel ? h('a', { class: 'tel block', href: `tel:${cfg.contact.tel.replace(/-/g, '')}` }, '電話をかける') : null) : null,
           h('dt', null, '内容の更新日'), h('dd', null, cfg.contentUpdated),
           h('dt', null, '版'), h('dd', null, cfg.appVersion))),
@@ -47,11 +47,15 @@ export function render(ctx) {
         ul('番号・名前・箱の位置は、36種類一覧の資料にもとづいています。',
           '一般公開では、確認できた情報と写真だけを表示します。',
           data.preview ? 'この確認用プレビューでは、確認中の情報も「照合待ち」と付けて表示しています。' : null)),
-      h('section', { class: 'card stack-sm' },
-        h('h3', { class: 'section-title' }, 'まだ使えない機能'),
-        ul(aiShown ? null : '貝の自動判定（撮った写真と図鑑を見比べて探せます）',
+      (() => {
+        // まだ使えない機能（なければ見出しごと出さない）
+        const items = [
+          aiShown ? null : '貝の自動判定（撮った写真と図鑑を見比べて探せます）',
           scanAvailable(data) ? null : '収集箱を撮って自動で読み取る機能（試験中。手で記録できます）',
-          cfg.features?.model3d && !models ? '3D表示・実物大AR' : null)),
+          cfg.features?.model3d && !models ? '3D表示・実物大AR' : null,
+        ].filter(Boolean);
+        return items.length ? h('section', { class: 'card stack-sm' }, h('h3', { class: 'section-title' }, 'まだ使えない機能'), ul(...items)) : null;
+      })(),
     ));
 }
 

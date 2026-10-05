@@ -126,7 +126,10 @@ export function render(ctx) {
     if (scanAvailable(data)) {
       actions.append(h('a', { class: 'btn block secondary', href: '#/scan' }, ic('camera'), scanIsPublic(data) ? '収集箱を撮って読み取る' : '収集箱を撮って読み取る（試験版）'));
     }
-    if (rec) actions.append(h('a', { class: 'btn block soft', href: '#/list?box=empty' }, ic('search'), '空いているマスの貝を探す'));
+    if (rec) {
+      actions.append(h('a', { class: 'btn block soft', href: '#/list?box=todo' }, ic('search'), 'これから探す貝を見る'),
+        h('p', { class: 'xsmall muted center' }, '空きと記録したマスと、まだ記録していない貝を図鑑で表示します'));
+    }
     body.append(actions);
     if (isTemp(rec)) {
       body.append(h('div', { class: 'center' }, h('button', { class: 'btn ghost small', type: 'button', onclick: () => { endTemp(); rec = loadBox(); draw(); toast('一時記録をやめました'); } }, '一時記録をやめる')));

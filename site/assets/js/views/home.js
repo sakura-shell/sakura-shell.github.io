@@ -36,7 +36,7 @@ export function render(ctx) {
   right.append(h('nav', { class: 'actions', 'aria-label': 'おもな操作' },
     action('#/identify', 'pink primary', 'identify', '写真で調べる', phrase('この貝はなんだろう？', '拾った貝を撮って調べる')),
     action('#/list', 'cream', 'search', '貝の図鑑', phrase('36種類の', '貝の写真を見る')),
-    action('#/box', 'sky', 'box', '収集箱を記録する', phrase('取った貝を', '記録する')),
+    action('#/box', 'sky', 'box', '収集箱を記録する', phrase('拾った貝を', '記録する')),
   ));
 
   if (data.config.event?.status === 'confirmed') {

@@ -18,7 +18,9 @@ export function render(ctx) {
   body.append(...[
     h('section', { class: 'card stack-sm guide-hero' },
       h('h2', { class: 'guide-title' }, phrase('増穂浦海岸で、', '36種類の秘貝を探そう。')),
-      h('p', { class: 'guide-fee' }, '参加費 ', h('strong', null, ev.fee))),
+      h('p', { class: 'guide-fee' }, '参加費 ', h('strong', null, ev.fee)),
+      ev.checkedAt ? h('p', { class: 'xsmall muted' }, `この案内は ${ev.checkedAt.replace(/^(\d+)-0?(\d+)-0?(\d+)$/, '$1年$2月$3日')} 時点の内容です。`,
+        ev.official ? h('span', null, '最新の情報は ', h('a', { href: ev.official.url, target: '_blank', rel: 'noopener' }, ev.official.label), ' でご確認ください。') : null) : null),
     h('section', { class: 'card stack-sm' },
       h('h3', { class: 'section-title' }, '参加のしかた'),
       h('ol', { class: 'guide-steps' }, ev.steps.map((t, i) => h('li', null, h('span', { class: 'step-no' }, i + 1), h('span', null, t))))),

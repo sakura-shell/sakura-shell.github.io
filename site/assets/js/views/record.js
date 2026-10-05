@@ -82,18 +82,18 @@ export function recordBlock(data, sp) {
     if (state === 'filled') {
       wrap.append(
         h('p', { class: 'recorded' }, ic('check'), h('span', null, '記録済み（貝あり）'), when ? h('span', { class: 'xsmall muted' }, when) : ''),
-        h('button', { class: 'btn block secondary', type: 'button', onclick: () => openChoiceSheet(data, sp.no, draw) }, ic('edit'), '記録を変更'));
+        h('button', { class: 'btn block secondary small', type: 'button', onclick: () => openChoiceSheet(data, sp.no, draw) }, ic('edit'), '記録を変更'));
     } else {
       wrap.append(...[
-        h('button', { class: 'btn block found-btn', type: 'button', onclick: () => recordCell(data, sp.no, 'filled', draw) },
-          ic('check'), '見つけた！ 収集箱に記録する'),
+        h('button', { class: 'btn block found-btn', type: 'button', 'aria-label': `見つけた！ ${sp.no}番 ${sp.v.name}を収集箱に記録する`, onclick: () => recordCell(data, sp.no, 'filled', draw) },
+          ic('check'), '見つけた！ 記録する'),
         state !== 'unknown'
           ? h('p', { class: 'small' }, '今の記録：', h('span', { class: 'state-pill', dataset: { state } }, STATE_LABEL[state]), when ? h('span', { class: 'xsmall muted' }, `　${when}`) : null)
           : null,
-        h('button', { class: 'btn block ghost small', type: 'button', onclick: () => openChoiceSheet(data, sp.no, draw) }, 'そのほかの記録（自信がない・まだ など）'),
+        h('button', { class: 'link-btn small', type: 'button', onclick: () => openChoiceSheet(data, sp.no, draw) }, 'そのほかの記録（自信がない・まだ など）'),
       ].filter(Boolean));
     }
-    wrap.append(h('p', { class: 'xsmall muted' }, '記録は、この端末・このブラウザの中に保存されます（外部には送りません）。'));
+    wrap.append(h('p', { class: 'xsmall muted' }, '記録はこの端末に保存されます。'));
   };
   draw();
   return wrap;

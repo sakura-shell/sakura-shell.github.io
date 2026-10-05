@@ -1,5 +1,5 @@
 {
- "appVersion": "2026.10.05-r11",
+ "appVersion": "2026.10.05-r12",
  "contentUpdated": "2026-10-05",
  "mode": "preview",
  "modeNote": "preview＝確認用（照合待ちの情報・許諾確認中の写真を表示）。public＝一般公開用（confirmed の情報と許諾済みの素材だけを表示）",
@@ -18,7 +18,8 @@
  "operator": {
   "name": "志賀町商工観光課",
   "status": "confirmed",
-  "source": "チラシ（2026-10-05 運営が確認）"
+  "source": "チラシ（2026-10-05 運営が確認）",
+  "note": "サイトの運営とイベントの問い合わせ先は同じ（2026-10-05 運営が確認）"
  },
  "contact": {
   "text": "志賀町商工観光課　TEL.0767-32-9341（〒925-0198 石川県羽咋郡志賀町末吉千古1-1 志賀町役場内）",
@@ -90,6 +91,12 @@
    "name": "志賀町商工観光課",
    "tel": "0767-32-9341",
    "address": "〒925-0198 石川県羽咋郡志賀町末吉千古1-1（志賀町役場内）"
+  },
+  "checkedAt": "2026-10-05",
+  "official": {
+   "label": "公式インスタグラム（@36shells）",
+   "url": "https://www.instagram.com/36shells/",
+   "source": "チラシのQRコード"
   }
  }
 }
