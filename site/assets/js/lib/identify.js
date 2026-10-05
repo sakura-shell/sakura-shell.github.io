@@ -14,7 +14,7 @@
 //   { status: 'likely' | 'similar' | 'outside' | 'unclear', candidates: [{ no, p }], other: 0〜1 | null }
 //   p は 0〜1（画面では％で表示）
 
-import { embed, loadImage, BACKBONE, DIM } from './embed.js';
+import { embed, loadImage, useFallbackBackend, BACKBONE, DIM } from './embed.js';
 import { isDev } from '../data.js';
 
 const MODEL_URL = new URL('../../../models/classifier.json', import.meta.url).href;
@@ -111,7 +111,16 @@ export async function identify(photos) {
   for (const p of photos) {
     const img = await loadImage(p.src);
     // 「判定の工夫（4枚の平均）」は 2026-10-05 の比較で効果がなかったため、1枚で判定する（スマホでの待ち時間を短く）
-    feats.push(await embed(img));
+    let f;
+    try {
+      f = await embed(img);
+      if (!f.every(Number.isFinite)) throw new Error('nan');
+    } catch (e) {
+      // iPhone などで画像処理（WebGL）がうまく動かないときは、計算方法を切り替えてもう一度
+      if (!(await useFallbackBackend())) throw e;
+      f = await embed(img);
+    }
+    feats.push(f);
   }
   const x = new Float32Array(DIM);
   for (const f of feats) for (let d = 0; d < DIM; d++) x[d] += f[d] / feats.length;

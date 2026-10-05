@@ -45,6 +45,11 @@ export async function render(ctx) {
     if (ai) runAI();
   }
 
+  // 「もう一度試す」
+  const retry = () => { if (session.photos.length && !busy) runAI(); };
+  window.addEventListener('m36:retry-ai', retry);
+  ctx.onCleanup?.(() => window.removeEventListener('m36:retry-ai', retry));
+
   async function runAI() {
     busy = true;
     draw();
@@ -52,7 +57,7 @@ export async function render(ctx) {
       session.result = await identify(session.photos);
     } catch (e) {
       console.error(e);
-      session.result = { status: 'error' };
+      session.result = { status: 'error', message: String(e?.message || e).slice(0, 120) };
     }
     busy = false;
     draw();
@@ -201,7 +206,10 @@ export function resultPanel(data, result) {
         h('p', { class: 'small' }, phrase('近い順の候補です。', '明るい場所で大きく撮り直すか、', '裏側も撮ると変わることがあります。')),
         candidateList(data, cand.slice(0, 5)));
     case 'error':
-      return notice('warn', 'alert', h('p', null, 'AIの判定ができませんでした。写真を見比べて探してください。'));
+      return notice('warn', 'alert', h('div', { class: 'stack-sm' },
+        h('p', null, 'AIの判定ができませんでした。電波のよい場所で「もう一度試す」を押すか、下の一覧から写真を見比べて探してください。'),
+        h('button', { class: 'btn small', type: 'button', onclick: () => window.dispatchEvent(new CustomEvent('m36:retry-ai')) }, 'もう一度試す'),
+        result.message ? h('p', { class: 'xsmall muted' }, `（くわしい理由：${result.message}）`) : null));
     default:
       return null;
   }

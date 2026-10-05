@@ -26,6 +26,16 @@ export function loadTf() {
   return tfPromise;
 }
 
+// 画像処理（WebGL）が使えない・途中で失敗する端末では、計算方法を切り替えて続ける（遅くなるが判定できる）
+export async function useFallbackBackend() {
+  const tf = await loadTf();
+  if (tf.getBackend() === 'cpu') return false;
+  await tf.setBackend('cpu');
+  await tf.ready();
+  netPromise = null; // 新しい計算方法でモデルを準備し直す
+  return true;
+}
+
 export function loadBackbone() {
   netPromise ||= (async () => {
     const tf = await loadTf();
