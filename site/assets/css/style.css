@@ -874,3 +874,9 @@ h1, h2, h3, .btn, .chip { text-wrap: balance; }
 .guide-prizes li { display: flex; gap: 12px; align-items: flex-start; line-height: 1.6; }
 .prize-n { flex: none; min-width: 52px; text-align: center; background: var(--cream-100); border: 2px solid var(--yellow-400); border-radius: 12px; padding: 2px 6px; color: var(--navy); }
 .prize-n strong { font-size: 20px; }
+
+.guide-places li { align-items: flex-start; }
+.place-name { font-weight: 700; color: var(--navy); margin: 0; }
+.guide-places .small { font-weight: 400; color: var(--ink-2); }
+a.tel { color: var(--navy); font-weight: 700; text-decoration: underline; text-decoration-color: var(--sky-300); text-underline-offset: 3px; display: inline-block; min-height: 32px; padding: 4px 0; }
+.guide-access { margin: 4px 0 0; color: var(--ink); }

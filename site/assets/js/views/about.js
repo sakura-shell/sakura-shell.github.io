@@ -23,7 +23,7 @@ export function render(ctx) {
         h('dl', { class: 'kv small' },
           h('dt', null, '運営'), h('dd', null, operator || (data.preview ? '（確認中）' : '―')),
           contact || data.preview ? h('dt', null, '問い合わせ') : null,
-          contact || data.preview ? h('dd', null, contact || '（確認中）') : null,
+          contact || data.preview ? h('dd', null, contact || '（確認中）', cfg.contact?.status === 'confirmed' && cfg.contact.tel ? h('a', { class: 'tel block', href: `tel:${cfg.contact.tel.replace(/-/g, '')}` }, '電話をかける') : null) : null,
           h('dt', null, '内容の更新日'), h('dd', null, cfg.contentUpdated),
           h('dt', null, '版'), h('dd', null, cfg.appVersion))),
       h('section', { class: 'card stack-sm' },
