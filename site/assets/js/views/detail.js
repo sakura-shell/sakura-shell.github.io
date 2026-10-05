@@ -1,5 +1,5 @@
 // 貝の詳細：写真 → 名前 → 見分けるポイント → 見比べ → 箱の位置 の順
-import { h, ic, shellName, stars, shapeTag, lightbox, notice, pendingTag, shellImg, photoThumbs } from '../ui.js';
+import { h, ic, shellName, stars, shapeTag, lightbox, notice, pendingTag, shellImg, photoThumbs, zoomFrame } from '../ui.js';
 import { positionLabel } from '../data.js';
 import { hasModel, mount3D } from '../lib/viewer3d.js';
 import { recordBlock } from './record.js';
@@ -25,7 +25,7 @@ export function render(ctx) {
   if (photos.length) {
     let current = 0;
     const imgEl = h('img', { src: photos[0].src, alt: `${sp.no}番 ${sp.v.name}の参考写真` });
-    const photoBtn = h('button', { class: 'photo-main', type: 'button', 'aria-label': '写真を拡大', onclick: () => lightbox(photos[current].src, `${sp.no}番 ${sp.v.name}`) }, imgEl);
+    const photoBtn = zoomFrame('photo-main', '写真を拡大', () => lightbox(photos[current].src, `${sp.no}番 ${sp.v.name}`), imgEl);
     const cap = h('p', { class: 'photo-cap' });
     const seg = photos.length > 1 ? photoThumbs(photos, (i) => show(i), { label: '写真を選ぶ', name: `${sp.v.name}の` }) : null;
     const show = (i) => {

@@ -197,6 +197,15 @@ export function lightbox(src, caption) {
   dlg.showModal();
 }
 
+// 押すと拡大する写真の枠。iPhone の Safari ではボタンの中の画像の高さが決まらず切れるため、
+// ボタンではなく div にボタンの役割（キーボード操作つき）を持たせる
+export function zoomFrame(cls, label, onOpen, ...children) {
+  return h('div', {
+    class: cls, role: 'button', tabindex: '0', 'aria-label': label, onclick: onOpen,
+    onkeydown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); } },
+  }, ...children);
+}
+
 export function notice(kind, iconName, ...content) {
   return h('div', { class: `notice ${kind || ''}` }, ic(iconName), h('div', null, ...content));
 }

@@ -322,7 +322,7 @@ ruby rt { font-size: .5em; font-weight: 500; }
 .compare .col-head { display: flex; align-items: center; gap: 6px; padding: 10px 10px 4px; min-height: 3.2em; }
 .compare .col-head .nm { font-size: 16px; font-weight: 700; color: var(--navy); line-height: 1.3; text-decoration: none; overflow-wrap: anywhere; }
 .compare .col-head a.nm { text-decoration: underline; text-decoration-color: var(--sky-300); text-underline-offset: 3px; }
-.compare button.ph { border: 0; cursor: zoom-in; width: 100%; }
+.compare .ph.zoom { cursor: zoom-in; width: 100%; }
 .compare .col-thumbs { padding: 0 8px 10px; }
 /* 比較：同じ項目ごとに左右を並べる */
 .cmp-names { display: grid; grid-template-columns: 1fr 1fr; column-gap: 12px; font-size: 13px; font-weight: 700; color: var(--navy); }
@@ -934,8 +934,8 @@ a.tel { color: var(--navy); font-weight: 700; text-decoration: underline; text-d
   .photo-main:not(.low-res) { height: min(calc(100vw - 32px), 27vh); min-height: 170px; }
 }
 
-/* 写真の枠：iPhone の Safari ではボタンの中の画像の高さ（100%）が効かず、拡大されて切れるため、
-   枠に対して位置を決めて、全体が収まるように表示する */
+/* 写真の枠：iPhone の Safari で画像が拡大されて切れないよう、枠（div）に対して位置を決めて、全体が収まるように表示する */
+.photo-main:focus-visible, .compare .ph.zoom:focus-visible { outline: 3px solid var(--pink-400); outline-offset: 2px; }
 .photo-main { --pm-pad: 16px; }
 .photo-main:not(.low-res) img {
   position: absolute; top: var(--pm-pad); left: var(--pm-pad);

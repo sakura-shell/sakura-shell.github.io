@@ -1,5 +1,5 @@
 // 2つを並べて見比べる（貝と貝、または撮った写真と貝）
-import { h, ic, notice, shellImg, shapeTag, lightbox, pendingTag, photoThumbs, phrase } from '../ui.js';
+import { h, ic, notice, shellImg, shapeTag, lightbox, pendingTag, photoThumbs, phrase, zoomFrame } from '../ui.js';
 import { loadBox } from '../store.js';
 import { page } from './common.js';
 import { shellCard, filterChips, applyFilters, noResult } from './parts.js';
@@ -76,7 +76,7 @@ export function render(ctx) {
         h('span', { class: 'no-badge' }, x.no),
         h('a', { class: 'nm', href: `#/shell/${x.no}` }, x.v.name)),
       sw
-        ? h('button', { class: 'ph', type: 'button', 'aria-label': `${x.v.name}の写真を拡大`, onclick: () => lightbox(sw.current().src, `${x.no}番 ${x.v.name}`) }, sw.img)
+        ? zoomFrame('ph zoom', `${x.v.name}の写真を拡大`, () => lightbox(sw.current().src, `${x.no}番 ${x.v.name}`), sw.img)
         : h('div', { class: 'ph' }, shellImg(x)),
       sw?.seg ? h('div', { class: 'col-thumbs' }, sw.seg) : null);
   }
