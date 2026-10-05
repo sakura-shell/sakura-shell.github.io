@@ -18,3 +18,6 @@ docs/*.pdf
 
 # スタッフ向けの説明書（合言葉を含むため公開しない）
 docs/staff/
+
+# 写真の送付先の合鍵（公開しない）
+tools/collect_config.json

@@ -90,9 +90,18 @@ export function isStaff() {
   try { return localStorage.getItem(STAFF_KEY) === '1'; } catch { return false; }
 }
 
+// 写真を送付するための合鍵（スタッフ用QRコードの URL の key=…）。サイトのファイルには書かない
+const STAFF_KEY_KEY = 'm36shells:staff-key';
+export function staffKey() {
+  try { return localStorage.getItem(STAFF_KEY_KEY) || ''; } catch { return ''; }
+}
+
 export function setStaffFromQuery(query) {
+  const k = query.get('key');
+  if (k) { try { localStorage.setItem(STAFF_KEY_KEY, k); localStorage.setItem(STAFF_KEY, '1'); } catch { /* 覚えられない */ } }
   const s = query.get('staff');
   if (s === null) return;
+  if (s === '0') { try { localStorage.removeItem(STAFF_KEY_KEY); } catch { /* 何もしない */ } }
   try {
     if (s === '1') localStorage.setItem(STAFF_KEY, '1');
     else localStorage.removeItem(STAFF_KEY);

@@ -944,3 +944,5 @@ a.tel { color: var(--navy); font-weight: 700; text-decoration: underline; text-d
 @media (max-width: 699px) { .photo-main { --pm-pad: 8px; } }
 .compare .ph { position: relative; }
 .compare .ph img { position: absolute; top: 8px; left: 8px; width: calc(100% - 16px); height: calc(100% - 16px); }
+.send-progress { margin: 0; padding: 14px; text-align: center; font-weight: 700; color: var(--navy); background: var(--sky-100); border-radius: var(--radius-sm); }
+.collect-zip summary { cursor: pointer; padding: 8px 0; color: var(--ink-2); }

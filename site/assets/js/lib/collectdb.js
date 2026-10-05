@@ -53,3 +53,11 @@ export function deleteExported() {
 export async function askPersist() {
   try { if (navigator.storage?.persist && !(await navigator.storage.persisted())) await navigator.storage.persist(); } catch { /* 頼めなくても保存はできる */ }
 }
+
+// 送付できた写真：送付日時を記録し、画像は消して端末の空きを増やす（数の集計には残す）
+export function markSent(id, when) {
+  return tx('readwrite', (s) => {
+    const req = s.get(id);
+    req.onsuccess = () => { const r = req.result; if (r) { r.sentAt = when; r.blob = null; s.put(r); } };
+  });
+}
