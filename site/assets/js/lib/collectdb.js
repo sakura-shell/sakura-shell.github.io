@@ -26,3 +26,30 @@ export function addPhoto(rec) { return tx('readwrite', (s) => s.add(rec)); }
 export function allPhotos() { return tx('readonly', (s) => s.getAll()); }
 export function deletePhoto(id) { return tx('readwrite', (s) => s.delete(id)); }
 export function clearPhotos() { return tx('readwrite', (s) => s.clear()); }
+
+// 書き出し済みの印を付ける
+export function markExported(ids, when) {
+  return tx('readwrite', (s) => {
+    for (const id of ids) {
+      const req = s.get(id);
+      req.onsuccess = () => { const r = req.result; if (r) { r.exportedAt = when; s.put(r); } };
+    }
+  });
+}
+
+export function deleteExported() {
+  return tx('readwrite', (s) => {
+    const req = s.openCursor();
+    req.onsuccess = () => {
+      const c = req.result;
+      if (!c) return;
+      if (c.value.exportedAt) c.delete();
+      c.continue();
+    };
+  });
+}
+
+// iPhone などで、しばらく開かないと保存データが消されにくいよう、端末に保存の継続を頼む
+export async function askPersist() {
+  try { if (navigator.storage?.persist && !(await navigator.storage.persisted())) await navigator.storage.persist(); } catch { /* 頼めなくても保存はできる */ }
+}

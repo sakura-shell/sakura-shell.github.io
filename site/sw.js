@@ -4,7 +4,7 @@
 // ・削除するのは、このアプリ・この公開パスの古い版だけ
 // ・画像は保存済みを先に使う。ページ・データは通信を優先するが、3秒で返らなければ保存済みを使う
 // ・版（VERSION）を上げると、基本のファイルを取り直す。データや写真を差し替えたら VERSION を上げること
-const VERSION = '2026.10.05-r10';
+const VERSION = '2026.10.05-r11';
 const SCOPE = new URL(self.registration.scope).pathname;
 const PREFIX = `m36shells:${SCOPE}:`;
 const CACHE = PREFIX + VERSION;

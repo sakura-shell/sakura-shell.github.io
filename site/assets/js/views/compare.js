@@ -5,7 +5,7 @@ import { page } from './common.js';
 import { shellCard, filterChips, applyFilters, noResult } from './parts.js';
 import { session, nextShell } from './identify.js';
 import { foundBlock } from './record.js';
-import { isDev } from '../data.js';
+import { isStaff } from '../data.js';
 import { addPhoto } from '../lib/collectdb.js';
 import { matchCheck } from './matchcheck.js';
 
@@ -60,7 +60,7 @@ export function render(ctx) {
       isPhoto ? h('section', { class: 'card stack-sm found-card' },
         h('h3', { class: 'section-title' }, phrase('この貝で', '合っていたら')),
         foundBlock(data, b, { onNext: nextShell }),
-        isDev() ? saveForTraining(b) : null) : null,
+        isStaff() ? saveForTraining(b) : null) : null,
       isPhoto ? featureCard(data, b) : compareTable(data, a, b),
       isPhoto ? matchCheck(data, b, session) : null,
       h('div', { class: 'btn-row' },

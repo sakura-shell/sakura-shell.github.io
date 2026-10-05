@@ -1,5 +1,5 @@
 // 画面の切り替え（ハッシュ #/... によるルーティング）
-import { loadData, setDevFromQuery, isDev } from './data.js';
+import { loadData, setDevFromQuery, setStaffFromQuery, isDev } from './data.js';
 import { gateNeeded, showGate } from './lib/gate.js';
 import { h, ic } from './ui.js';
 import * as home from './views/home.js';
@@ -96,6 +96,7 @@ async function render() {
   if (!route) { navigate('#/', { replace: true }); return; }
   const match = path.match(route.re);
   setDevFromQuery(query);
+  setStaffFromQuery(query);
   try { current?.cleanup?.(); } catch { /* 何もしない */ }
   if (currentHash) scrollMemory.set(currentHash, window.scrollY);
   const prevIndex = lastIndex;

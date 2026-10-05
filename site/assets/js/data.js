@@ -82,6 +82,23 @@ export function isDev() {
   try { return sessionStorage.getItem('m36shells:dev') === '1'; } catch { return false; }
 }
 
+// スタッフ用モード：URL に ?staff=1 を付けて一度開くと、その端末ではずっと有効（?staff=0 で解除）。
+// 学習用の写真集めの画面と「学習用に保存」ボタンだけが使えるようになる（開発用の表示は出ない）
+const STAFF_KEY = 'm36shells:staff';
+export function isStaff() {
+  if (isDev()) return true;
+  try { return localStorage.getItem(STAFF_KEY) === '1'; } catch { return false; }
+}
+
+export function setStaffFromQuery(query) {
+  const s = query.get('staff');
+  if (s === null) return;
+  try {
+    if (s === '1') localStorage.setItem(STAFF_KEY, '1');
+    else localStorage.removeItem(STAFF_KEY);
+  } catch { /* 覚えられないときは、この画面の間だけ */ }
+}
+
 export function setDevFromQuery(query) {
   const d = query.get('dev');
   if (d === null) return;

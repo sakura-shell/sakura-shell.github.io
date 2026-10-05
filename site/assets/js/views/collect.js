@@ -1,11 +1,11 @@
-// 学習用の写真を集める（運営スタッフ用。開発用モード ?dev=1 のときだけ）
+// 学習用の写真を集める（運営スタッフ用。スタッフ用モード ?staff=1 で一度開いた端末だけ）
 // 海岸で撮った写真に正しい番号を付けて、この端末に貯める。まとめて ZIP で書き出し、
 // パソコンで python3 tools/import_collected.py <ZIP> → 学習し直す、の流れで AI の精度を上げる。
 import { h, ic, toast, confirmSheet, notice, shellImg, phrase } from '../ui.js';
-import { isDev } from '../data.js';
+import { isStaff } from '../data.js';
 import { fileToCanvas, pickImageFile, pickImageFiles } from '../lib/image.js';
 import { openCamera } from '../lib/camera.js';
-import { addPhoto, allPhotos, clearPhotos } from '../lib/collectdb.js';
+import { addPhoto, allPhotos, markExported, deleteExported, askPersist } from '../lib/collectdb.js';
 import { makeZip } from '../lib/zip.js';
 import { page } from './common.js';
 
@@ -27,8 +27,8 @@ export async function render(ctx) {
   const main = page(ctx, { title: '学習用の写真を集める', back: '#/' });
   const body = h('div', { class: 'stack' });
   main.append(body);
-  if (!isDev()) {
-    body.append(notice('', 'info', h('p', null, 'この画面は運営スタッフ用です。')));
+  if (!isStaff()) {
+    body.append(notice('', 'info', h('p', null, 'この画面は運営スタッフ用です。スタッフ用のQRコード（URLの最後が ?staff=1）から開いてください。')));
     return main;
   }
   // 選んでいる貝と、いま撮っている個体の番号（端末に覚えておく）
@@ -59,6 +59,7 @@ export async function render(ctx) {
     }
     if (!canvases.length) return;
     busy = true; draw();
+    askPersist();
     let ok = 0;
     for (const cv of canvases) {
       const blob = await canvasToBlob(cv);
@@ -76,22 +77,27 @@ export async function render(ctx) {
     return sp ? `${sp.no}番 ${sp.v.name}` : '';
   }
 
-  async function exportZip() {
-    if (!photos.length) return;
+  // ZIP で書き出す。onlyNew：まだ書き出していない写真だけ
+  async function exportZip(onlyNew) {
+    const list = onlyNew ? photos.filter((p) => !p.exportedAt) : photos;
+    if (!list.length) return;
     busy = true; draw();
     const files = [];
-    const count = {};
-    for (const p of photos) {
+    for (const p of list) {
       const dir = p.label === 'other' ? 'other' : String(p.label).padStart(2, '0');
-      count[p.group] = (count[p.group] || 0) + 1;
-      files.push({ name: `photos/${dir}/${p.group}/${String(count[p.group]).padStart(3, '0')}.jpg`, data: new Uint8Array(await p.blob.arrayBuffer()) });
+      // ファイル名は写真ごとの番号（何度書き出しても同じ名前。取り込み時に重ならない）
+      files.push({ name: `photos/${dir}/${p.group}/${String(p.id).padStart(6, '0')}.jpg`, data: new Uint8Array(await p.blob.arrayBuffer()) });
     }
     const zip = makeZip(files);
-    const a = h('a', { href: URL.createObjectURL(zip), download: `shell-photos-${today()}.zip` });
+    const stamp = new Date();
+    const name = `shell-photos-${today()}-${String(stamp.getHours()).padStart(2, '0')}${String(stamp.getMinutes()).padStart(2, '0')}.zip`;
+    const a = h('a', { href: URL.createObjectURL(zip), download: name });
     document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 60000);
-    busy = false; draw();
-    toast(`${photos.length}枚を書き出しました`, 3200);
+    try { await markExported(list.map((p) => p.id), stamp.toISOString()); } catch { /* 印が付けられなくても書き出しはできている */ }
+    busy = false;
+    toast(`${list.length}枚を書き出しました（${name}）`, 4000);
+    refresh();
   }
 
   function draw() {
@@ -136,10 +142,20 @@ export async function render(ctx) {
       b.n++; b.groups.add(p.group);
     }
     const labels = Object.keys(by).sort((a, b) => (a === 'other') - (b === 'other') || Number(a) - Number(b));
+    const fresh = photos.filter((p) => !p.exportedAt);
+    const exported = photos.filter((p) => p.exportedAt);
+    // 書き出していない写真が多い・古いときは、書き出しを促す（iPhone では、しばらく開かないと保存した写真が消えることがある）
+    const oldest = fresh.reduce((m, p) => (!m || p.t < m ? p.t : m), null);
+    const days = oldest ? (Date.now() - Date.parse(oldest)) / 86400000 : 0;
+    if (fresh.length >= 100 || days >= 1) {
+      body.append(notice('warn', 'alert', h('p', { class: 'small' },
+        h('strong', null, `書き出していない写真が ${fresh.length}枚あります。`),
+        'iPhone などでは、しばらくこのサイトを開かないと、保存した写真が消えることがあります。その日のうちに書き出して、パソコンに送ってください。')));
+    }
     const done = labels.filter((l) => l !== 'other' && by[l].n >= GOAL_PHOTOS && by[l].groups.size >= GOAL_GROUPS).length;
     body.append(h('section', { class: 'card stack-sm' },
       h('h3', { class: 'section-title' }, '3. 集まった写真'),
-      h('p', { class: 'small' }, `合計 ${photos.length}枚。目安（1種類 ${GOAL_PHOTOS}枚・別の貝 ${GOAL_GROUPS}個）に届いたのは ${done} / 36種類。`),
+      h('p', { class: 'small' }, `合計 ${photos.length}枚（書き出していない ${fresh.length}枚）。目安（1種類 ${GOAL_PHOTOS}枚・別の貝 ${GOAL_GROUPS}個）に届いたのは ${done} / 36種類。`),
       labels.length
         ? h('ul', { class: 'collect-list' }, labels.map((l) => {
           const b = by[l];
@@ -147,12 +163,13 @@ export async function render(ctx) {
           return h('li', { class: ok ? 'ok' : '' }, h('span', { class: 'grow' }, labelName(l)), h('span', { class: 'small' }, `${b.n}枚・${b.groups.size}個`), ok ? ic('check') : null);
         }))
         : h('p', { class: 'small muted' }, 'まだありません。'),
-      h('div', { class: 'btn-row' },
-        h('button', { class: 'btn', type: 'button', disabled: busy || !photos.length, onclick: exportZip }, ic('save'), 'ZIP で書き出す'),
-        h('button', { class: 'btn ghost', type: 'button', disabled: busy || !photos.length, onclick: async () => {
-          if (!(await confirmSheet({ title: '集めた写真をすべて消しますか？', body: '書き出したZIPをパソコンに移したことを確かめてから消してください。消した写真は元に戻せません。', ok: '消す', cancel: 'やめる', danger: true }))) return;
-          await clearPhotos(); toast('消しました'); refresh();
-        } }, 'すべて消す')),
+      h('div', { class: 'stack-sm' },
+        h('button', { class: 'btn block', type: 'button', disabled: busy || !fresh.length, onclick: () => exportZip(true) }, ic('save'), fresh.length ? `書き出していない ${fresh.length}枚を ZIP で書き出す` : 'すべて書き出し済みです'),
+        exported.length ? h('button', { class: 'btn block secondary small', type: 'button', disabled: busy, onclick: () => exportZip(false) }, 'もう一度すべてを書き出す') : null,
+        exported.length ? h('button', { class: 'btn block ghost small', type: 'button', disabled: busy, onclick: async () => {
+          if (!(await confirmSheet({ title: `書き出し済みの ${exported.length}枚を消しますか？`, body: '書き出した ZIP をパソコンに送ったことを確かめてから消してください。まだ書き出していない写真は残ります。', ok: '消す', cancel: 'やめる', danger: true }))) return;
+          await deleteExported(); toast('書き出し済みの写真を消しました'); refresh();
+        } }, `書き出し済みの ${exported.length}枚を消す（端末の空きを増やす）`) : null),
       h('p', { class: 'xsmall muted' }, '書き出した ZIP は、パソコンで python3 tools/import_collected.py <ZIP> を実行して学習に加えます。')));
   }
 

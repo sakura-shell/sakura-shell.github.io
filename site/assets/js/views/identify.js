@@ -5,7 +5,7 @@ import { openCamera } from '../lib/camera.js';
 import { fileToCanvas, pickImageFile, canvasToDataURL } from '../lib/image.js';
 import { identify, initIdentifier, IDENTIFIER } from '../lib/identify.js';
 import { page } from './common.js';
-import { isDev } from '../data.js';
+import { isStaff } from '../data.js';
 import { foundBlock } from './record.js';
 import { shellCard, filterChips, applyFilters, noResult } from './parts.js';
 
@@ -77,7 +77,7 @@ export async function render(ctx) {
           h('button', { class: 'btn block secondary', type: 'button', onclick: () => addPhoto(false) }, ic('image'), '写真を選ぶ')),
         h('p', { class: 'small muted center' }, phrase('写真はこの端末の中だけで使い、', '送信・保存しません。')),
         h('a', { class: 'btn block ghost', href: '#/list' }, ic('search'), '写真を使わず一覧から探す'),
-        isDev() ? h('a', { class: 'btn block soft', href: '#/collect' }, ic('plus'), '学習用の写真を集める（スタッフ用）') : null,
+        isStaff() ? h('a', { class: 'btn block soft', href: '#/collect' }, ic('plus'), '学習用の写真を集める（スタッフ用）') : null,
       ].filter(Boolean));
       return;
     }
