@@ -1,5 +1,5 @@
 // AI判定の学習と評価（開発用）。tools/train.html から読み込む
-import { loadTf, loadBackbone, cropSubject, loadImage, otsu, BACKBONE, DIM } from '../site/assets/js/lib/embed.js';
+import { loadTf, loadBackbone, cropSubject, loadImage, otsu, embedTTA, BACKBONE, DIM } from '../site/assets/js/lib/embed.js';
 import { predictFromFeature, decide } from '../site/assets/js/lib/identify.js';
 import { detectBox, orderClockwise, guessBoxCorners, rectify, cellRect } from '../site/assets/js/lib/boxreader.js';
 
@@ -15,6 +15,49 @@ function rng(seed) {
 }
 
 const BACKGROUNDS = ['#d9c7a2', '#c9b48a', '#e8c9ae', '#f2f0ea', '#9c9c96', '#5e5a52', '#45bfe3', '#b8d8e0', '#ffffff'];
+let TEXTURES = []; // 実際の背景（砂浜・色紙・木の台・収集箱など。training/backgrounds/）
+
+async function loadTextures() {
+  try {
+    const idx = await (await fetch('../training/backgrounds/index.json', { cache: 'no-cache' })).json();
+    TEXTURES = (await Promise.all(idx.backgrounds.map((b) => loadImage(b.src).catch(() => null)))).filter(Boolean);
+  } catch { TEXTURES = []; }
+  return TEXTURES.length;
+}
+
+// 背景を描く：実際の背景の写真・砂のような模様・無地のどれか
+let USE_REAL_BG = true;
+function paintBackground(ctx, S, rand) {
+  const r = USE_REAL_BG ? rand() : 0.9;
+  if (TEXTURES.length && r < 0.55) {
+    const t = TEXTURES[Math.floor(rand() * TEXTURES.length)];
+    const sc = 1 + rand() * 1.2;
+    ctx.save();
+    ctx.translate(S / 2, S / 2);
+    ctx.rotate(Math.floor(rand() * 4) * Math.PI / 2);
+    ctx.drawImage(t, -S * sc / 2 - rand() * S * 0.2, -S * sc / 2 - rand() * S * 0.2, S * sc, S * sc);
+    ctx.restore();
+  } else if (r < 0.8) {
+    // 砂：ベージュの地に、大小の粒
+    const base = [190 + rand() * 40, 170 + rand() * 35, 130 + rand() * 40].map(Math.round);
+    ctx.fillStyle = `rgb(${base.join(',')})`;
+    ctx.fillRect(0, 0, S, S);
+    for (let i = 0; i < 1400; i++) {
+      const k = rand();
+      const c = k < 0.4 ? '70,60,50' : k < 0.7 ? '240,235,225' : k < 0.85 ? '150,120,90' : '110,110,110';
+      ctx.fillStyle = `rgba(${c},${0.15 + rand() * 0.35})`;
+      const sz = 1 + rand() * (rand() < 0.1 ? 6 : 2.5);
+      ctx.fillRect(rand() * S, rand() * S, sz, sz);
+    }
+  } else {
+    ctx.fillStyle = BACKGROUNDS[Math.floor(rand() * BACKGROUNDS.length)];
+    ctx.fillRect(0, 0, S, S);
+    for (let i = 0; i < 400; i++) {
+      ctx.fillStyle = `rgba(${rand() < 0.5 ? '0,0,0' : '255,255,255'},${rand() * 0.12})`;
+      ctx.fillRect(rand() * S, rand() * S, 2 + rand() * 4, 2 + rand() * 4);
+    }
+  }
+}
 
 // 貝の部分だけを取り出して、背景・向き・大きさ・明るさを変えた画像を作る
 function augment(base, rand) {
@@ -43,21 +86,21 @@ function augment(base, rand) {
 
   const c = document.createElement('canvas'); c.width = S; c.height = S;
   const ctx = c.getContext('2d');
-  ctx.fillStyle = BACKGROUNDS[Math.floor(rand() * BACKGROUNDS.length)];
-  ctx.fillRect(0, 0, S, S);
-  // ざらつき（砂や手のひらの質感の代わり）
-  for (let i = 0; i < 400; i++) {
-    ctx.fillStyle = `rgba(${rand() < 0.5 ? '0,0,0' : '255,255,255'},${rand() * 0.12})`;
-    ctx.fillRect(rand() * S, rand() * S, 2 + rand() * 4, 2 + rand() * 4);
-  }
+  paintBackground(ctx, S, rand);
   ctx.save();
-  ctx.translate(S / 2, S / 2);
+  // 貝の位置・向き・大きさ（小さく写ったものも含める）
+  ctx.translate(S / 2 + (rand() - 0.5) * S * 0.2, S / 2 + (rand() - 0.5) * S * 0.2);
   ctx.rotate(rand() * Math.PI * 2);
-  const sc = 0.75 + rand() * 0.4;
+  const sc = USE_REAL_BG ? 0.45 + rand() * 0.6 : 0.75 + rand() * 0.4;
   ctx.scale(rand() < 0.5 ? -sc : sc, sc);
-  ctx.filter = `brightness(${0.8 + rand() * 0.4}) contrast(${0.85 + rand() * 0.3}) saturate(${0.8 + rand() * 0.4})`;
+  // 明るさ・色味・ピントのずれ・影
+  const blur = rand() < 0.3 ? rand() * 1.4 : 0;
+  ctx.filter = `brightness(${0.7 + rand() * 0.6}) contrast(${0.8 + rand() * 0.45}) saturate(${0.75 + rand() * 0.55}) hue-rotate(${Math.round((rand() - 0.5) * 16)}deg)${blur ? ` blur(${blur.toFixed(2)}px)` : ''}`;
+  if (rand() < 0.6) { ctx.shadowColor = 'rgba(0,0,0,0.28)'; ctx.shadowBlur = 6 + rand() * 10; ctx.shadowOffsetX = 2 + rand() * 4; ctx.shadowOffsetY = 2 + rand() * 4; }
   ctx.drawImage(fg, -S / 2, -S / 2);
   ctx.restore();
+  // 日なた・日かげの色味（暖色・寒色を薄く重ねる）
+  if (rand() < 0.5) { ctx.fillStyle = rand() < 0.5 ? 'rgba(255,170,80,0.07)' : 'rgba(80,140,255,0.07)'; ctx.fillRect(0, 0, S, S); }
   return c;
 }
 
@@ -195,7 +238,7 @@ async function boxCells() {
     const r = cellRect(rect, sp.box.row, sp.box.col, data.box);
     const c = document.createElement('canvas'); c.width = 140; c.height = 200;
     c.getContext('2d').drawImage(rc, r.x, r.y, r.w, r.h, 0, 0, 140, 200);
-    return { label: String(sp.no), canvas: cropSubject(c) };
+    return { label: String(sp.no), canvas: cropSubject(c), raw: c };
   });
 }
 
@@ -207,6 +250,8 @@ $('run').addEventListener('click', async () => {
   try {
     await loadBackbone();
     log('MobileNet を読み込みました');
+    USE_REAL_BG = $('realBg')?.checked ?? false;
+    log(USE_REAL_BG ? `背景の写真：${await loadTextures()}枚（training/backgrounds/）・小さく写った貝も作る` : '背景は無地（前の方法）');
     const data = await (await fetch('../site/data/shells.json')).json();
     const items = [];
     if ($('useCatalog').checked) {
@@ -226,7 +271,7 @@ $('run').addEventListener('click', async () => {
       try { img = await loadImage(it.src); } catch { log(`読み込めない写真: ${it.src}`); continue; }
       const base = cropSubject(img);
       labelSet.add(it.label);
-      if (it.split === 'val' && useVal) valSamples.push({ label: it.label, canvas: base, group: it.group });
+      if (it.split === 'val' && useVal) valSamples.push({ label: it.label, canvas: base, group: it.group, img });
       else {
         trainCanvases.push(base); trainLabels.push(it.label);
         for (let k = 0; k < nAug; k++) { trainCanvases.push(augment(base, rand)); trainLabels.push(it.label); }
@@ -236,8 +281,9 @@ $('run').addEventListener('click', async () => {
     log(`ラベル ${labels.length}種類・学習用の画像 ${trainCanvases.length}枚（水増し込み）・評価用 ${valSamples.length}枚`);
     const X = await embedAll(trainCanvases, '学習用');
     const Y = trainLabels.map((l) => labels.indexOf(l));
-    const valX = valSamples.length ? await embedAll(valSamples.map((s) => s.canvas), '評価用') : [];
-    valSamples.forEach((s, i) => { s.x = valX[i]; });
+    // 評価用は、サイトと同じ「判定の工夫（4枚の平均）」で特徴を出す
+    for (const s of valSamples) { s.x = await embedTTA(s.img); s.x0 = (await embedAll([s.canvas], ''))[0]; }
+    log(`特徴を計算（評価用・判定の工夫あり）：${valSamples.length}枚`);
 
     // 1回目：学習用だけで学習し、評価用・見本の箱で評価する
     log('学習中（1回目：評価のため）…');
@@ -283,18 +329,32 @@ $('run').addEventListener('click', async () => {
     if ($('useBox').checked) {
       log('見本の箱の写真で評価中…');
       const cells = await boxCells();
-      const cx = await embedAll(cells.map((c) => c.canvas), '見本の箱');
-      cells.forEach((c, i) => { c.x = cx[i]; });
+      for (const c of cells) { c.x = await embedTTA(c.raw); c.x0 = (await embedAll([c.canvas], ''))[0]; }
       const ev = evaluate(final, cells);
       evaluation.box = ev.summary;
+      evaluation.boxSingle = evaluate(final, cells.map((c) => ({ ...c, x: c.x0 }))).summary;
+      log(`見本の箱：判定の工夫あり 1位 ${ev.summary.top1}%・3位以内 ${ev.summary.top3}%／なし 1位 ${evaluation.boxSingle.top1}%・3位以内 ${evaluation.boxSingle.top3}%`);
       $('report').append(tableOf('完成見本の箱の写真（各マスの実物の貝。学習に使っていない）', ev));
     }
+    // 学習に使っていない、別の個体の実物写真（training/test/）
+    try {
+      const t = await (await fetch('../training/test/index.json', { cache: 'no-cache' })).json();
+      const tests = [];
+      for (const it of t.items) { const img = await loadImage(it.src); const cv = cropSubject(img); tests.push({ label: it.label, canvas: cv, x: await embedTTA(img), x0: (await embedAll([cv], ''))[0] }); }
+      if (tests.length) {
+        const ev = evaluate(final, tests);
+        evaluation.test = ev.summary;
+        evaluation.testSingle = evaluate(final, tests.map((c) => ({ ...c, x: c.x0 }))).summary;
+        log(`別の個体：判定の工夫あり 正解の確率 ${ev.summary.meanTrueP}%・1位 ${ev.summary.top1}%／なし 正解の確率 ${evaluation.testSingle.meanTrueP}%・1位 ${evaluation.testSingle.top1}%`);
+        $('report').append(tableOf('別の個体の実物写真（training/test/。学習に使っていない）', ev));
+      }
+    } catch { /* テスト用の写真がなければ飛ばす */ }
     const { _W, _protos, ...json } = final;
     json.evaluation = evaluation;
     json.samples = Object.fromEntries(labels.map((l) => [l, items.filter((i) => i.label === l).length]));
     json.trainedAt = evaluation.date;
     exported = json;
-    log(`完了。評価用：${evaluation.val ? `1位で正解 ${evaluation.val.top1}%（${evaluation.val.n}枚）` : 'なし'}・見本の箱：${evaluation.box ? `1位で正解 ${evaluation.box.top1}%・5位以内 ${evaluation.box.top5}%（${evaluation.box.n}枚）` : 'なし'}`);
+    log(`完了。評価用：${evaluation.val ? `1位で正解 ${evaluation.val.top1}%（${evaluation.val.n}枚）` : 'なし'}・見本の箱：${evaluation.box ? `1位で正解 ${evaluation.box.top1}%・3位以内 ${evaluation.box.top3}%・5位以内 ${evaluation.box.top5}%（${evaluation.box.n}枚）` : 'なし'}・別の個体：${evaluation.test ? `1位で正解 ${evaluation.test.top1}%（${evaluation.test.n}枚）` : 'なし'}`);
     $('save').disabled = false;
     window.__train = { evaluation };
   } catch (e) {

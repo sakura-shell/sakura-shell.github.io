@@ -11,6 +11,7 @@ import * as box from './views/box.js';
 import * as scan from './views/scan.js';
 import * as about from './views/about.js';
 import * as guide from './views/guide.js';
+import * as collect from './views/collect.js';
 
 const routes = [
   { re: /^\/$/, view: home, tab: 'home' },
@@ -22,6 +23,7 @@ const routes = [
   { re: /^\/scan$/, view: scan, tab: 'box' },
   { re: /^\/about$/, view: about, tab: 'home' },
   { re: /^\/guide$/, view: guide, tab: 'home' },
+  { re: /^\/collect$/, view: collect, tab: 'identify' },
 ];
 
 const TABS = [

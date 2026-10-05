@@ -104,6 +104,43 @@ export async function embed(source) {
   return embedCanvas(cropSubject(source));
 }
 
+// 複数の canvas の特徴をまとめて計算し、平均して長さ1にそろえる
+export async function embedMean(canvases) {
+  const tf = await loadTf();
+  const model = await loadBackbone();
+  const v = tf.tidy(() => {
+    const imgs = canvases.map((c) => tf.browser.fromPixels(c).toFloat().div(127.5).sub(1));
+    const batch = tf.stack(imgs.concat(imgs.map((t) => t.reverse(1))));
+    const f = model.predict(batch).reshape([canvases.length * 2, DIM]);
+    const n = f.div(f.norm('euclidean', 1, true)).mean(0);
+    return n.div(n.norm());
+  });
+  const out = await v.data();
+  v.dispose();
+  return Float32Array.from(out);
+}
+
+function rotate90(canvas) {
+  const c = document.createElement('canvas');
+  c.width = canvas.height; c.height = canvas.width;
+  const ctx = c.getContext('2d');
+  ctx.translate(c.width / 2, c.height / 2);
+  ctx.rotate(Math.PI / 2);
+  ctx.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
+  return c;
+}
+
+// 判定の工夫：切り出し方（ふつう・きつめ・ゆるめ）と向き（90度回転）を変えた4枚の平均で判定する。
+// 貝の切り出しが少しずれても、結果がぶれにくくなる
+export function ttaCanvases(source) {
+  const main = cropSubject(source);
+  return [main, cropSubject(source, { margin: 0.04 }), cropSubject(source, { margin: 0.32 }), rotate90(main)];
+}
+
+export async function embedTTA(source) {
+  return embedMean(ttaCanvases(source));
+}
+
 export function otsu(values) {
   let max = 0;
   for (const v of values) if (v > max) max = v;

@@ -5,6 +5,8 @@ import { page } from './common.js';
 import { shellCard, filterChips, applyFilters, noResult } from './parts.js';
 import { session, nextShell } from './identify.js';
 import { foundBlock } from './record.js';
+import { isDev } from '../data.js';
+import { addPhoto } from '../lib/collectdb.js';
 import { matchCheck } from './matchcheck.js';
 
 
@@ -57,7 +59,8 @@ export function render(ctx) {
       h('p', { class: 'xsmall muted' }, '写真の大きさは実物の大きさとは関係ありません。'),
       isPhoto ? h('section', { class: 'card stack-sm found-card' },
         h('h3', { class: 'section-title' }, phrase('この貝で', '合っていたら')),
-        foundBlock(data, b, { onNext: nextShell })) : null,
+        foundBlock(data, b, { onNext: nextShell }),
+        isDev() ? saveForTraining(b) : null) : null,
       isPhoto ? featureCard(data, b) : compareTable(data, a, b),
       isPhoto ? matchCheck(data, b, session) : null,
       h('div', { class: 'btn-row' },
@@ -136,4 +139,22 @@ function photoColumn() {
     h('div', { class: 'col-head' }, h('span', { class: 'nm' }, 'あなたの写真')),
     h('button', { class: 'ph user', type: 'button', 'aria-label': '写真を拡大', onclick: () => lightbox(sw.current().src, `あなたの写真（${sw.current().label}）`) }, sw.img),
     sw.seg ? h('div', { class: 'col-thumbs' }, sw.seg) : null);
+}
+
+// スタッフ用：撮った写真を、この貝の学習用写真として端末に保存する（開発用モードのときだけ）
+function saveForTraining(sp) {
+  const btn = h('button', { class: 'btn block soft small', type: 'button', onclick: async () => {
+    btn.disabled = true;
+    const group = `${String(sp.no).padStart(2, '0')}-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-id${Date.now() % 100000}`;
+    let ok = 0;
+    for (const p of session.photos) {
+      try {
+        const blob = await (await fetch(p.src)).blob();
+        await addPhoto({ label: String(sp.no), group, blob, t: new Date().toISOString(), note: '写真で調べるから保存' });
+        ok++;
+      } catch { /* 保存できなかった写真は飛ばす */ }
+    }
+    btn.textContent = ok ? `学習用に${ok}枚保存しました` : '保存できませんでした';
+  } }, ic('plus'), `撮った写真を「${sp.v.name}」の学習用に保存（スタッフ用）`);
+  return btn;
 }

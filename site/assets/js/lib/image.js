@@ -68,3 +68,20 @@ export function pickImageFile({ capture = false } = {}) {
     input.click();
   });
 }
+
+// 複数の写真を選ぶ（学習用の写真集めで使う）
+export function pickImageFiles() {
+  return new Promise((resolve) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.multiple = true;
+    input.style.display = 'none';
+    let settled = false;
+    const finish = (fs) => { if (settled) return; settled = true; input.remove(); resolve(fs); };
+    input.addEventListener('change', () => finish(Array.from(input.files || [])));
+    input.addEventListener('cancel', () => finish([]));
+    document.body.append(input);
+    input.click();
+  });
+}

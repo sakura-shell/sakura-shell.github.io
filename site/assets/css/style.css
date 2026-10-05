@@ -882,3 +882,10 @@ a.tel { color: var(--navy); font-weight: 700; text-decoration: underline; text-d
 .guide-access { margin: 4px 0 0; color: var(--ink); }
 .found-card { border: 2px solid var(--ok-bg); }
 .quick-record { border-top: 1px dashed var(--line); padding-top: 12px; margin-top: 4px; }
+
+/* ---------- 学習用の写真集め（スタッフ用） ---------- */
+.collect-select { width: 100%; min-height: 48px; font: inherit; font-size: 17px; padding: 8px 12px; border-radius: var(--radius-sm); border: 2px solid var(--line); background: var(--white); color: var(--ink); }
+.collect-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; max-height: 360px; overflow: auto; }
+.collect-list li { display: flex; align-items: center; gap: 8px; padding: 6px 4px; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.collect-list li.ok { color: var(--ok); font-weight: 700; }
+.collect-list svg { width: 18px; height: 18px; }

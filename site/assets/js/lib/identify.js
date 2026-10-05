@@ -110,6 +110,7 @@ export async function identify(photos) {
   const feats = [];
   for (const p of photos) {
     const img = await loadImage(p.src);
+    // 「判定の工夫（4枚の平均）」は 2026-10-05 の比較で効果がなかったため、1枚で判定する（スマホでの待ち時間を短く）
     feats.push(await embed(img));
   }
   const x = new Float32Array(DIM);

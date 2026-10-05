@@ -24,6 +24,7 @@
   <legend>学習に使う写真</legend>
   <label><input type="checkbox" id="useCatalog" checked> 図鑑の写真（site/data/shells.json の photos）</label>
   <label><input type="checkbox" id="useTraining" checked> 学習用の写真（training/manifest.json。<code>python3 tools/make_training_manifest.py</code> で作る）</label>
+  <label><input type="checkbox" id="realBg"> 背景を実写（砂浜・色紙・木の台など）にし、小さく写った貝も作る（2026-10-05 の比較では効果なし。実物の写真が増えたら再確認）</label>
   <label>1枚あたりの水増し（向き・大きさ・明るさ・背景を変えた画像）: <select id="aug"><option>4</option><option selected>12</option><option>24</option></select></label>
 </fieldset>
 <fieldset>
