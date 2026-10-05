@@ -86,7 +86,7 @@ export function render(ctx) {
     h('p', { class: 'small' }, positionLabel(sp)),
     boxGrid(data, { mini: true, highlight: sp.no }));
   // 収集箱への記録（名前のすぐ下に置く）
-  const recordCard = h('section', { class: 'card stack-sm record-card' }, recordBlock(data, sp));
+  const recordCard = h('section', { class: 'card stack-sm found-card' }, recordBlock(data, sp));
 
   // 3D・AR（実物に基づくモデルがあるときだけ）
   let modelCard = null;

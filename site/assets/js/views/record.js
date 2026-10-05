@@ -98,3 +98,28 @@ export function recordBlock(data, sp) {
   draw();
   return wrap;
 }
+
+// 写真で調べたあとに、その場で記録する欄（「この貝だった！」→ 記録 → 次の貝を調べる）
+// onNext：次の貝を調べる（撮った写真を消して、写真で調べる画面へ）
+export function foundBlock(data, sp, { onNext, lead } = {}) {
+  const wrap = h('div', { class: 'stack-sm' });
+  const draw = (justSaved) => {
+    const rec = loadBox();
+    const state = cellState(rec, sp.no);
+    wrap.replaceChildren(...[
+      lead ? h('p', { class: 'small' }, lead) : null,
+      state === 'filled'
+        ? h('p', { class: 'recorded' }, ic('check'), h('span', null, justSaved ? `${sp.no}番 ${sp.v.name}を記録しました` : `${sp.no}番 ${sp.v.name}は記録済み（貝あり）`))
+        : h('button', { class: 'btn block found-btn', type: 'button', onclick: () => recordCell(data, sp.no, 'filled', () => draw(true)) },
+          ic('check'), `この貝だった！ ${sp.no}番を記録する`),
+      state === 'filled' && onNext
+        ? h('button', { class: 'btn block secondary', type: 'button', onclick: onNext }, ic('camera'), '次の貝を調べる')
+        : null,
+      state === 'filled'
+        ? h('a', { class: 'small', href: '#/box' }, '収集箱の記録を見る')
+        : h('p', { class: 'xsmall muted' }, '押すとすぐ収集箱に記録されます。間違えたときは「取り消す」で戻せます。'),
+    ].filter(Boolean));
+  };
+  draw(false);
+  return wrap;
+}

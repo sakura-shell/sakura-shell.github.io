@@ -4,6 +4,8 @@
 //
 // AIの判定を使っているときは、その貝の％も並べて出す。
 import { h, ic, lightbox } from '../ui.js';
+import { foundBlock } from './record.js';
+import { nextShell } from './identify.js';
 
 // どの貝にも当てはまる、見比べる観点（貝ごとの特徴を断定するものではない）
 const BASE_ITEMS = [
@@ -42,9 +44,8 @@ export function matchCheck(data, sp, session) {
     } else if (yes === n) {
       msg = h('div', { class: 'stack-sm' },
         h('p', { class: 'small' }, h('strong', null, `${sp.no}番 ${sp.v.name}かもしれません。`), '箱に入れる前に、もう一度写真とよく見比べてね。'),
-        h('div', { class: 'btn-row' },
-          h('a', { class: 'btn small secondary', href: `#/shell/${sp.no}` }, '詳細を見る'),
-          h('a', { class: 'btn small', href: `#/box?sel=${sp.no}` }, ic('box'), `${sp.no}番を記録`)));
+        foundBlock(data, sp, { onNext: nextShell }),
+        h('a', { class: 'small', href: `#/shell/${sp.no}` }, `${sp.no}番の詳細を見る`));
     } else {
       msg = h('p', { class: 'small' }, 'わからないところは、裏側も撮ったり、写真を拡大したりすると見比べやすくなります。');
     }

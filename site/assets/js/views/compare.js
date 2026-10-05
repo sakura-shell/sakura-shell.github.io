@@ -1,9 +1,10 @@
 // 2つを並べて見比べる（貝と貝、または撮った写真と貝）
-import { h, ic, notice, shellImg, shapeTag, lightbox, pendingTag, photoThumbs } from '../ui.js';
+import { h, ic, notice, shellImg, shapeTag, lightbox, pendingTag, photoThumbs, phrase } from '../ui.js';
 import { loadBox } from '../store.js';
 import { page } from './common.js';
 import { shellCard, filterChips, applyFilters, noResult } from './parts.js';
-import { session } from './identify.js';
+import { session, nextShell } from './identify.js';
+import { foundBlock } from './record.js';
 import { matchCheck } from './matchcheck.js';
 
 
@@ -54,6 +55,9 @@ export function render(ctx) {
     h('div', { class: 'stack' },
       h('div', { class: 'compare' }, left, right),
       h('p', { class: 'xsmall muted' }, '写真の大きさは実物の大きさとは関係ありません。'),
+      isPhoto ? h('section', { class: 'card stack-sm found-card' },
+        h('h3', { class: 'section-title' }, phrase('この貝で', '合っていたら')),
+        foundBlock(data, b, { onNext: nextShell })) : null,
       isPhoto ? featureCard(data, b) : compareTable(data, a, b),
       isPhoto ? matchCheck(data, b, session) : null,
       h('div', { class: 'btn-row' },

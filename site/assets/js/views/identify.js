@@ -5,10 +5,17 @@ import { openCamera } from '../lib/camera.js';
 import { fileToCanvas, pickImageFile, canvasToDataURL } from '../lib/image.js';
 import { identify, initIdentifier, IDENTIFIER } from '../lib/identify.js';
 import { page } from './common.js';
+import { foundBlock } from './record.js';
 import { shellCard, filterChips, applyFilters, noResult } from './parts.js';
 
 // 撮った写真はこの画面を開いている間だけ保持する（端末に保存・送信しない）
 export const session = { photos: [], result: null, filters: { shape: '', color: '', box: '' }, checks: {} };
+
+// 次の貝を調べる：撮った写真と結果を消して、写真で調べる画面へ
+export function nextShell() {
+  session.photos = []; session.result = null; session.checks = {};
+  location.hash = `#/identify?next=${Date.now()}`; // 同じ画面にいても描き直すよう、毎回ちがうアドレスにする
+}
 const LABELS = ['表', '裏', '横'];
 
 export async function render(ctx) {
@@ -176,7 +183,8 @@ export function resultPanel(data, result) {
   switch (result.status) {
     case 'likely':
       return card(h('span', null, phrase(`「${top.v.name}」`, 'の可能性が高そう'), h('span', { class: 'ai-big' }, pctText(cand[0].p))),
-        candidateList(data, cand.slice(0, 3)));
+        candidateList(data, cand.slice(0, 3)),
+        h('div', { class: 'quick-record' }, foundBlock(data, top, { onNext: nextShell, lead: phrase(`見比べて「${top.v.name}」で合っていたら、`, 'そのまま記録できます。') })));
     case 'similar':
       return card(phrase('似ている候補が', 'あります'),
         h('p', { class: 'small' }, '上から順に、図鑑の写真と見比べてみましょう。'),

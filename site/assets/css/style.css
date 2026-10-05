@@ -880,3 +880,5 @@ h1, h2, h3, .btn, .chip { text-wrap: balance; }
 .guide-places .small { font-weight: 400; color: var(--ink-2); }
 a.tel { color: var(--navy); font-weight: 700; text-decoration: underline; text-decoration-color: var(--sky-300); text-underline-offset: 3px; display: inline-block; min-height: 32px; padding: 4px 0; }
 .guide-access { margin: 4px 0 0; color: var(--ink); }
+.found-card { border: 2px solid var(--ok-bg); }
+.quick-record { border-top: 1px dashed var(--line); padding-top: 12px; margin-top: 4px; }
