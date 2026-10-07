@@ -55,7 +55,7 @@ export function render(ctx) {
     panel.hidden = !open;
     toggleBtn.setAttribute('aria-expanded', String(open));
     const n = activeCount();
-    toggleBtn.replaceChildren(ic('search'), '絞り込み', n ? h('span', { class: 'badge' }, n) : null, h('span', { class: `caret${open ? ' up' : ''}`, 'aria-hidden': 'true' }, '▾'));
+    toggleBtn.replaceChildren(...[ic('search'), '絞り込み', n ? h('span', { class: 'badge' }, n) : null, h('span', { class: `caret${open ? ' up' : ''}`, 'aria-hidden': 'true' }, '▾')].filter(Boolean));
   }
 
   const reset = () => {

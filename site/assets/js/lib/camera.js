@@ -17,7 +17,8 @@ export function openCamera({ mode = 'box', maxSide = 1600 } = {}) {
 
     const video = h('video', { playsinline: true, muted: true, autoplay: true });
     video.muted = true;
-    const frame = h('div', { class: `frame ${mode}` }, hint.one ? h('span', { class: 'one-mark' }, hint.one) : null);
+    // 枠の名前は frame-box／frame-shell（収集箱のマス目の .box と重ならないように）
+    const frame = h('div', { class: `frame frame-${mode}` }, hint.one ? h('span', { class: 'one-mark' }, hint.one) : null);
     const view = h('div', { class: 'view' }, video, frame, h('p', { class: 'hint' }, hint.title));
     const shutter = h('button', { class: 'shutter', type: 'button', 'aria-label': '撮影する', disabled: true });
     const cancel = h('button', { class: 'ctl', type: 'button' }, ic('close'), 'やめる');

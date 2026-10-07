@@ -471,9 +471,15 @@ ruby rt { font-size: .5em; font-weight: 500; }
 }
 .camera .view { position: relative; flex: 1; overflow: hidden; }
 .camera video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.camera .frame { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); border: 3px solid #FFE36B; box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .35); pointer-events: none; }
-.camera .frame.box { width: 88%; aspect-ratio: 1.4; border-radius: 10px; }
-.camera .frame.shell { width: 62%; aspect-ratio: 1; border-radius: 50%; }
+.camera .frame { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); border: 2.5px solid rgba(255, 227, 107, .85); box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .28); pointer-events: none; background: transparent; }
+/* 収集箱の枠：中は透明。マスの仕切り（9列×4段）を薄く出して、実物の箱の仕切りと重ねやすくする */
+.camera .frame.frame-box {
+  width: 88%; aspect-ratio: 1.4; border-radius: 8px;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(100% / 9 - 1px), rgba(255, 255, 255, .45) calc(100% / 9 - 1px) calc(100% / 9)),
+    repeating-linear-gradient(0deg, transparent 0 calc(100% / 4 - 1px), rgba(255, 255, 255, .45) calc(100% / 4 - 1px) calc(100% / 4));
+}
+.camera .frame.frame-shell { width: 62%; aspect-ratio: 1; border-radius: 50%; }
 .camera .frame .one-mark { position: absolute; right: -4px; top: -40px; background: #D9577F; color: #fff; font-weight: 700; font-size: 14px; border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
 .camera .hint { position: absolute; left: 12px; right: 12px; top: calc(env(safe-area-inset-top, 0px) + 12px); text-align: center; font-weight: 700; font-size: 16px; text-shadow: 0 1px 3px rgba(0, 0, 0, .8); }
 .camera .controls { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 16px 20px calc(16px + var(--safe-b)); gap: 12px; background: #000; }
@@ -611,10 +617,10 @@ h1[tabindex="-1"]:focus { outline: none; }
 .adjust-img img { max-width: 100%; max-height: 42vh; width: auto; height: auto; display: block; }
 .adjust-inner { position: relative; line-height: 0; }
 .adjust-img svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.adjust-img .quad { fill: rgba(69, 191, 227, .08); stroke: #FFE36B; stroke-width: 2.5; vector-effect: non-scaling-stroke; }
-.adjust-img .grid-line { stroke: rgba(255, 255, 255, .9); stroke-width: 1.2; vector-effect: non-scaling-stroke; fill: none; }
-.adjust-img .handle { fill: rgba(255, 227, 107, .35); stroke: #FFE36B; stroke-width: 3; vector-effect: non-scaling-stroke; }
-.adjust-img .handle.active { fill: rgba(217, 87, 127, .55); stroke: #fff; }
+.adjust-img .quad { fill: none; stroke: rgba(255, 227, 107, .85); stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+.adjust-img .grid-line { stroke: rgba(255, 255, 255, .55); stroke-width: 1.2; vector-effect: non-scaling-stroke; fill: none; }
+.adjust-img .handle { fill: rgba(255, 227, 107, .18); stroke: rgba(255, 227, 107, .9); stroke-width: 3; vector-effect: non-scaling-stroke; }
+.adjust-img .handle.active { fill: rgba(217, 87, 127, .3); stroke: #fff; }
 .adjust-img .one { fill: #D9577F; stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
 .adjust-img .one-t { fill: #fff; font-weight: 700; text-anchor: middle; dominant-baseline: central; font-family: var(--font); }
 .adjust-tools summary { cursor: pointer; font-weight: 700; color: var(--navy); min-height: 44px; display: flex; align-items: center; }
@@ -693,7 +699,7 @@ h1[tabindex="-1"]:focus { outline: none; }
 body {
   background-color: var(--sky-50);
   background-image: url("../img/brand/pattern.svg");
-  background-size: 260px 260px;
+  background-size: 300px 300px;
   background-attachment: fixed;
 }
 /* チラシの水色の帯と白い波（表紙の下の区切り） */
