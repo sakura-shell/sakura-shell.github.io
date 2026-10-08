@@ -1,0 +1,88 @@
+{
+ "label": "変更前",
+ "date": "2026-10-08 19:49",
+ "idleSec": 5.0,
+ "conditions": "Chrome headless・下り9Mbps/往復150ms・CPU 1/4",
+ "runs": [
+  {
+   "first": {
+    "home": 1754,
+    "identify": 630,
+    "result": 11363,
+    "aiOk": true
+   },
+   "revisit": {
+    "home": 1150,
+    "identify": 198,
+    "result": 2585,
+    "aiOk": true
+   },
+   "offline": {
+    "home": 143,
+    "identify": 45,
+    "result": 904,
+    "aiOk": true
+   }
+  },
+  {
+   "first": {
+    "home": 1765,
+    "identify": 631,
+    "result": 11390,
+    "aiOk": true
+   },
+   "revisit": {
+    "home": 1291,
+    "identify": 198,
+    "result": 2571,
+    "aiOk": true
+   },
+   "offline": {
+    "home": 145,
+    "identify": 46,
+    "result": 852,
+    "aiOk": true
+   }
+  },
+  {
+   "first": {
+    "home": 1772,
+    "identify": 641,
+    "result": 11274,
+    "aiOk": true
+   },
+   "revisit": {
+    "home": 1436,
+    "identify": 194,
+    "result": 2588,
+    "aiOk": true
+   },
+   "offline": {
+    "home": 141,
+    "identify": 46,
+    "result": 874,
+    "aiOk": true
+   }
+  }
+ ],
+ "median": {
+  "first": {
+   "home": 1765,
+   "identify": 631,
+   "result": 11363,
+   "aiOk": 3
+  },
+  "revisit": {
+   "home": 1291,
+   "identify": 198,
+   "result": 2585,
+   "aiOk": 3
+  },
+  "offline": {
+   "home": 143,
+   "identify": 46,
+   "result": 874,
+   "aiOk": 3
+  }
+ }
+}

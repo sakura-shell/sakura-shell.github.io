@@ -14,7 +14,7 @@
 //   { status: 'likely' | 'similar' | 'outside' | 'unclear', candidates: [{ no, p }], other: 0〜1 | null }
 //   p は 0〜1（画面では％で表示）
 
-import { embed, loadImage, useFallbackBackend, BACKBONE, DIM } from './embed.js';
+import { embed, loadImage, useFallbackBackend, loadTf, loadBackbone, prefetchBackboneFiles, BACKBONE, DIM } from './embed.js';
 import { isDev } from '../data.js';
 
 const MODEL_URL = new URL('../../../models/classifier.json', import.meta.url).href;
@@ -27,25 +27,57 @@ export const IDENTIFIER = {
   model: null,
 };
 
-// 使えるかどうかを調べる（分類器のファイルがあり、設定で有効なとき）
-export async function initIdentifier(data) {
+// 設定で有効か（ファイルを読まずにすぐ分かる）。"preview"＝確認用プレビュー（config.mode が preview）のときだけ使う試験版
+export function identifierEnabled(data) {
   const mode = data.config.features?.identify || 'off';
-  // "preview"＝確認用プレビュー（config.mode が preview）のときだけ使う試験版
-  if (mode === 'off' || (mode === 'dev' && !isDev()) || (mode === 'preview' && !data.preview && !isDev())) {
+  return !(mode === 'off' || (mode === 'dev' && !isDev()) || (mode === 'preview' && !data.preview && !isDev()));
+}
+
+// 使えるかどうかを調べる（分類器のファイルがあり、設定で有効なとき）。何度呼んでも読み込みは1回
+let initPromise = null;
+export function initIdentifier(data) {
+  if (!identifierEnabled(data)) {
     IDENTIFIER.available = false;
-    return IDENTIFIER;
+    return Promise.resolve(IDENTIFIER);
   }
-  const model = await loadModel().catch(() => null);
-  if (!model) {
+  initPromise ||= loadModel().then((model) => {
+    IDENTIFIER.available = true;
+    IDENTIFIER.model = model;
+    IDENTIFIER.evaluation = model.evaluation || null;
+    IDENTIFIER.mode = data.config.features?.identify;
+    return IDENTIFIER;
+  }).catch(() => {
+    initPromise = null; // 次に開いたときにもう一度試す
     IDENTIFIER.available = false;
-    IDENTIFIER.reason = '学習済みのデータ（models/classifier.json）がまだないため、AI判定は準備中です。';
+    IDENTIFIER.reason = '学習済みのデータ（models/classifier.json）を読み込めなかったため、AI判定を使えません。';
     return IDENTIFIER;
+  });
+  return initPromise;
+}
+
+// 初めて開いたときは、Service Worker が動き出す前に読み込みが終わることがある。
+// 読み込んだ AI のファイルを、あとから Service Worker に保存してもらう（次からは通信なしで使える）
+let cacheAsked = false;
+function askToCache(urls) {
+  if (!('serviceWorker' in navigator)) return;
+  navigator.serviceWorker.ready.then((reg) => reg.active?.postMessage({ type: 'cache-ai', urls })).catch(() => {});
+}
+
+// 先回りの準備。stage 1＝ファイルの読み込みだけ、stage 2＝モデルの組み立てと慣らしの計算まで。
+// 失敗しても例外は出さない（写真を撮ったときに、もう一度準備する）
+export async function prepareIdentifier(data, stage = 2) {
+  if (!identifierEnabled(data)) return false;
+  try {
+    const id = await initIdentifier(data);
+    if (!id.available) return false;
+    const [, files] = await Promise.all([loadTf(), prefetchBackboneFiles()]);
+    if (!cacheAsked) { cacheAsked = true; askToCache([...files, MODEL_URL]); }
+    if (stage >= 2) await loadBackbone();
+    return true;
+  } catch (e) {
+    console.warn('AIの先回りの準備に失敗（写真を撮ったときにもう一度試す）', e);
+    return false;
   }
-  IDENTIFIER.available = true;
-  IDENTIFIER.model = model;
-  IDENTIFIER.evaluation = model.evaluation || null;
-  IDENTIFIER.mode = mode;
-  return IDENTIFIER;
 }
 
 export function loadModel() {

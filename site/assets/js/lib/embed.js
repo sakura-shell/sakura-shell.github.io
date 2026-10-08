@@ -36,6 +36,27 @@ export async function useFallbackBackend() {
   return true;
 }
 
+// 先回りの準備（1段目）：モデルのファイルを読み込んでおくだけ（計算はしない。画面の操作を止めない）
+// 読み込んだファイルは Service Worker（sw.js）が保存するので、次からは通信なしで使える
+let filesPromise = null;
+export function prefetchBackboneFiles() {
+  filesPromise ||= (async () => {
+    const res = await fetch(MODEL_URL);
+    if (!res.ok) throw new Error('model.json');
+    const json = await res.json();
+    const paths = (json.weightsManifest || []).flatMap((g) => g.paths || []);
+    const urls = paths.map((p) => new URL(p, MODEL_URL).href);
+    // 4本ずつ並べて読み込む
+    for (let i = 0; i < urls.length; i += 4) {
+      await Promise.all(urls.slice(i, i + 4).map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error('weights'); return r.arrayBuffer(); })));
+    }
+    return [TF_URL, MODEL_URL, ...urls]; // 読み込んだファイル（Service Worker に保存を頼むため）
+  })().catch((e) => { filesPromise = null; throw e; });
+  return filesPromise;
+}
+
+// モデルの準備（2段目）：組み立てて、空の画像で1回計算しておく（最初の判定が速くなる）。
+// 何度呼んでも準備は1回だけ（ホームで始めた準備を、写真を撮ったあとも使い回す）
 export function loadBackbone() {
   netPromise ||= (async () => {
     const tf = await loadTf();
@@ -43,10 +64,35 @@ export function loadBackbone() {
     const layer = net.getLayer('global_average_pooling2d_1');
     const model = tf.model({ inputs: net.inputs, outputs: layer.output });
     // 最初の1回は準備に時間がかかるので、空の画像で慣らしておく
-    tf.tidy(() => model.predict(tf.zeros([1, SIZE, SIZE, 3])));
+    await warmUp(tf, model);
     return model;
   })().catch((e) => { netPromise = null; throw e; });
   return netPromise;
+}
+
+// 慣らしの計算。画像処理（WebGL）の準備（シェーダーの組み立て）は、そのままだと画面を0.3秒ほど止めるので、
+// 対応している端末では裏で並べて組み立てる（KHR_parallel_shader_compile。画面を止めない）。
+// 対応していない端末・計算方法を切り替えた端末では、これまでどおり1回計算する
+async function warmUp(tf, model) {
+  const be = tf.backend();
+  const parallel = tf.getBackend() === 'webgl' && typeof be.checkCompileCompletionAsync === 'function'
+    && be.gpgpu?.gl?.getExtension('KHR_parallel_shader_compile');
+  if (parallel) {
+    try {
+      tf.env().set('ENGINE_COMPILE_ONLY', true);
+      const y = tf.tidy(() => model.predict(tf.zeros([1, SIZE, SIZE, 3])));
+      tf.env().set('ENGINE_COMPILE_ONLY', false);
+      await be.checkCompileCompletionAsync();
+      be.getUniformLocations();
+      y.dispose();
+      return;
+    } catch {
+      tf.env().set('ENGINE_COMPILE_ONLY', false); // うまくいかなければ、ふつうの方法で
+    }
+  }
+  const y = tf.tidy(() => model.predict(tf.zeros([1, SIZE, SIZE, 3])));
+  await y.data();
+  y.dispose();
 }
 
 // 写真の中の貝のまわりを正方形に切り出した canvas（背景との色の違いで大まかに探す）

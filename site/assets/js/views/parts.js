@@ -6,9 +6,7 @@ import { availableShapes, availableColors } from '../data.js';
 export function shellCard(data, sp, rec, { href, onclick } = {}) {
   const state = cellState(rec, sp.no);
   const tag = href ? 'a' : 'button';
-  const badge = rec && (state === 'filled' || state === 'check')
-    ? h('span', { class: `have-badge ${state}` }, state === 'filled' ? ic('check') : '?', state === 'filled' ? '収集済' : '要確認')
-    : null;
+  const badge = rec && state === 'filled' ? h('span', { class: 'have-badge filled' }, ic('check'), '収集済') : null;
   return h(tag, {
     class: 'shell-card', href, onclick, type: href ? null : 'button',
     'aria-label': `${sp.no}番 ${sp.v.name}${rec ? `（収集箱の記録：${STATE_LABEL[state]}）` : ''}`,
@@ -21,21 +19,21 @@ export function shellCard(data, sp, rec, { href, onclick } = {}) {
     sp.v.shape ? h('div', { class: 'sub' }, data.shapes[sp.v.shape].label) : null));
 }
 
-// 収集箱の記録での絞り込み（「これから探す」＝空きとして記録＋まだ記録していない。未記録を空きと決めつけない）
+// 収集箱の記録での絞り込み。状態は「箱に入れた（貝あり）」と「空き」の2つ
+// （キーの todo は以前のアドレス #/list?box=todo との互換のため。以前の empty・unknown・check も空きとして扱う）
 export const BOX_FILTERS = [
-  { key: 'todo', label: 'これから探す', hint: '空き＋まだ記録していない' },
-  { key: 'unknown', label: 'まだ記録していない' },
-  { key: 'empty', label: '空きと記録した' },
-  { key: 'check', label: '要確認' },
-  { key: 'filled', label: '集めた（貝あり）' },
+  { key: 'todo', label: 'これから探す（空き）' },
+  { key: 'filled', label: '箱に入れた' },
 ];
+const OLD_BOX_KEYS = { empty: 'todo', unknown: 'todo', check: 'todo' };
+export const normalizeBoxKey = (key) => OLD_BOX_KEYS[key] || key;
 
 export function boxMatch(rec, no, key) {
   const s = cellState(rec, no);
-  return key === 'todo' ? s === 'empty' || s === 'unknown' : s === key;
+  return normalizeBoxKey(key) === 'todo' ? s === 'empty' : s === 'filled';
 }
 
-// 絞り込み。state = { shape, color, box }（box: '' | 'todo' | 'unknown' | 'empty' | 'check' | 'filled'）
+// 絞り込み。state = { shape, color, box }（box: '' | 'todo' | 'filled'）
 export function filterChips(data, state, rec, onChange) {
   const wrap = h('div', { class: 'stack-sm filter-groups' });
   const shapes = availableShapes(data);
@@ -56,7 +54,7 @@ export function filterChips(data, state, rec, onChange) {
         if (!n && f.key !== 'todo' && state.box !== f.key) continue; // 0件の条件は出さない（これから探すは常に出す）
         row.append(chip(`${f.label}（${n}）`, state.box === f.key, () => { state.box = state.box === f.key ? '' : f.key; }, f.key === 'todo' ? ic('box') : null));
       }
-      wrap.append(group('収集箱の記録', row, h('p', { class: 'xsmall muted' }, '「空き」は、箱を見て空いていると記録したマス。「まだ記録していない」は、記録をつけていない貝です。')));
+      wrap.append(group('収集箱の記録', row));
     }
     if (colors.length) {
       const row = h('div', { class: 'chip-wrap', role: 'group', 'aria-label': '色で絞り込む' });

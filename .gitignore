@@ -21,3 +21,6 @@ docs/staff/
 
 # 写真の送付先の合鍵（公開しない）
 tools/collect_config.json
+
+# 画面の撮影（一覧の before.jpg・after.jpg だけ残す）
+docs/screens/*/

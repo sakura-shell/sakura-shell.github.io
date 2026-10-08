@@ -1,6 +1,7 @@
 // 初めての方へ：参加のしかた・収集箱の受け取り・景品（config.json の event。運営が確認した内容だけ）
 import { h, ic, phrase } from '../ui.js';
 import { page } from './common.js';
+import { installSection } from '../lib/install.js';
 
 const mapUrl = (place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} 石川県${place.address || '志賀町'}`)}`;
 const telLink = (tel) => h('a', { class: 'tel', href: `tel:${tel.replace(/-/g, '')}` }, `TEL ${tel}`);
@@ -47,6 +48,7 @@ export function render(ctx) {
       h('p', { class: 'place-name' }, ev.contact.name),
       h('p', { class: 'small' }, telLink(ev.contact.tel)),
       h('p', { class: 'xsmall muted' }, ev.contact.address)) : null,
+    installSection(data),
     h('section', { class: 'card stack-sm' },
       h('h3', { class: 'section-title' }, 'このサイトでできること'),
       h('div', { class: 'stack-sm' },

@@ -3,7 +3,7 @@ import { h, ic, notice, lightbox, confirmSheet, openSheet, shellImg, phrase } fr
 import { loadBox } from '../store.js';
 import { openCamera } from '../lib/camera.js';
 import { fileToCanvas, pickImageFile, canvasToDataURL } from '../lib/image.js';
-import { identify, initIdentifier, IDENTIFIER } from '../lib/identify.js';
+import { identify, identifierEnabled, prepareIdentifier, IDENTIFIER } from '../lib/identify.js';
 import { page } from './common.js';
 import { isStaff } from '../data.js';
 import { foundBlock } from './record.js';
@@ -22,8 +22,9 @@ const LABELS = ['表', '裏', '横'];
 export async function render(ctx) {
   const { data } = ctx;
   const rec = loadBox();
-  await initIdentifier(data);
-  const ai = IDENTIFIER.available;
+  // AIの準備は待たずに画面を出す（準備はホームで始まっていれば、その続き。まだならここで始める）
+  const ai = identifierEnabled(data);
+  if (ai) prepareIdentifier(data, 2);
   const main = page(ctx, { title: 'この貝はなんだろう', back: '#/' });
   const body = h('div', { class: 'stack' });
   main.append(body);
@@ -54,7 +55,10 @@ export async function render(ctx) {
     busy = true;
     draw();
     try {
-      session.result = await identify(session.photos);
+      await prepareIdentifier(data, 2); // 準備がまだなら、ここで終わるのを待つ（終わっていればすぐ進む）
+      session.result = IDENTIFIER.available
+        ? await identify(session.photos)
+        : { status: 'error', message: IDENTIFIER.reason };
     } catch (e) {
       console.error(e);
       session.result = { status: 'error', message: String(e?.message || e).slice(0, 120) };
@@ -66,21 +70,23 @@ export async function render(ctx) {
   function draw(errorText) {
     body.replaceChildren();
     if (!session.photos.length) {
+      // 最初の画面：説明は短く、「カメラで撮る」「写真を選ぶ」がすぐ見えるように。撮り方のコツは開いて読める
       body.append(...[
-        h('div', { class: 'notice pink' }, ic('compare'),
-          ai
-            ? h('p', null, h('strong', null, phrase('AIが写真から、', '似ている貝を探します。')), phrase('最後は図鑑の写真と', '見比べて確かめてね。'))
-            : h('p', null, h('strong', null, phrase('撮った写真と', '図鑑を見比べます。')), phrase('自動判定は', 'ありません。'))),
-        h('section', { class: 'card stack' },
-          h('div', { class: 'guide-art' }, shellGuideArt()),
-          h('ol', { class: 'tips' },
-            h('li', null, h('span', { class: 'n' }, '1'), h('span', null, phrase('貝を1つだけ、', '手のひらや無地の上に置く'))),
-            h('li', null, h('span', { class: 'n' }, '2'), h('span', null, phrase('近づいて、', '貝全体を大きく写す'))),
-            h('li', null, h('span', { class: 'n' }, '3'), h('span', null, phrase('裏側も撮ると、', '見分けやすくなります')))),
+        h('section', { class: 'card stack-sm identify-start' },
+          h('p', { class: 'identify-lead' }, ai
+            ? phrase('AIが写真から', '似ている貝を探します。', '最後は図鑑の写真と見比べてね。')
+            : phrase('撮った写真と', '図鑑を見比べて探します。')),
+          h('p', { class: 'small identify-tip' }, ic('shell'), phrase('貝を1つだけ、', '近づいて大きく撮ってね')),
+          h('details', { class: 'tips-more' },
+            h('summary', null, '撮り方のコツ'),
+            h('ol', { class: 'tips' },
+              h('li', null, h('span', { class: 'n' }, '1'), h('span', null, phrase('貝を1つだけ、', '手のひらや無地の上に置く'))),
+              h('li', null, h('span', { class: 'n' }, '2'), h('span', null, phrase('近づいて、', '貝全体を大きく写す'))),
+              h('li', null, h('span', { class: 'n' }, '3'), h('span', null, phrase('裏側も撮ると、', '見分けやすくなります'))))),
           errorText ? notice('warn', 'alert', h('p', null, errorText)) : null,
           h('button', { class: 'btn block', type: 'button', onclick: () => addPhoto(true) }, ic('camera'), 'カメラで撮る'),
-          h('button', { class: 'btn block secondary', type: 'button', onclick: () => addPhoto(false) }, ic('image'), '写真を選ぶ')),
-        h('p', { class: 'small muted center' }, phrase('写真はこの端末の中だけで使い、', '送信・保存しません。')),
+          h('button', { class: 'btn block secondary', type: 'button', onclick: () => addPhoto(false) }, ic('image'), '写真を選ぶ'),
+          h('p', { class: 'xsmall muted center' }, phrase('写真はこの端末の中だけで使い、', '送信・保存しません。'))),
         h('a', { class: 'btn block ghost', href: '#/list' }, ic('search'), '写真を使わず一覧から探す'),
         isStaff() ? h('a', { class: 'btn block soft', href: '#/collect' }, ic('plus'), '学習用の写真を集める（スタッフ用）') : null,
       ].filter(Boolean));
@@ -206,24 +212,11 @@ export function resultPanel(data, result) {
         h('p', { class: 'small' }, phrase('近い順の候補です。', '明るい場所で大きく撮り直すか、', '裏側も撮ると変わることがあります。')),
         candidateList(data, cand.slice(0, 5)));
     case 'error':
-      return notice('warn', 'alert', h('div', { class: 'stack-sm' },
+      return notice('warn ai-error', 'alert', h('div', { class: 'stack-sm' },
         h('p', null, 'AIの判定ができませんでした。電波のよい場所で「もう一度試す」を押すか、下の一覧から写真を見比べて探してください。'),
         h('button', { class: 'btn small', type: 'button', onclick: () => window.dispatchEvent(new CustomEvent('m36:retry-ai')) }, 'もう一度試す'),
         result.message ? h('p', { class: 'xsmall muted' }, `（くわしい理由：${result.message}）`) : null));
     default:
       return null;
   }
-}
-
-function shellGuideArt() {
-  const wrap = document.createElement('span');
-  wrap.innerHTML = `<svg viewBox="0 0 200 150" fill="none" stroke="#262C74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <rect x="30" y="6" width="140" height="138" rx="16" fill="#fff"/>
-    <circle cx="100" cy="68" r="44" fill="#FBE8EF" stroke="#FFE36B" stroke-width="3"/>
-    <path d="M100 44c-14 0-24 11-24 24 0 4.8 1.7 8.7 4.8 11.4h38.4c3.1-2.7 4.8-6.6 4.8-11.4 0-13-10-24-24-24z" fill="#F6C3D5"/>
-    <path d="M100 44v35.4M89 47.3L94 79.4M111 47.3L106 79.4M80.4 56.3l7.6 23.1M119.6 56.3L112 79.4"/>
-    <path d="M92.5 79.4l-1.8 8h18.6l-1.8-8" fill="#F6C3D5"/>
-    <circle cx="100" cy="132" r="5"/>
-  </svg>`;
-  return wrap.firstElementChild;
 }

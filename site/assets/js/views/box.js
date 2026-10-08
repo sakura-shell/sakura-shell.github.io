@@ -1,6 +1,6 @@
-// 収集箱の記録：箱で見る／番号順リスト。押すとすぐ保存し、「取り消す」で戻せる
+// 収集箱の記録：箱で見る／番号順リスト。状態は「箱に入れた（貝あり）」と「空き」の2つ。押すとすぐ保存し、「取り消す」で戻せる
 import { h, ic, toast, confirmSheet, formatDate, shellImg, notice, lightbox, ring, phrase } from '../ui.js';
-import { loadBox, clearBox, counts, STATE_LABEL, isTemp, endTemp, loadError, storageAvailable } from '../store.js';
+import { loadBox, clearBox, counts, STATE_LABEL, isTemp, endTemp, loadError, storageAvailable, migrationNote, dismissMigrationNote } from '../store.js';
 import { scanAvailable, scanIsPublic } from '../data.js';
 import { page } from './common.js';
 import { zoomableBox, legend } from './boxgrid.js';
@@ -22,7 +22,7 @@ export function render(ctx) {
   const body = h('div', { class: 'stack' });
   main.append(body);
 
-  const stateOf = (no) => rec?.cells?.[no]?.s || 'unknown';
+  const stateOf = (no) => (rec?.cells?.[no]?.s === 'filled' ? 'filled' : 'empty');
   let boxView = null;
   let focusPanel = !!selected;
 
@@ -39,14 +39,6 @@ export function render(ctx) {
     focusPanel = true;
     boxView?.focusCell(selected);
     redraw();
-  }
-
-  function nextOf(state) {
-    for (let k = 1; k <= 36; k++) {
-      const no = ((selected || 0) + k - 1) % 36 + 1;
-      if (stateOf(no) === state) return no;
-    }
-    return null;
   }
 
   function setView(v) {
@@ -70,6 +62,15 @@ export function render(ctx) {
     if (readError === 'corrupt') {
       body.append(notice('warn', 'alert', h('p', { class: 'small' }, '保存されていた記録を読み込めませんでした。元のデータは消さずに残してあります。新しく記録すると保存できます。')));
     }
+    // 4つの状態から2つに変えたとき、一度だけ知らせる（要確認だった番号は空きにした）
+    const note = migrationNote();
+    if (note) {
+      const box = notice('', 'info', h('div', { class: 'stack-sm' },
+        h('p', { class: 'small' }, '記録の種類を「箱に入れた（貝あり）」と「空き」の2つにしました。',
+          note.check ? `「要確認」だった${note.check}件は「空き」にしています。箱に入っていたら、もう一度「見つけた！箱に入れる」を押してください。` : '「貝あり」の記録はそのまま残っています。'),
+        h('button', { class: 'btn small secondary', type: 'button', onclick: () => { dismissMigrationNote(); box.remove(); } }, 'わかった')));
+      body.append(box);
+    }
 
     // まとめ
     body.append(h('div', { class: 'card stack-sm' },
@@ -77,16 +78,11 @@ export function render(ctx) {
         ring(c.filled),
         h('div', { class: 'grow' },
           h('p', { class: 'summary-title' }, phrase('36種類のうち、', `${c.filled}種類を集めました`)),
-          h('p', { class: 'small muted' }, `要確認 ${c.check}・空き ${c.empty}・未記録 ${c.unknown}`),
+          h('p', { class: 'small muted' }, `空き ${c.empty}`),
           rec ? h('p', { class: 'xsmall muted' }, isTemp(rec) ? '一時記録・ページを閉じると消えます' : `${formatDate(rec.savedAt)} 保存`) : null)),
       h('p', { class: 'xsmall muted' },
-        storageAvailable() ? '記録は押すとすぐ、この端末・このブラウザの中に保存されます（外部には送りません）。' : 'この環境では保存できないため、ページを閉じるまでの一時記録になります。',
-        '記録は目安です。実物の箱を確かめてください。')));
-
-    if (c.check) {
-      body.append(h('button', { class: 'btn block warn-btn', type: 'button', onclick: () => { selected = 0; const no = nextOf('check'); selected = no; view = 'map'; focusPanel = true; draw(); } },
-        h('span', { class: 'q', 'aria-hidden': 'true' }, '?'), `要確認 ${c.check}件を確かめる`));
-    }
+        storageAvailable() ? '押すとすぐ、この端末の中に保存されます（送信・同期はしません）。' : 'この環境では保存できないため、ページを閉じるまでの一時記録になります。',
+        '実物の箱は変わりません。')));
 
     // 表示の切り替え
     body.append(h('div', { class: 'seg seg-wide', role: 'group', 'aria-label': '表示の切り替え' },
@@ -95,7 +91,7 @@ export function render(ctx) {
       }, label))));
 
     if (view === 'list') {
-      body.append(h('p', { class: 'xsmall muted' }, '番号を押すと、大きなボタンで記録できます。'), listView());
+      body.append(h('p', { class: 'xsmall muted' }, '番号を押すと、「見つけた！箱に入れる」で記録できます。'), listView());
     } else {
       const opts = { cells: rec?.cells || {}, selected, onTap, zoom: boxView ? boxView.zoom : false };
       boxView = zoomableBox(data, opts);
@@ -110,7 +106,7 @@ export function render(ctx) {
         body.append(panel, boxBlock);
         if (focusPanel) requestAnimationFrame(() => panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' }));
       } else {
-        body.append(h('p', { class: 'small muted center' }, phrase('マスを押すと、', '大きなボタンで記録できます')), boxBlock);
+        body.append(h('p', { class: 'small muted center' }, phrase('マスを押すと、', '「見つけた！箱に入れる」で', '記録できます')), boxBlock);
       }
       focusPanel = false;
     }
@@ -118,7 +114,7 @@ export function render(ctx) {
     // 状態の意味
     body.append(h('section', { class: 'card flat stack-sm' },
       h('h3', { class: 'section-title' }, '記録の意味'),
-      h('ul', { class: 'state-help' }, ['filled', 'check', 'empty', 'unknown'].map((s) => h('li', null,
+      h('ul', { class: 'state-help' }, ['filled', 'empty'].map((s) => h('li', null,
         h('span', { class: 'state-pill', dataset: { state: s } }, STATE_LABEL[s]), STATE_HELP[s])))));
 
     // そのほかの操作
@@ -127,8 +123,7 @@ export function render(ctx) {
       actions.append(h('a', { class: 'btn block secondary', href: '#/scan' }, ic('camera'), scanIsPublic(data) ? '収集箱を撮って読み取る' : '収集箱を撮って読み取る（試験版）'));
     }
     if (rec) {
-      actions.append(h('a', { class: 'btn block soft', href: '#/list?box=todo' }, ic('search'), 'これから探す貝を見る'),
-        h('p', { class: 'xsmall muted center' }, '空きと記録したマスと、まだ記録していない貝を図鑑で表示します'));
+      actions.append(h('a', { class: 'btn block soft', href: '#/list?box=todo' }, ic('search'), 'これから探す貝（空き）を見る'));
     }
     body.append(actions);
     if (isTemp(rec)) {
@@ -151,7 +146,6 @@ export function render(ctx) {
     const sp = data.byNo[no];
     const state = stateOf(no);
     const cell = rec?.cells?.[no];
-    const checks = counts(rec).check;
     return h('section', { class: 'card stack-sm sel-card', 'aria-label': `${no}番のマス` },
       h('div', { class: 'sel-panel' },
         h('div', { class: 'ph' }, shellImg(sp)),
@@ -166,8 +160,7 @@ export function render(ctx) {
       choiceButtons(data, no, state, reload),
       h('div', { class: 'btn-row' },
         h('button', { class: 'btn small secondary', type: 'button', onclick: () => move(-1) }, ic('back'), '前の番号'),
-        h('button', { class: 'btn small secondary', type: 'button', onclick: () => move(1) }, '次の番号', ic('chevron'))),
-      checks ? h('button', { class: 'btn small soft block', type: 'button', onclick: () => { const n = nextOf('check'); if (n) { selected = n; focusPanel = true; boxView?.focusCell(n); redraw(); } } }, `次の要確認へ（残り${checks}）`) : null);
+        h('button', { class: 'btn small secondary', type: 'button', onclick: () => move(1) }, '次の番号', ic('chevron'))));
   }
 
   // 番号順のリスト：1行ずつ大きく。押すと大きな選択カードが開く
@@ -176,7 +169,7 @@ export function render(ctx) {
     for (let no = 1; no <= 36; no++) {
       const sp = data.byNo[no];
       const state = stateOf(no);
-      ul.append(h('li', null, h('button', { type: 'button', dataset: { state }, 'aria-label': `${no}番 ${sp.v.name}（${STATE_LABEL[state]}）を記録する`, onclick: () => openChoiceSheet(data, no, reload) },
+      ul.append(h('li', null, h('button', { type: 'button', dataset: { state }, 'aria-label': `${no}番 ${sp.v.name}（${STATE_LABEL[state]}）の記録を変える`, onclick: () => openChoiceSheet(data, no, reload) },
         h('span', { class: 'no-badge' }, no),
         h('span', { class: 'ph' }, shellImg(sp, { thumb: true })),
         h('span', { class: 'nm grow' }, sp.v.name),

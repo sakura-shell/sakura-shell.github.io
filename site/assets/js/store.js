@@ -6,20 +6,28 @@
 //   一時記録 … 保存できない環境などで「この画面を開いている間だけ使う」を選んだ記録。閉じると消える
 //
 // 保存キーは公開パスごとに分ける（同じドメインの別サイトと混ざらないように）。
-// 形式（v: 2）:
-// { v: 2, savedAt: ISO日時, source: "manual"|"scan",
-//   cells: { "12": { s: "filled"|"empty"|"check", t: 更新日時, img?: 箱の写真の切り抜き(dataURL) } } }
-// 未記録の番号は cells に含めない。
+//
+// 記録の状態は「箱に入れた（貝あり）」と「空き」の2つ（2026-10-08〜）。
+// 形式（v: 3）:
+// { v: 3, savedAt: ISO日時, source: "manual"|"scan",
+//   cells: { "12": { s: "filled", t: 更新日時, img?: 箱の写真の切り抜き(dataURL) } } }
+// cells にあるのは「箱に入れた」番号だけ。載っていない番号は「空き」。
+//
+// 以前の形式（v: 2。貝あり／空き／要確認／未記録の4つ）は、読み込むときに v: 3 へ移す。
+//   貝あり → 箱に入れた（日時・写真もそのまま）／ 要確認・空き・未記録 → 空き
+//   移す前の記録は、別のキー（…:box:v2-backup）にそのまま残す（消さない）。
 
 const APP = 'm36shells';
 const BASE = location.pathname.replace(/[^/]*$/, '') || '/';
 const KEY = `${APP}:${BASE}:box`;
 const MIGRATED = `${KEY}:migrated-from-v1`;
 const BACKUP = `${KEY}:unreadable-backup`;
+const V2_BACKUP = `${KEY}:v2-backup`;
+const V3_NOTE = `${KEY}:v3-note`; // 移したときの内容（収集箱の画面で一度だけ知らせる）
 const LEGACY_KEY = 'm36:box:v1'; // 試作版の保存キー
 
-export const STATES = ['filled', 'empty', 'check'];
-export const STATE_LABEL = { filled: '貝あり', empty: '空き', check: '要確認', unknown: '未記録' };
+export const STATES = ['filled', 'empty'];
+export const STATE_LABEL = { filled: '貝あり', empty: '空き' };
 
 let available = null;
 let temp = null; // 一時記録
@@ -38,28 +46,65 @@ export function storageAvailable() {
   return available;
 }
 
+// 以前の形式の状態も受け付ける（読み込み時に「箱に入れた」以外を空きにする）
+const OLD_STATES = ['filled', 'empty', 'check'];
+
 function validCells(obj) {
   if (!obj || typeof obj !== 'object') return null;
   const cells = {};
   for (const [no, c] of Object.entries(obj)) {
     const n = Number(no);
-    if (!(n >= 1 && n <= 36) || !c || !STATES.includes(c.s)) return null;
-    cells[n] = { s: c.s, t: typeof c.t === 'string' ? c.t : null };
-    if (c.s === 'filled' && typeof c.img === 'string' && c.img.startsWith('data:image/')) cells[n].img = c.img;
+    if (!(n >= 1 && n <= 36) || !c || !OLD_STATES.includes(c.s)) return null;
+    if (c.s !== 'filled') continue; // 空き（以前の 要確認・空き）は持たない
+    cells[n] = { s: 'filled', t: typeof c.t === 'string' ? c.t : null };
+    if (typeof c.img === 'string' && c.img.startsWith('data:image/')) cells[n].img = c.img;
   }
   return cells;
 }
 
+// version: 読み込む形式（1, 2, 3）
 function parseRecord(raw, version) {
   try {
     const rec = JSON.parse(raw);
     if (!rec || rec.v !== version) return null;
     const cells = validCells(rec.cells);
     if (!cells) return null;
-    return { v: 2, savedAt: rec.savedAt || null, source: rec.source || 'manual', cells };
+    return { v: 3, savedAt: rec.savedAt || null, source: rec.source || 'manual', cells };
   } catch {
     return null;
   }
+}
+
+// 以前の形式（v: 2）の記録を v: 3 に移す。元の記録は退避して消さない
+function migrateV2(raw) {
+  const rec = parseRecord(raw, 2);
+  if (!rec) return null;
+  let old = {};
+  try { old = JSON.parse(raw).cells || {}; } catch { /* 上で確かめ済み */ }
+  const n = (st) => Object.values(old).filter((c) => c?.s === st).length;
+  try {
+    if (!localStorage.getItem(V2_BACKUP)) localStorage.setItem(V2_BACKUP, raw);
+    localStorage.setItem(KEY, JSON.stringify(rec));
+    localStorage.setItem(V3_NOTE, JSON.stringify({ at: new Date().toISOString(), filled: n('filled'), check: n('check'), empty: n('empty') }));
+  } catch { /* 書き込めなくても、読み込んだ内容は使える（次に保存したときに v: 3 になる） */ }
+  return rec;
+}
+
+// 移したときの内容（まだ知らせていないときだけ）。{ filled, check, empty } または null
+export function migrationNote() {
+  try {
+    const v = JSON.parse(localStorage.getItem(V3_NOTE) || 'null');
+    return v && !v.seen ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+export function dismissMigrationNote() {
+  try {
+    const v = JSON.parse(localStorage.getItem(V3_NOTE) || 'null');
+    if (v) localStorage.setItem(V3_NOTE, JSON.stringify({ ...v, seen: true }));
+  } catch { /* 何もしない */ }
 }
 
 // 記録を読む。一時記録を使っているときはそれを返す
@@ -70,7 +115,7 @@ export function loadBox() {
   let raw = null;
   try { raw = localStorage.getItem(KEY); } catch { return null; }
   if (raw) {
-    const rec = parseRecord(raw, 2);
+    const rec = parseRecord(raw, 3) || migrateV2(raw);
     if (!rec) lastError = 'corrupt'; // 壊れていても消さない（保存時に退避してから上書き）
     return rec;
   }
@@ -104,11 +149,11 @@ export function isTemp(rec) {
 // 保存。戻り値: { ok, droppedImages?, record?, error? }
 export function saveBox({ source = 'manual', cells }) {
   if (!storageAvailable()) return { ok: false, error: 'unavailable' };
-  const rec = { v: 2, savedAt: new Date().toISOString(), source, cells };
+  const rec = { v: 3, savedAt: new Date().toISOString(), source, cells: onlyFilled(cells) };
   try {
     // 読めなかった古い記録は、上書きする前に一度だけ退避しておく
     const old = localStorage.getItem(KEY);
-    if (old && !parseRecord(old, 2) && !localStorage.getItem(BACKUP)) localStorage.setItem(BACKUP, old);
+    if (old && !parseRecord(old, 3) && !parseRecord(old, 2) && !localStorage.getItem(BACKUP)) localStorage.setItem(BACKUP, old);
   } catch { /* 退避できなくても保存は続ける */ }
   try {
     localStorage.setItem(KEY, JSON.stringify(rec));
@@ -128,17 +173,25 @@ export function saveBox({ source = 'manual', cells }) {
   }
 }
 
-// 1マスだけ記録してすぐ保存する（手で記録するときはこれを使う。押すたびに保存）
-// 戻り値: { ok, prev（取り消し用の元の状態。未記録なら null）, temp?, error? }
+// 「箱に入れた」番号だけを残す
+function onlyFilled(cells) {
+  const out = {};
+  for (const [no, c] of Object.entries(cells || {})) if (c?.s === 'filled') out[no] = c;
+  return out;
+}
+
+// 1マスだけ記録してすぐ保存する（押すたびに保存）。state: 'filled'（箱に入れる）| 'empty'（箱から出す）
+// 戻り値: { ok, prev（取り消し用の元の状態。空きなら null）, temp?, error? }
 export function setCell(no, state) {
   const rec = loadBox();
   const cells = {};
   for (const [k, c] of Object.entries(rec?.cells || {})) cells[k] = { ...c };
   const prev = cells[no] ? { ...cells[no] } : null;
-  if (state === 'unknown') delete cells[no]; // 未記録に戻す（写真・日時も消す）
-  else {
-    cells[no] = { s: state, t: new Date().toISOString() };
-    if (state === 'filled' && prev?.s === 'filled' && prev.img) cells[no].img = prev.img; // 箱の写真は貝ありのときだけ残す
+  if (state === 'filled') {
+    cells[no] = { s: 'filled', t: new Date().toISOString() };
+    if (prev?.img) cells[no].img = prev.img; // 箱の写真は入れたままなら残す
+  } else {
+    delete cells[no]; // 空きに戻す（写真・日時も消す）
   }
   return { ...writeCells(cells, rec), prev };
 }
@@ -160,7 +213,7 @@ function writeCells(cells, rec) {
 
 // この画面を開いている間だけ使う記録。永続記録は変えない
 export function useTemp(cells) {
-  temp = { v: 2, temp: true, savedAt: null, source: 'temp', cells };
+  temp = { v: 3, temp: true, savedAt: null, source: 'temp', cells: onlyFilled(cells) };
   return temp;
 }
 
@@ -181,25 +234,16 @@ export function clearBox() {
 }
 
 export function counts(record) {
-  const c = { filled: 0, empty: 0, check: 0, unknown: 36 };
-  if (!record) return c;
-  for (const cell of Object.values(record.cells)) {
-    if (c[cell.s] !== undefined) {
-      c[cell.s]++;
-      c.unknown--;
-    }
-  }
-  return c;
+  let filled = 0;
+  for (const cell of Object.values(record?.cells || {})) if (cell?.s === 'filled') filled++;
+  return { filled, empty: 36 - filled };
 }
 
 export function cellState(record, no) {
-  return record?.cells?.[no]?.s || 'unknown';
+  return record?.cells?.[no]?.s === 'filled' ? 'filled' : 'empty';
 }
 
-// 「貝あり32・要確認4で保存」のような保存ボタンの文言
+// 「貝あり12で保存」のような保存ボタンの文言
 export function saveLabel(cells) {
-  const c = counts({ cells });
-  const parts = [`貝あり${c.filled}`];
-  if (c.check) parts.push(`要確認${c.check}`);
-  return `${parts.join('・')}で保存`;
+  return `貝あり${counts({ cells }).filled}で保存`;
 }

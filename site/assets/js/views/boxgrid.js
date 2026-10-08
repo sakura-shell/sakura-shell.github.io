@@ -13,7 +13,7 @@ export function boxGrid(data, { cells = {}, selected = null, highlight = null, c
     for (let col = 1; col <= data.box.cols; col++) {
       const sp = data.byPos[`${row}-${col}`];
       const cell = cells[sp.no];
-      const state = cell?.s || 'unknown';
+      const state = cell?.s === 'filled' ? 'filled' : (cell?.s === 'check' ? 'check' : 'empty'); // check は読み取りの確認中だけ
       const cls = ['cell'];
       if (highlight === sp.no) cls.push('hl');
       if (changed?.has(sp.no)) cls.push('changed');
@@ -23,7 +23,7 @@ export function boxGrid(data, { cells = {}, selected = null, highlight = null, c
         dataset: { state, no: sp.no, col },
         style: { gridRow: row, gridColumn: col },
         'aria-current': selected === sp.no ? 'true' : null,
-        'aria-label': mini ? null : `${sp.no}番 ${sp.v.name}：${STATE_LABEL[state]}${changed?.has(sp.no) ? '（前回と違う）' : ''}`,
+        'aria-label': mini ? null : `${sp.no}番 ${sp.v.name}：${STATE_LABEL[state] || 'どちらか選ぶ'}${changed?.has(sp.no) ? '（前回と違う）' : ''}`,
         onclick: onTap ? () => onTap(sp.no) : null,
       });
       if (!mini && cell?.img && (state === 'filled' || allThumbs)) el.append(h('img', { class: 'thumb', src: cell.img, alt: '' }));
@@ -41,17 +41,16 @@ export function boxGrid(data, { cells = {}, selected = null, highlight = null, c
 function markFor(state) {
   const m = h('span', { class: 'mark', 'aria-hidden': 'true' });
   if (state === 'filled') m.append(ic('check'));
-  else if (state === 'check') m.append('?');
-  else if (state === 'unknown') m.append('－');
+  else if (state === 'check') m.append('?'); // 読み取りで決めきれなかったマス（保存前に選んでもらう）
   return m;
 }
 
-export function legend() {
+// withUndecided：箱の読み取りの確認中（決めきれなかったマスがあるとき）だけ「?」を出す
+export function legend({ withUndecided = false } = {}) {
   return h('div', { class: 'legend', 'aria-hidden': 'true' },
-    h('span', null, h('i', { class: 'l-filled' }, '✓'), '貝あり'),
+    h('span', null, h('i', { class: 'l-filled' }, '✓'), '箱に入れた（貝あり）'),
     h('span', null, h('i', { class: 'l-empty' }), '空き'),
-    h('span', null, h('i', { class: 'l-check' }, '?'), '要確認'),
-    h('span', null, h('i', { class: 'l-unknown' }), '未記録'));
+    withUndecided ? h('span', null, h('i', { class: 'l-check' }, '?'), 'どちらか選ぶ') : null);
 }
 
 // 拡大表示の切り替え付きの箱。拡大中は、箱のどの範囲を見ているかを小さな帯で示す

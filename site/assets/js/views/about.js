@@ -1,6 +1,7 @@
 import { h } from '../ui.js';
 import { scanAvailable, isDev } from '../data.js';
 import { page } from './common.js';
+import { installSection } from '../lib/install.js';
 
 export function render(ctx) {
   const { data } = ctx;
@@ -28,7 +29,7 @@ export function render(ctx) {
           h('dt', null, '版'), h('dd', null, cfg.appVersion))),
       h('section', { class: 'card stack-sm' },
         h('h3', { class: 'section-title' }, '収集箱の記録について'),
-        ul('記録はこの端末のこのブラウザの中だけに保存します。ログインや登録はありません。',
+        ul('記録はこの端末のこのブラウザの中だけに保存します。ログインや登録はありません。ほかの端末・ほかのブラウザとは同期しません。',
           'ブラウザのデータを消したとき、別の端末・別のブラウザでは記録が残りません。実物の箱を見ながら、いつでも記録し直せます。',
           '保存できない環境では「この画面を開いている間だけ使う」を選べます（閉じると消えます）。',
           '記録は目安です。実物の箱を確かめてください。')),
@@ -40,8 +41,9 @@ export function render(ctx) {
           'アクセス解析・広告・位置情報の取得はしていません。')),
       h('section', { class: 'card stack-sm' },
         h('h3', { class: 'section-title' }, 'オフラインで使うには'),
-        h('p', { class: 'small' }, '一度、電波のある場所でこのサイトを開くと、基本の画面・データ・写真が端末に保存され、電波が弱くても使えるようになります。'),
+        h('p', { class: 'small' }, '一度、電波のある場所でこのサイトを開くと、基本の画面・データ・写真（AI判定を使えるときは、その準備のファイルも）が端末に保存され、電波が弱くても使えるようになります。'),
         h('p', { class: 'small' }, 'この端末の準備：', offline)),
+      installSection(data),
       h('section', { class: 'card stack-sm' },
         h('h3', { class: 'section-title' }, '写真と情報について'),
         ul('番号・名前・箱の位置は、36種類一覧の資料にもとづいています。',
@@ -72,7 +74,7 @@ async function checkOffline(el) {
       ch.port1.onmessage = (e) => { clearTimeout(timer); resolve(e.data); };
       sw.postMessage({ type: 'status' }, [ch.port2]);
     });
-    set(res.ready ? '準備できています' : `準備中（${res.cached} / ${res.total}）。電波のある場所でしばらく開いたままにしてください`);
+    set(res.ready ? `準備できています${res.ai ? '（AI判定も使えます）' : ''}` : `準備中（${res.cached} / ${res.total}）。電波のある場所でしばらく開いたままにしてください`);
   } catch {
     set('確認できませんでした');
   }

@@ -2,14 +2,14 @@ import { h, ic } from '../ui.js';
 import { searchSpecies } from '../data.js';
 import { loadBox, counts } from '../store.js';
 import { page } from './common.js';
-import { shellCard, filterChips, applyFilters, noResult, hasFilter, BOX_FILTERS, boxMatch } from './parts.js';
+import { shellCard, filterChips, applyFilters, noResult, hasFilter, BOX_FILTERS, boxMatch, normalizeBoxKey } from './parts.js';
 
 const OPEN_KEY = 'm36shells:list-filter-open';
 
 export function render(ctx) {
   const { data, query } = ctx;
   const rec = loadBox();
-  const box = query.get('box') || (query.get('todo') === '1' ? 'todo' : '');
+  const box = normalizeBoxKey(query.get('box') || (query.get('todo') === '1' ? 'todo' : ''));
   const state = {
     q: query.get('q') || '',
     shape: query.get('shape') || '',
@@ -87,14 +87,11 @@ export function render(ctx) {
     const go = (key) => () => { state.box = key; chips.redraw(); update(); };
     const c = counts(rec);
     const actions = [];
-    if (state.box !== 'unknown' && n('unknown')) actions.push({ label: `まだ記録していない ${n('unknown')}種類を見る`, onclick: go('unknown') });
-    if (state.box !== 'todo' && n('todo')) actions.push({ label: `これから探す ${n('todo')}種類を見る`, onclick: go('todo') });
+    if (state.box !== 'todo' && n('todo')) actions.push({ label: `これから探す（空き）${n('todo')}種類を見る`, onclick: go('todo') });
+    if (state.box !== 'filled' && n('filled')) actions.push({ label: `箱に入れた ${n('filled')}種類を見る`, onclick: go('filled') });
     const titles = {
-      empty: '空きと記録したマスはありません。',
-      unknown: 'まだ記録していない貝はありません。',
-      check: '要確認のマスはありません。',
-      filled: c.filled ? 'この条件で集めた貝はありません。' : 'まだ集めた貝はありません。',
-      todo: 'これから探す貝はありません。すべて集まっています！',
+      filled: c.filled ? 'この条件で箱に入れた貝はありません。' : 'まだ箱に入れた貝はありません。',
+      todo: '空きの貝はありません。すべて集まっています！',
     };
     return { title: titles[state.box] || '見つかりませんでした。', actions };
   }

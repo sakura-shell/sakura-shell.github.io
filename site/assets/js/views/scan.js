@@ -14,7 +14,9 @@ import { zoomableBox, legend } from './boxgrid.js';
 const RECT_W = 1260;
 const STEP_NAMES = ['撮影', '範囲・向き', '確認・保存'];
 const CORNER_NAMES = ['左上', '右上', '右下', '左下'];
-const REVIEW_STATES = ['filled', 'empty', 'check', 'unknown'];
+// 確認画面で選べる状態（読み取りで決めきれなかったマス check は、どちらかを選ぶまで保存できない）
+const REVIEW_STATES = ['filled', 'empty'];
+const REVIEW_LABEL = { filled: '箱に入れる', empty: '空き', check: 'どちらか選ぶ' };
 
 export function render(ctx) {
   const { data } = ctx;
@@ -315,7 +317,7 @@ export function render(ctx) {
 
   // ---------- 3. 確認・保存 ----------
   let boxView = null;
-  const prevState = (no) => (prevRec ? prevRec.cells[no]?.s || 'unknown' : null);
+  const prevState = (no) => (prevRec ? (prevRec.cells[no]?.s === 'filled' ? 'filled' : 'empty') : null);
   const changedSet = () => {
     const set = new Set();
     if (prevRec) for (let no = 1; no <= 36; no++) if (prevState(no) !== s.draft[no].s) set.add(no);
@@ -340,6 +342,7 @@ export function render(ctx) {
   function drawReview(focusPanel = false) {
     s.step = 'review';
     const c = counts({ cells: s.draft });
+    const undecided = Object.values(s.draft).filter((d) => d.s === 'check').length;
     const changed = changedSet();
     const opts = { cells: s.draft, selected: s.selected, changed: prevRec ? changed : null, allThumbs: true, zoom: boxView?.zoom, onTap };
     boxView = zoomableBox(data, opts);
@@ -351,18 +354,19 @@ export function render(ctx) {
         h('p', { class: 'unsaved' }, 'まだ保存していません'),
         h('div', { class: 'box-summary' },
           h('span', { class: 'small muted' }, '貝あり'), h('span', { class: 'big' }, c.filled, h('small', null, ' / 36'))),
-        h('p', { class: 'small muted' }, `空き ${c.empty}・要確認 ${c.check}${c.unknown ? `・未記録 ${c.unknown}` : ''}`,
+        h('p', { class: 'small muted' }, `空き ${c.empty - undecided}`, undecided ? `・どちらか選ぶ ${undecided}` : '',
           prevRec ? `・前回と違うマス ${changed.size}` : '')),
       s.readWarning ? notice('warn', 'alert', h('p', { class: 'small' }, '箱の範囲や向きがずれているかもしれません。結果がおかしいときは「範囲・向きを直す」から合わせ直してください。')) : null,
-      notice('', 'hand', h('p', { class: 'small' }, '自動の結果は間違うことがあります。実物の箱と見比べて、違うマスを直してください。', h('strong', null, '要確認のマスは収集数に数えません。'))),
+      notice('', 'hand', h('p', { class: 'small' }, '自動の結果は間違うことがあります。実物の箱と見比べて、違うマスを直してください。',
+        undecided ? h('strong', null, `「?」のマス（読み取りで決めきれなかった${undecided}マス）は、「箱に入れる」か「空き」を選ぶと保存できます。`) : null)),
       h('div', { class: 'btn-row' },
-        h('button', { class: 'btn small soft', type: 'button', disabled: !c.check, onclick: () => jump(nextWhere((no) => s.draft[no].s === 'check'), '要確認のマスはありません') }, `次の要確認（${c.check}）`),
+        undecided ? h('button', { class: 'btn small soft', type: 'button', onclick: () => jump(nextWhere((no) => s.draft[no].s === 'check'), '「?」のマスはありません') }, `次の「?」のマス（${undecided}）`) : null,
         prevRec ? h('button', { class: 'btn small soft', type: 'button', disabled: !changed.size, onclick: () => jump(nextWhere((no) => changed.has(no)), '前回と違うマスはありません') }, `次の変更マス（${changed.size}）`) : null),
       h('div', { class: 'stack-sm' },
         h('div', { class: 'row between' }, h('p', { class: 'small muted' }, prevRec ? '赤い点：前回と違うマス' : '右上が1番です'), boxView.zoomButton),
         boxView.range,
         boxView.el,
-        legend()),
+        legend({ withUndecided: undecided > 0 })),
       panel,
       h('button', { class: 'btn block ghost small', type: 'button', onclick: drawAdjust }, '範囲・向きを直す'),
       !storageAvailable() ? notice('warn', 'alert', h('p', { class: 'small' }, 'この環境では保存できません。「この画面だけで使う」でページを閉じるまで使えます。')) : null,
@@ -371,9 +375,11 @@ export function render(ctx) {
           h('button', { class: 'btn secondary', type: 'button', onclick: async () => {
             if (await confirmSheet({ title: '撮り直しますか？', body: 'この読み取り結果は保存されません。', ok: '撮り直す', cancel: '戻る' })) drawStart();
           } }, ic('retake'), '撮り直す'),
-          storageAvailable()
-            ? h('button', { class: 'btn', type: 'button', onclick: save }, saveLabel(cellsToSave()))
-            : h('button', { class: 'btn', type: 'button', onclick: () => useTempAndGo() }, 'この画面だけで使う'))),
+          undecided
+            ? h('button', { class: 'btn', type: 'button', onclick: () => jump(nextWhere((no) => s.draft[no].s === 'check'), '') }, `あと${undecided}マス選ぶ`)
+            : storageAvailable()
+              ? h('button', { class: 'btn', type: 'button', onclick: save }, saveLabel(cellsToSave()))
+              : h('button', { class: 'btn', type: 'button', onclick: () => useTempAndGo() }, 'この画面だけで使う'))),
     );
     if (focusPanel && panel) requestAnimationFrame(() => panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' }));
   }
@@ -396,19 +402,19 @@ export function render(ctx) {
     const sp = data.byNo[no];
     const d = s.draft[no];
     const before = prevState(no);
-    const picker = h('div', { class: 'state-picker four', role: 'group', 'aria-label': `${no}番の状態` },
+    const picker = h('div', { class: 'state-picker', role: 'group', 'aria-label': `${no}番の状態` },
       REVIEW_STATES.map((st) => h('button', {
         type: 'button', 'aria-pressed': String(d.s === st),
         onclick: () => { d.s = st; s.edited = true; redrawReview(false); },
-      }, st === 'filled' ? ic('check') : null, st === 'unknown' ? '未記録' : STATE_LABEL[st])));
+      }, st === 'filled' ? ic('check') : null, REVIEW_LABEL[st])));
     return h('section', { class: 'card stack-sm sel-card', 'aria-label': `${no}番のマス` },
       h('div', { class: 'sel-panel' },
         h('button', { class: 'user-photo', type: 'button', 'aria-label': 'あなたの箱の写真を拡大', onclick: () => lightbox(d.img, `${no}番のマス（あなたの箱の写真）`) },
           h('img', { src: d.img, alt: '' }), h('span', { class: 'photo-label' }, '箱')),
         h('div', { class: 'grow' },
-          h('div', { class: 'row' }, h('span', { class: 'no-badge' }, no), h('span', { class: 'state-pill', dataset: { state: d.s } }, STATE_LABEL[d.s])),
+          h('div', { class: 'row' }, h('span', { class: 'no-badge' }, no), h('span', { class: 'state-pill', dataset: { state: d.s } }, d.s === 'check' ? 'どちらか選ぶ' : STATE_LABEL[d.s])),
           h('div', { class: 'nm' }, sp.v.name),
-          before !== null ? h('p', { class: 'xsmall' }, `前回：${STATE_LABEL[before]} → 今回：${STATE_LABEL[d.s]}`) : null),
+          before !== null ? h('p', { class: 'xsmall' }, `前回：${STATE_LABEL[before]} → 今回：${d.s === 'check' ? '？' : STATE_LABEL[d.s]}`) : null),
         h('div', { class: 'ph' }, shellImg(sp), h('span', { class: 'photo-label' }, '図鑑'))),
       picker);
   }
@@ -418,9 +424,8 @@ export function render(ctx) {
     const cells = {};
     for (let no = 1; no <= 36; no++) {
       const d = s.draft[no];
-      if (d.s === 'unknown') continue;
-      cells[no] = { s: d.s, t: now };
-      if (d.s === 'filled') cells[no].img = d.img; // 空き・要確認の画像は保存しない
+      if (d.s !== 'filled') continue; // 保存するのは「箱に入れた」マスだけ（決めきれなかったマスを勝手に入れない）
+      cells[no] = { s: 'filled', t: now, img: d.img }; // 空きの画像は保存しない
     }
     return cells;
   }

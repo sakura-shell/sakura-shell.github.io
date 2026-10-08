@@ -1,6 +1,8 @@
 // 画面の切り替え（ハッシュ #/... によるルーティング）
 import { loadData, setDevFromQuery, setStaffFromQuery, isDev } from './data.js';
 import { gateNeeded, showGate } from './lib/gate.js';
+import { identifierEnabled, prepareIdentifier } from './lib/identify.js';
+import './lib/install.js'; // ホーム画面に追加の知らせ（beforeinstallprompt）を最初から受け取る
 import { h, ic } from './ui.js';
 import * as home from './views/home.js';
 import * as list from './views/list.js';
@@ -143,6 +145,30 @@ async function render() {
   if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
 }
 
+// 手が空いたときに実行する（対応していないブラウザでは少し待ってから）
+function whenIdle(fn, timeout) {
+  if ('requestIdleCallback' in window) requestIdleCallback(() => fn(), { timeout });
+  else setTimeout(fn, 1200);
+}
+
+// AI判定の先回りの準備。画面を出したあと、手が空いたときに2段階で行う
+//   1段目：分類器・TensorFlow.js・MobileNet のファイルを読み込む（通信だけ。Service Worker が保存する）
+//   2段目：モデルを組み立てて慣らしの計算をする（少し重いので、1段目のあと、さらに手が空いたとき）
+// 写真を撮ったときは、ここで始めた準備をそのまま使う（lib/identify.js・lib/embed.js が1回だけ準備する）
+function warmUpAI() {
+  const ai = identifierEnabled(data) && !navigator.connection?.saveData; // 通信量を節約する設定のときは、先読みしない（撮ったときに準備する）
+  whenIdle(async () => {
+    if (ai && await prepareIdentifier(data, 1)) whenIdle(() => prepareIdentifier(data, 2), 4000);
+    cachePhotosLater();
+  }, 3000);
+}
+
+// オフライン用に図鑑の写真を保存してもらう（AI の先読みのあと。回線を取り合わないように）
+function cachePhotosLater() {
+  if (!('serviceWorker' in navigator)) return;
+  navigator.serviceWorker.ready.then((reg) => reg.active?.postMessage({ type: 'cache-photos' })).catch(() => {});
+}
+
 async function boot() {
   try {
     data = await loadData();
@@ -162,6 +188,7 @@ async function boot() {
     if (current?.dirty?.()) { e.preventDefault(); e.returnValue = ''; }
   });
   await render();
+  warmUpAI();
 }
 
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {

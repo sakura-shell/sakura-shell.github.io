@@ -298,9 +298,9 @@ ruby rt { font-size: .5em; font-weight: 500; }
 .feature-list li svg { width: 20px; height: 20px; color: var(--pink-400); flex: none; margin-top: 3px; }
 .src { font-size: 12px; color: var(--ink-2); }
 
-.kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 15px; }
+.kv { display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr); gap: 6px 14px; font-size: 15px; }
 .kv dt { color: var(--ink-2); }
-.kv dd { margin: 0; font-weight: 700; }
+.kv dd { margin: 0; font-weight: 700; min-width: 0; overflow-wrap: anywhere; }
 
 .pager { display: flex; gap: 10px; }
 .pager a { flex: 1; }
@@ -399,8 +399,8 @@ ruby rt { font-size: .5em; font-weight: 500; }
 .cell[data-state="filled"] .mark { background: var(--ok); color: #fff; box-shadow: 0 0 0 2px #fff; }
 .cell[data-state="filled"] .thumb + .num + .mark { top: auto; bottom: 3px; left: auto; right: 3px; transform: none; width: 18px; height: 18px; }
 .box.zoom .cell[data-state="filled"] .thumb + .num + .mark { width: 24px; height: 24px; bottom: 26px; }
-.cell[data-state="empty"] { background: #CFEFF9; }
-.cell[data-state="empty"] .mark { border: 2px dashed var(--box-deep); background: transparent; color: var(--box-deep); }
+/* 空きのマスは番号だけ（記号を並べない）。箱に入れたマスだけ ✓ */
+.cell[data-state="empty"] .mark { display: none; }
 .cell[data-state="check"] { background: var(--warn-bg); box-shadow: inset 0 0 0 2px var(--yellow-400); }
 .cell[data-state="check"] .mark { background: var(--yellow-400); color: #4d3500; }
 .cell[data-state="unknown"] .mark { color: rgba(38, 44, 116, .45); }
@@ -417,7 +417,7 @@ ruby rt { font-size: .5em; font-weight: 500; }
 .legend span { display: inline-flex; align-items: center; gap: 5px; }
 .legend i { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; font-style: normal; font-weight: 700; font-size: 11px; }
 .legend .l-filled { background: var(--ok); color: #fff; }
-.legend .l-empty { border: 2px dashed var(--box-deep); color: var(--box-deep); }
+.legend .l-empty { background: var(--box-cell); border-radius: 4px; box-shadow: inset 0 1px 2px rgba(0, 80, 120, .25); }
 .legend .l-check { background: var(--yellow-400); color: #4d3500; }
 .legend .l-unknown { background: var(--box-cell); color: var(--navy); }
 
@@ -749,8 +749,6 @@ body {
 .pager-link .dir { display: block; font-size: 12px; color: var(--ink-2); font-weight: 700; }
 .pager-link .pn { display: block; font-weight: 700; font-size: 15px; line-height: 1.3; }
 
-/* 未記録のマスは番号だけ（記号を並べない） */
-.cell[data-state="unknown"] .mark { display: none; }
 
 /* AIの判定中：やわらかい光が流れる */
 @keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
@@ -952,3 +950,50 @@ a.tel { color: var(--navy); font-weight: 700; text-decoration: underline; text-d
 .compare .ph img { position: absolute; top: 8px; left: 8px; width: calc(100% - 16px); height: calc(100% - 16px); }
 .send-progress { margin: 0; padding: 14px; text-align: center; font-weight: 700; color: var(--navy); background: var(--sky-100); border-radius: var(--radius-sm); }
 .collect-zip summary { cursor: pointer; padding: 8px 0; color: var(--ink-2); }
+
+/* ホーム画面に追加の手順 */
+.plain-steps { margin: 0; padding-left: 1.4em; }
+.plain-steps li { margin: 2px 0; }
+.small.strong { font-weight: 700; color: var(--navy); margin: 0; }
+
+/* ---------- ホーム：スマホの最初の画面で全体が見えるように（2026-10-08） ----------
+   ロゴは横長に切り出して小さく、見出しは1〜2行、「写真で調べる」は大きく1つ、図鑑と収集箱は横に2つ。
+   高さを決め打ちにせず、文字を大きくした端末ではそのままスクロールできる */
+@media (max-width: 699px) {
+  .page.home { gap: 10px; align-content: start; }
+  .record-strip .xsmall { display: none; } /* 保存日時は収集箱の画面で */
+  .page.home .hero, .page.home .hero.compact { width: auto; max-width: 320px; margin: 8px auto 0; border-width: 5px; border-radius: 20px; }
+  .page.home .hero img { aspect-ratio: 685 / 290; object-fit: cover; object-position: center 66%; }
+  .page.home .hero::after { display: none; }
+  .page.home .wave-band { height: 8px; background-size: 16px 8px; margin-top: 0; }
+  .page.home .lead { font-size: 17px; line-height: 1.45; margin: 0; }
+  .page.home .home-actions > * + * { margin-top: 10px; }
+  .record-strip { min-height: 48px; padding: 6px 12px; }
+  .record-strip .ring { transform: scale(.9); }
+  .page.home .actions { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .page.home .action { min-height: 70px; padding: 10px 12px; gap: 10px; border-radius: 20px; }
+  .page.home .action.primary { grid-column: 1 / -1; min-height: 84px; }
+  .page.home .action.primary .art { width: 52px; height: 52px; }
+  .page.home .action.primary .label { font-size: 21px; }
+  .page.home .action.half .art { width: 40px; height: 40px; }
+  .page.home .action.half .label { font-size: 17px; }
+  .page.home .action.half .desc { font-size: 12.5px; }
+  .page.home .action.half .go { display: none; }
+  .page.home .guide-link { padding: 9px 14px; }
+  .page.home .guide-link svg { width: 22px; height: 22px; }
+  .page.home .footer-links { padding-top: 0; }
+}
+/* 低い画面（iPhone SE など）・横向き：ロゴをさらに小さく */
+@media (max-width: 699px) and (max-height: 720px) {
+  .page.home .hero, .page.home .hero.compact { max-width: 270px; }
+}
+@media (max-width: 699px) and (max-height: 600px), (orientation: landscape) and (max-height: 500px) {
+  .page.home .hero, .page.home .hero.compact { max-width: 220px; }
+}
+
+/* 写真で調べる：最初の画面 */
+.identify-lead { margin: 0; font-weight: 700; color: var(--navy); font-size: 16px; line-height: 1.5; }
+.identify-tip { margin: 0; display: flex; align-items: center; gap: 6px; }
+.identify-tip svg { width: 22px; height: 22px; flex: none; }
+.tips-more summary { cursor: pointer; font-size: 14px; font-weight: 700; color: var(--navy); min-height: 40px; display: flex; align-items: center; }
+.tips-more .tips { margin-top: 4px; }
