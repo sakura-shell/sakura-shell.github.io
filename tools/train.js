@@ -133,16 +133,32 @@ async function trainLinear(X, Y, labels, epochs = 120) {
   const tf = await loadTf();
   const C = labels.length;
   const xs = tf.tensor2d(X.flatMap((x) => Array.from(x)), [X.length, DIM]);
-  const ys = tf.oneHot(tf.tensor1d(Y, 'int32'), C).toFloat();
+  const ys0 = tf.oneHot(tf.tensor1d(Y, 'int32'), C).toFloat();
+  // 種類ごとの写真の数の偏りを打ち消す：どの種類も同じくらいの回数で学習するように、写真を選び直す
+  // （動画から切り出した写真で、一部の種類だけ急に多くなっても、ほかの貝を「その種類」と答えやすくならない。2026-10-08 の検証）
+  const count = {};
+  Y.forEach((y) => { count[y] = (count[y] || 0) + 1; });
+  const w = Y.map((y) => 1 / count[y]);
+  const total = w.reduce((a, b) => a + b, 0);
+  const r = rng(7);
+  const idx = [];
+  for (let k = 0; k < Y.length; k++) {
+    let u = r() * total, j = 0;
+    while (j < w.length - 1 && u > w[j]) { u -= w[j]; j++; }
+    idx.push(j);
+  }
+  const it = tf.tensor1d(idx, 'int32');
+  const xs1 = tf.gather(xs, it), ys = tf.gather(ys0, it);
+  it.dispose(); xs.dispose(); ys0.dispose();
   const model = tf.sequential();
   model.add(tf.layers.dense({ units: C, inputShape: [DIM], kernelRegularizer: tf.regularizers.l2({ l2: 1e-4 }) }));
   model.compile({ optimizer: tf.train.adam(0.01), loss: (t, p) => tf.losses.softmaxCrossEntropy(t, p) });
   // yieldEvery: 'never'：画面の描画を待たない（画面が隠れていても止まらない）
-  await model.fit(xs, ys, { epochs, batchSize: 64, shuffle: true, verbose: 0, yieldEvery: 'never' });
+  await model.fit(xs1, ys, { epochs, batchSize: 64, shuffle: true, verbose: 0, yieldEvery: 'never' });
   const [kernel, bias] = model.getWeights();
   const W = Array.from(await kernel.data());
   const b = Array.from(await bias.data());
-  xs.dispose(); ys.dispose(); model.dispose();
+  xs1.dispose(); ys.dispose(); model.dispose();
   return { W, b };
 }
 

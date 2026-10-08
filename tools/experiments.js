@@ -258,7 +258,7 @@ function withColor(feats, hists, w) {
 }
 
 // ---------- 分類 ----------
-async function trainLinear(X, Y, C, { l2 = 1e-4, epochs = 120 } = {}) {
+async function trainLinear(X, Y, C, { l2 = 1e-4, epochs = 120, weights = null } = {}) {
   const tf = await loadTf();
   const D = X[0].length;
   const xs = tf.tensor2d(X.flatMap((x) => Array.from(x)), [X.length, D]);
@@ -266,7 +266,22 @@ async function trainLinear(X, Y, C, { l2 = 1e-4, epochs = 120 } = {}) {
   const model = tf.sequential();
   model.add(tf.layers.dense({ units: C, inputShape: [D], kernelRegularizer: tf.regularizers.l2({ l2 }) }));
   model.compile({ optimizer: tf.train.adam(0.01), loss: (t, p) => tf.losses.softmaxCrossEntropy(t, p) });
-  await model.fit(xs, ys, { epochs, batchSize: 64, shuffle: true, verbose: 0, yieldEvery: 'never' });
+  // weights：1枚ごとの重み（多い種類・多い個体の写真を軽くする）。重みの分だけ写真を選ぶ確率を変えて学習する
+  let fitX = xs, fitY = ys;
+  if (weights) {
+    const total = weights.reduce((a, b) => a + b, 0);
+    const r = rng(7);
+    const idx = [];
+    for (let k = 0; k < X.length; k++) {
+      let u = r() * total, j = 0;
+      while (j < weights.length - 1 && u > weights[j]) { u -= weights[j]; j++; }
+      idx.push(j);
+    }
+    const it = tf.tensor1d(idx, 'int32');
+    fitX = tf.gather(xs, it); fitY = tf.gather(ys, it); it.dispose();
+  }
+  await model.fit(fitX, fitY, { epochs, batchSize: 64, shuffle: true, verbose: 0, yieldEvery: 'never' });
+  if (weights) { fitX.dispose(); fitY.dispose(); }
   const [k, b] = model.getWeights();
   const W = await k.array(), B = await b.array();
   xs.dispose(); ys.dispose(); model.dispose();
@@ -360,10 +375,18 @@ window.runExperiment = async (cfg) => {
     X = X.concat(withColor(extra.map((s) => s.x), extra.map((s) => s.h), cfg.color || 0));
     Y = Y.concat(extra.map((s) => labels.indexOf(s.label)));
   }
+  // balance: 'class'＝種類ごとに同じ重み／'group'＝個体（写真のまとまり）ごとに同じ重みで、さらに種類ごとにそろえる
+  let weights = null;
+  if (cfg.balance) {
+    const groups = f.groups.concat(Array(Y.length - f.groups.length).fill('extra'));
+    const nClass = {}, nGroup = {}, groupsOfClass = {};
+    Y.forEach((y, i) => { nClass[y] = (nClass[y] || 0) + 1; const g = `${y}|${groups[i]}`; nGroup[g] = (nGroup[g] || 0) + 1; (groupsOfClass[y] ||= new Set()).add(g); });
+    weights = Y.map((y, i) => cfg.balance === 'class' ? 1 / nClass[y] : 1 / (nGroup[`${y}|${groups[i]}`] * groupsOfClass[y].size));
+  }
   let scorer;
   if (cfg.head === 'centroid') scorer = centroidScorer(X, Y, labels.length);
   else if (cfg.head === 'knn') scorer = knnScorer(X, Y, labels.length);
-  else scorer = await trainLinear(X, Y, labels.length, { l2: cfg.l2 ?? 1e-4, epochs: cfg.epochs ?? 120 });
+  else scorer = await trainLinear(X, Y, labels.length, { l2: cfg.l2 ?? 1e-4, epochs: cfg.epochs ?? 120, weights });
   const result = { cfg };
   let all = [];
   for (const [name, list] of Object.entries(f.E)) {
