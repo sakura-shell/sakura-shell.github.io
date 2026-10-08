@@ -21,6 +21,7 @@ from capture_pages import CDP, CHROME, FONT, ROOT, SAMPLE_KEY, SITE, WAIT_RENDER
 
 SIZES = [(375, 667), (390, 844)]
 PAGES = [
+    ("intro", "初めて開いたとき（導入）", "#/", "fresh"),
     ("home", "ホーム（記録なし）", "#/", "clear"),
     ("home-rec", "ホーム（記録あり）", "#/", "sample"),
     ("identify", "写真で調べる", "#/identify", "clear"),
@@ -62,7 +63,12 @@ def main():
             cdp.send("Emulation.setDeviceMetricsOverride", {"width": w, "height": hgt, "deviceScaleFactor": 2, "mobile": True})
             for key, title, hash_, prep in PAGES:
                 rec = json.dumps(json.dumps(sample_record()))
-                cdp.js(f"localStorage.removeItem('{SAMPLE_KEY}');" if prep == "clear" else f"localStorage.setItem('{SAMPLE_KEY}', {rec});" + " return true;")
+                if prep == "fresh":  # 初めて開いた状態（導入が出る）
+                    cdp.js(f"localStorage.removeItem('{SAMPLE_KEY}'); localStorage.removeItem('m36shells:intro'); localStorage.removeItem('m36shells:install-hint'); return true;")
+                elif prep == "clear":
+                    cdp.js(f"localStorage.removeItem('{SAMPLE_KEY}'); localStorage.setItem('m36shells:intro', 'start'); return true;")
+                else:
+                    cdp.js(f"localStorage.setItem('{SAMPLE_KEY}', {rec}); localStorage.setItem('m36shells:intro', 'start'); return true;")
                 cdp.send("Page.navigate", {"url": SITE + f"?shot={time.time()}{hash_}"})
                 time.sleep(0.4)
                 cdp.js(WAIT_RENDER, timeout=30)

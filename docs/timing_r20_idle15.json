@@ -1,0 +1,83 @@
+{
+ "label": "r20-15秒",
+ "date": "2026-10-09 07:10",
+ "idleSec": 15.0,
+ "conditions": "Chrome headless・下り9Mbps/往復150ms・CPU 1/4",
+ "runs": [
+  {
+   "first": {
+    "home": 1736,
+    "identify": 24,
+    "result": 600,
+    "aiOk": true,
+    "homeLongTaskMax": 211,
+    "homeLongTasks": 3
+   },
+   "revisit": {
+    "home": 1475,
+    "identify": 24,
+    "result": 484,
+    "aiOk": true,
+    "homeLongTaskMax": 68,
+    "homeLongTasks": 1
+   },
+   "offline": {
+    "home": 111,
+    "identify": 23,
+    "result": 436,
+    "aiOk": true,
+    "homeLongTaskMax": 72,
+    "homeLongTasks": 1
+   }
+  },
+  {
+   "first": {
+    "home": 1711,
+    "identify": 23,
+    "result": 594,
+    "aiOk": true,
+    "homeLongTaskMax": 211,
+    "homeLongTasks": 3
+   },
+   "revisit": {
+    "home": 1465,
+    "identify": 24,
+    "result": 482,
+    "aiOk": true,
+    "homeLongTaskMax": 81,
+    "homeLongTasks": 1
+   },
+   "offline": {
+    "home": 113,
+    "identify": 22,
+    "result": 436,
+    "aiOk": true,
+    "homeLongTaskMax": 86,
+    "homeLongTasks": 1
+   }
+  }
+ ],
+ "median": {
+  "first": {
+   "home": 1724,
+   "identify": 24,
+   "result": 597,
+   "homeLongTaskMax": 211,
+   "aiOk": 2
+  },
+  "revisit": {
+   "home": 1470,
+   "identify": 24,
+   "result": 483,
+   "homeLongTaskMax": 74,
+   "aiOk": 2
+  },
+  "offline": {
+   "home": 112,
+   "identify": 22,
+   "result": 436,
+   "homeLongTaskMax": 79,
+   "aiOk": 2
+  }
+ }
+}

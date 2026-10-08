@@ -102,6 +102,7 @@ WATCH_HOME = """
 
 GO_IDENTIFY = """
   window.__ltHome = (window.__lt || []).slice();
+  document.querySelector('dialog.intro .intro-skip')?.click(); // 初めて開いたときの導入は「スキップ」
   const t0 = performance.now();
   location.hash = '#/identify';
   for (let i = 0; i < 3000; i++) {
