@@ -2,7 +2,8 @@
 import { loadData, setDevFromQuery, setStaffFromQuery, isDev } from './data.js';
 import { gateNeeded, showGate } from './lib/gate.js';
 import { identifierEnabled, prepareIdentifier } from './lib/identify.js';
-import './lib/install.js'; // ホーム画面に追加の知らせ（beforeinstallprompt）を最初から受け取る
+import { maybeShowInstallHint } from './lib/install.js'; // ホーム画面に追加の知らせ（beforeinstallprompt）を最初から受け取る
+import { introNeeded, showIntro } from './lib/intro.js';
 import { h, ic } from './ui.js';
 import * as home from './views/home.js';
 import * as list from './views/list.js';
@@ -155,10 +156,15 @@ function whenIdle(fn, timeout) {
 //   1段目：分類器・TensorFlow.js・MobileNet のファイルを読み込む（通信だけ。Service Worker が保存する）
 //   2段目：モデルを組み立てて慣らしの計算をする（少し重いので、1段目のあと、さらに手が空いたとき）
 // 写真を撮ったときは、ここで始めた準備をそのまま使う（lib/identify.js・lib/embed.js が1回だけ準備する）
+//   通信量を節約する設定・とても遅い回線（2G）では、ホームでは先読みしない（写真で調べる画面を開いたときに準備する）。
+//   メモリの少ない端末では、ホームではファイルの読み込みまでにして、モデルの組み立ては写真で調べる画面で行う
 function warmUpAI() {
-  const ai = identifierEnabled(data) && !navigator.connection?.saveData; // 通信量を節約する設定のときは、先読みしない（撮ったときに準備する）
+  const conn = navigator.connection;
+  const slow = conn?.saveData || /(^|-)2g$/.test(conn?.effectiveType || '');
+  const ai = identifierEnabled(data) && !slow;
+  const lowMemory = navigator.deviceMemory && navigator.deviceMemory <= 2;
   whenIdle(async () => {
-    if (ai && await prepareIdentifier(data, 1)) whenIdle(() => prepareIdentifier(data, 2), 4000);
+    if (ai && await prepareIdentifier(data, 1) && !lowMemory) whenIdle(() => prepareIdentifier(data, 2), 4000);
     cachePhotosLater();
   }, 3000);
 }
@@ -188,7 +194,11 @@ async function boot() {
     if (current?.dirty?.()) { e.preventDefault(); e.returnValue = ''; }
   });
   await render();
-  warmUpAI();
+  warmUpAI(); // 導入を出していても、AIの準備は裏で進める
+  // 初めて開いた人への短い導入（ホームから開いたときだけ。閉じたら、ホーム画面に追加の小さな案内を一度だけ）
+  if (parseHash().path === '/' && introNeeded()) {
+    showIntro(data, (how) => { if (how !== 'guide') maybeShowInstallHint('intro', 600); });
+  }
 }
 
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {

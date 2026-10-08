@@ -3,7 +3,7 @@ import { h, ic, notice, lightbox, confirmSheet, openSheet, shellImg, phrase } fr
 import { loadBox } from '../store.js';
 import { openCamera } from '../lib/camera.js';
 import { fileToCanvas, pickImageFile, canvasToDataURL } from '../lib/image.js';
-import { identify, identifierEnabled, prepareIdentifier, IDENTIFIER } from '../lib/identify.js';
+import { identify, identifierEnabled, prepareIdentifier, aiStatus, IDENTIFIER } from '../lib/identify.js';
 import { page } from './common.js';
 import { isStaff } from '../data.js';
 import { foundBlock } from './record.js';
@@ -46,10 +46,25 @@ export async function render(ctx) {
     if (ai) runAI();
   }
 
+  // AIの準備状況（短く。準備中でも撮影できる。失敗したら図鑑で探す道へ）
+  const statusEl = h('p', { class: 'xsmall ai-status', 'aria-live': 'polite' });
+  const drawStatus = () => {
+    const st = aiStatus();
+    statusEl.dataset.state = st;
+    statusEl.replaceChildren(...({
+      loading: [h('span', { class: 'dot' }), 'AIの準備中…（このまま撮れます）'],
+      ready: [ic('check'), 'AIの準備ができました'],
+      failed: ['AIの準備ができませんでした。', h('a', { href: '#/list' }, '図鑑で見比べて探す')],
+      idle: ['撮ると、AIの準備を始めます'],
+    }[st] || []));
+  };
+  drawStatus();
+  window.addEventListener('m36:ai-status', drawStatus);
+
   // 「もう一度試す」
   const retry = () => { if (session.photos.length && !busy) runAI(); };
   window.addEventListener('m36:retry-ai', retry);
-  ctx.onCleanup?.(() => window.removeEventListener('m36:retry-ai', retry));
+  ctx.onCleanup?.(() => { window.removeEventListener('m36:retry-ai', retry); window.removeEventListener('m36:ai-status', drawStatus); });
 
   async function runAI() {
     busy = true;
@@ -77,6 +92,7 @@ export async function render(ctx) {
             ? phrase('AIが写真から', '似ている貝を探します。', '最後は図鑑の写真と見比べてね。')
             : phrase('撮った写真と', '図鑑を見比べて探します。')),
           h('p', { class: 'small identify-tip' }, ic('shell'), phrase('貝を1つだけ、', '近づいて大きく撮ってね')),
+          ai ? statusEl : null,
           h('details', { class: 'tips-more' },
             h('summary', null, '撮り方のコツ'),
             h('ol', { class: 'tips' },

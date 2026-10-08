@@ -997,3 +997,37 @@ a.tel { color: var(--navy); font-weight: 700; text-decoration: underline; text-d
 .identify-tip svg { width: 22px; height: 22px; flex: none; }
 .tips-more summary { cursor: pointer; font-size: 14px; font-weight: 700; color: var(--navy); min-height: 40px; display: flex; align-items: center; }
 .tips-more .tips { margin-top: 4px; }
+
+/* 写真で調べる：AIの準備状況 */
+.ai-status { margin: 0; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; color: var(--ink-2); }
+.ai-status svg { width: 16px; height: 16px; color: var(--ok); }
+.ai-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sky-300); animation: pulse 1.2s ease-in-out infinite; }
+.ai-status[data-state="failed"] { color: var(--warn); }
+@keyframes pulse { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .ai-status .dot { animation: none; } }
+
+/* 初めて開いた人への導入 */
+dialog.intro { border: 0; padding: 0; width: min(440px, calc(100% - 32px)); max-height: calc(100% - 32px); border-radius: 24px; background: var(--white); color: var(--ink); box-shadow: 0 20px 60px rgba(20, 30, 80, .3); display: flex; flex-direction: column; }
+dialog.intro:not([open]) { display: none; }
+dialog.intro::backdrop { background: rgba(20, 30, 80, .35); }
+.intro-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px 0 18px; }
+.intro-kicker { margin: 0; font-size: 12px; font-weight: 700; color: var(--ink-2); }
+.intro-skip { min-height: 44px; }
+.intro-body { padding: 4px 18px 8px; overflow: auto; }
+.intro-body h2 { font-size: 20px; color: var(--navy); margin: 0 0 12px; line-height: 1.4; }
+.intro-steps { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 10px; }
+.intro-steps li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+.intro-steps strong { color: var(--navy); }
+.intro-more { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; }
+.intro-more svg { width: 20px; height: 20px; }
+.intro-actions { padding: 8px 18px 16px; border-top: 1px solid var(--line); }
+
+/* ホーム画面に追加の小さな案内 */
+.install-hint {
+  position: fixed; left: 12px; right: 12px; bottom: calc(var(--tabbar-h) + var(--safe-b) + 12px); z-index: 40;
+  max-width: 520px; margin: 0 auto; display: flex; align-items: center; gap: 10px;
+  padding: 10px 10px 10px 14px; border-radius: 16px; background: var(--white); border: 2px solid var(--sky-200); box-shadow: var(--shadow);
+}
+.install-hint p { margin: 0; flex: 1; min-width: 0; }
+.install-hint strong { color: var(--navy); }
+.install-hint-actions { display: flex; align-items: center; gap: 4px; flex: none; }

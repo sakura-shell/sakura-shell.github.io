@@ -63,19 +63,30 @@ function askToCache(urls) {
   navigator.serviceWorker.ready.then((reg) => reg.active?.postMessage({ type: 'cache-ai', urls })).catch(() => {});
 }
 
+// 準備の状況（写真で調べる画面に短く出す）：'idle'＝まだ／'loading'＝準備中／'ready'＝できた／'failed'＝できなかった
+let status = 'idle';
+export function aiStatus() { return status; }
+function setStatus(s) {
+  if (status === s) return;
+  status = s;
+  window.dispatchEvent(new CustomEvent('m36:ai-status', { detail: s }));
+}
+
 // 先回りの準備。stage 1＝ファイルの読み込みだけ、stage 2＝モデルの組み立てと慣らしの計算まで。
 // 失敗しても例外は出さない（写真を撮ったときに、もう一度準備する）
 export async function prepareIdentifier(data, stage = 2) {
   if (!identifierEnabled(data)) return false;
+  if (status !== 'ready') setStatus('loading');
   try {
     const id = await initIdentifier(data);
-    if (!id.available) return false;
+    if (!id.available) { setStatus('failed'); return false; }
     const [, files] = await Promise.all([loadTf(), prefetchBackboneFiles()]);
     if (!cacheAsked) { cacheAsked = true; askToCache([...files, MODEL_URL]); }
-    if (stage >= 2) await loadBackbone();
+    if (stage >= 2) { await loadBackbone(); setStatus('ready'); }
     return true;
   } catch (e) {
     console.warn('AIの先回りの準備に失敗（写真を撮ったときにもう一度試す）', e);
+    setStatus('failed');
     return false;
   }
 }

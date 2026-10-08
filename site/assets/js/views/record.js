@@ -2,6 +2,7 @@
 // 押すとすぐ、この端末・このブラウザに保存する。間違えたときは「取り消す」で元に戻せる。
 import { h, ic, toast, toastAction, openSheet, formatDate, shellImg } from '../ui.js';
 import { loadBox, setCell, restoreCell, useTemp, STATE_LABEL, cellState } from '../store.js';
+import { maybeShowInstallHint } from '../lib/install.js';
 
 // 記録の状態は2つ：「箱に入れた（貝あり）」と「空き」
 export const FOUND_LABEL = '見つけた！箱に入れる';
@@ -36,6 +37,8 @@ export function recordCell(data, no, state, onDone) {
     toast(back.ok ? '元に戻しました' : '元に戻せませんでした', 2600);
     onDone?.();
   });
+  // 初めて貝を記録したあとに、ホーム画面に追加の小さな案内を一度だけ（「取り消す」の知らせが消えてから）
+  if (state === 'filled') maybeShowInstallHint('record', 6500);
 }
 
 // 大きな選択ボタン：空きなら「見つけた！箱に入れる」、入れてあれば「箱から出す」
