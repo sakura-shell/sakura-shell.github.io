@@ -458,7 +458,7 @@ export function render(ctx) {
 
 function guideArt() {
   const wrap = document.createElement('span');
-  wrap.innerHTML = `<svg viewBox="0 0 200 150" fill="none" stroke="#262C74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  wrap.innerHTML = `<svg viewBox="0 0 200 150" fill="none" stroke="#2E3A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <rect x="30" y="6" width="140" height="138" rx="16" fill="#fff"/>
     <rect x="42" y="36" width="116" height="80" rx="4" fill="#7FD2EC" stroke="#FFE36B" stroke-width="3"/>
     <path d="M42 56h116M42 76h116M42 96h116M54.9 36v80M67.8 36v80M80.7 36v80M93.6 36v80M106.4 36v80M119.3 36v80M132.2 36v80M145.1 36v80" stroke-width="1.2"/>

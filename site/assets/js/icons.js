@@ -4,11 +4,11 @@ const S = 'fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="
 // チラシの貝の描き方に合わせた絵（48x48）：濃紺の線を使わず、淡いピンク・水色・黄色の塗りに白い筋
 const M = {
   fan: `<path d="M24 45L5 20C8 9 15.5 3.5 24 3.5S40 9 43 20z" fill="#F4B3C8"/><path d="M24 43V6M24 43L16.5 6.8M24 43l7.5-36.2M24 43L10.5 11.5M24 43l13.5-31.5M24 43L6.5 18M24 43l17.5-25" stroke="#FDE6EE" stroke-width="1.7" stroke-linecap="round" fill="none"/><path d="M18 41h12l-2 5h-8z" fill="#EE9DB7"/>`,
-  cone: `<path d="M24 3L17.5 14.5 19 15.5 15 25 16.6 26 12.5 35.5C11 42 16 46.5 23 45.5 30.5 44.5 36.5 40.5 35.5 34L31.5 26 33 25 29 15.5 30.5 14.5z" fill="#A3D8EB"/><path d="M18.6 15.2Q24.5 18.5 29.8 15.2M16 25.6Q24.5 29.5 32.4 25.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M24.5 35.5C28.5 34 33 35.5 33.5 38.5 32 41.5 27.5 43 24 42z" fill="#E3F4FA"/><g fill="#262C74" opacity=".5"><circle cx="22.5" cy="10.5" r=".9"/><circle cx="25.5" cy="20.5" r=".9"/><circle cx="20.5" cy="21.5" r=".9"/><circle cx="18" cy="32" r="1"/><circle cx="22" cy="38" r="1"/></g>`,
+  cone: `<path d="M24 3L17.5 14.5 19 15.5 15 25 16.6 26 12.5 35.5C11 42 16 46.5 23 45.5 30.5 44.5 36.5 40.5 35.5 34L31.5 26 33 25 29 15.5 30.5 14.5z" fill="#A3D8EB"/><path d="M18.6 15.2Q24.5 18.5 29.8 15.2M16 25.6Q24.5 29.5 32.4 25.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M24.5 35.5C28.5 34 33 35.5 33.5 38.5 32 41.5 27.5 43 24 42z" fill="#E3F4FA"/><g fill="#2E3A6E" opacity=".5"><circle cx="22.5" cy="10.5" r=".9"/><circle cx="25.5" cy="20.5" r=".9"/><circle cx="20.5" cy="21.5" r=".9"/><circle cx="18" cy="32" r="1"/><circle cx="22" cy="38" r="1"/></g>`,
   pair: `<path d="M24 25C22 14 15 9.5 9 11 3.5 12.5 2 20 4.5 26 7.5 33 17 35 24 25z" fill="#F7C3D4"/><path d="M24 25C26 14 33 9.5 39 11 44.5 12.5 46 20 43.5 26 40.5 33 31 35 24 25z" fill="#F7C3D4"/><path d="M23 24L5 19M23 24.5L7.5 29.5M23 23.5L11 11.5M25 24l18-5M25 24.5l15.5 5M25 23.5l12-12" stroke="#FDE6EE" stroke-width="1.6" stroke-linecap="round" fill="none"/>`,
   cap: `<path d="M24 5.5C27 4 30 6.5 32.5 6.5S38 7.5 39.5 10.5 43 15 43 18.5 44.5 25 43 28 42.5 34 40 36.5 35 41 32 41.5 27 44 24 43.5 18 43.5 15 41.5 9.5 39 7.5 36 4.5 31 4.5 27.5 3.5 21 5 18 6.5 12.5 9 10 13 7 16 6.5 21 6.5 24 5.5z" fill="#F8D985"/><path d="M22 21L23.5 6M22 21L35 8.5M22 21L42.5 18.5M22 21L41.5 32M22 21L31 41.5M22 21L19 43M22 21L9 38M22 21L5 27M22 21L7 12" stroke="#EEC456" stroke-width="1.6" stroke-linecap="round" fill="none"/><circle cx="22" cy="21" r="3" fill="#FCEBB8"/>`,
   dollar: `<g fill="none" stroke="#9FD6EA" stroke-width="1.8"><circle cx="24" cy="24" r="18"/><ellipse cx="24" cy="15" rx="2.6" ry="6"/><ellipse cx="24" cy="15" rx="2.6" ry="6" transform="rotate(72 24 24)"/><ellipse cx="24" cy="15" rx="2.6" ry="6" transform="rotate(144 24 24)"/><ellipse cx="24" cy="15" rx="2.6" ry="6" transform="rotate(216 24 24)"/><ellipse cx="24" cy="15" rx="2.6" ry="6" transform="rotate(288 24 24)"/></g>`,
-  dot: `<ellipse cx="24" cy="24" rx="12.5" ry="18.5" fill="#F9D7C2"/><path d="M24 9.5C22.5 18 22.5 30 24 38.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/><g fill="#262C74" opacity=".5"><circle cx="17" cy="16" r="1.1"/><circle cx="29.5" cy="14" r="1"/><circle cx="16" cy="27" r="1"/><circle cx="31" cy="25" r="1.1"/><circle cx="19.5" cy="35" r=".9"/><circle cx="28.5" cy="34" r="1"/></g>`,
+  dot: `<ellipse cx="24" cy="24" rx="12.5" ry="18.5" fill="#F9D7C2"/><path d="M24 9.5C22.5 18 22.5 30 24 38.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/><g fill="#2E3A6E" opacity=".5"><circle cx="17" cy="16" r="1.1"/><circle cx="29.5" cy="14" r="1"/><circle cx="16" cy="27" r="1"/><circle cx="31" cy="25" r="1.1"/><circle cx="19.5" cy="35" r=".9"/><circle cx="28.5" cy="34" r="1"/></g>`,
 };
 const motif = (name, x = 0, y = 0, scale = 1, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${rot} ${24 * scale} ${24 * scale}) scale(${scale})">${M[name]}</g>`;
 
@@ -55,21 +55,21 @@ const shapes = {
 
 // ホームの3つの操作の絵（64x64）
 const art = {
-  identify: `<svg viewBox="0 0 64 64" fill="none" stroke="#262C74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  identify: `<svg viewBox="0 0 64 64" fill="none" stroke="#2E3A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="32" cy="32" r="29" fill="#fff" stroke="none"/>
     <g stroke="none">${motif('fan', 9, 10, 0.82)}</g>
     <circle cx="46" cy="44" r="8.5" fill="#FFF7DA"/>
     <path d="M43.2 41.4a3.6 3.6 0 1 1 3.9 5.6c-.7.3-1.1.9-1.1 1.6v.4" stroke-width="2.2"/>
-    <circle cx="46" cy="51.6" r=".9" fill="#262C74" stroke="none"/>
+    <circle cx="46" cy="51.6" r=".9" fill="#2E3A6E" stroke="none"/>
   </svg>`,
-  search: `<svg viewBox="0 0 64 64" fill="none" stroke="#262C74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  search: `<svg viewBox="0 0 64 64" fill="none" stroke="#2E3A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="32" cy="32" r="29" fill="#fff" stroke="none"/>
     <g stroke="none">${motif('fan', 5, 9, 0.62, -14)}${motif('cone', 31, 6, 0.46, 32)}</g>
     <circle cx="42" cy="43" r="8.5" fill="#fff" stroke-width="2.6"/>
     <path d="M48.3 49.3L55 56" stroke-width="3.2"/>
     <path d="M38.5 41.5a4 4 0 0 1 3.5-3" stroke-width="1.6"/>
   </svg>`,
-  box: `<svg viewBox="0 0 64 64" fill="none" stroke="#262C74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  box: `<svg viewBox="0 0 64 64" fill="none" stroke="#2E3A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="32" cy="32" r="29" fill="#fff" stroke="none"/>
     <rect x="11" y="18" width="42" height="29" rx="3" fill="#7FD2EC"/>
     <path d="M11 27.7h42M11 37.3h42M19.4 18v29M27.8 18v29M36.2 18v29M44.6 18v29"/>
