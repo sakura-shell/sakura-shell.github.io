@@ -186,7 +186,11 @@ body.full .viewer{height:100vh;height:100dvh;min-height:0;border:0}
   .toggles{display:none}
   #ctlToggle,#resetView,#helpBtn{display:none}
   .fsbtn{top:calc(12px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));min-height:44px}
-  .zoomctl{top:calc(64px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right))}
+  .zoomctl{top:calc(64px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));gap:4px;padding:3px;border-radius:10px;background:color-mix(in srgb,var(--bg) 15%,transparent);border-color:color-mix(in srgb,var(--rule-strong) 35%,transparent)}
+  .zoomctl .cb{width:36px;height:36px;font-size:17px;background:color-mix(in srgb,var(--bg) 30%,transparent);border-color:color-mix(in srgb,var(--fg) 22%,transparent)}
+  .zoomctl .zslider{width:36px;height:84px}
+  .zoomctl .zthumb{width:20px;height:20px;border-width:2px}
+  .zoomctl .ztrack{width:3px;opacity:.7}
   .navctl{right:calc(12px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom))}
   .compass{left:calc(12px + env(safe-area-inset-left))}
   .fsinfo{left:calc(12px + env(safe-area-inset-left));bottom:calc(76px + env(safe-area-inset-bottom));max-width:min(360px,calc(100% - 96px));font-size:12.5px}
@@ -1502,12 +1506,12 @@ function onTouchMove(e){ const p=TCH.pts.get(e.pointerId); if(!p) return; p.x=e.
   if(!TCH.mode){   // 最初の少しの動きで「傾き」か「地図の操作」かを決める（途中で切り替わらない）
     const [sa,sb]=[...TCH.start.values()], da={x:C.a.x-sa.x,y:C.a.y-sa.y}, db={x:C.b.x-sb.x,y:C.b.y-sb.y};
     if(Math.max(Math.hypot(da.x,da.y),Math.hypot(db.x,db.y))<10) return;
-    const flat=Math.abs(Math.sin(S.ang))<0.6, same=da.y*db.y>0&&Math.abs(da.y)>1.5*Math.abs(da.x)&&Math.abs(db.y)>1.5*Math.abs(db.x);
-    TCH.mode=(flat&&same&&Math.abs(C.len-S.len)<0.35*Math.abs(C.my-S.my))?'tilt':'map';
+    const flat=Math.abs(Math.sin(S.ang))<0.85, same=da.y*db.y>0&&Math.abs(da.y)>Math.abs(da.x)&&Math.abs(db.y)>Math.abs(db.x);
+    TCH.mode=(flat&&same&&Math.abs(C.len-S.len)<0.6*Math.abs(C.my-S.my))?'tilt':'map';
     if(TCH.mode==='map'){ TCH.prev=new Map([...TCH.start].map(([k,q])=>[k,{...q}])); return onTouchMove(e); } }
   if(TCH.mode==='tilt'){
     offV.subVectors(camera.position,controls.target); sphT.setFromVector3(offV);
-    sphT.phi=cl(sphT.phi-(C.my-P.my)*Math.PI/Math.max(200,host.clientHeight)*0.6,0.02,controls.maxPolarAngle); sphT.makeSafe();
+    sphT.phi=cl(sphT.phi-(C.my-P.my)*Math.PI/Math.max(200,host.clientHeight)*0.8,0.02,controls.maxPolarAngle); sphT.makeSafe();
     offV.setFromSpherical(sphT); camera.position.copy(controls.target).add(offV); camera.lookAt(controls.target);
   } else {
     groundAt(P.mx,P.my,gA); const ax=gA.x, az=gA.z;   // 2本指の間の地面の点が、指について動くように
@@ -1517,10 +1521,8 @@ function onTouchMove(e){ const p=TCH.pts.get(e.pointerId); if(!p) return; p.x=e.
     groundAt(C.mx,C.my,gB); moveXZ(ax-gB.x,az-gB.z); }
   TCH.prev=new Map([...TCH.pts].map(([k,q])=>[k,{...q}])); req(); }
 function onTouchUp(e){ if(!TCH.pts.has(e.pointerId)) return;
-  const wasPan=TCH.pts.size===1&&TCH.mode==='pan'&&performance.now()-TCH.lastT<80;
   TCH.pts.delete(e.pointerId); try{ if(renderer.domElement.hasPointerCapture(e.pointerId)) renderer.domElement.releasePointerCapture(e.pointerId); }catch(_){}
-  if(TCH.pts.size===0){ const sp=TCH.vel.length(), max=dist()*3+20;
-    if(wasPan&&e.type==='pointerup'&&sp>dist()*0.25+2){ TCH.fling=TCH.vel.clone().multiplyScalar(Math.min(1,max/sp)); TCH.last=performance.now(); req(); } }
+  // 惰性は付けない（指を離したらその場で止める。2026-10-09「ぬるぬるしすぎ」の指摘で外した）
   touchReset(); TCH.mode=TCH.pts.size===1?'pan':null; }   // 2本→1本では、残った指でそのまま移動を続ける（視点は飛ばない）
 // 指を離したあとの短い惰性（約0.5秒で止まる）
 function touchStep(now){ const f=TCH.fling; if(!f) return false; const dt=Math.min(0.05,(now-TCH.last)/1000); TCH.last=now;
