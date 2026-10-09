@@ -337,7 +337,7 @@ python3 tools/extract_assets.py
 - `main` に push すると、`.github/workflows/pages.yml` が自動で公開する（1〜3分）。`config.json` の `mode` が `preview` の間は、検索エンジンに載らないよう noindex と robots.txt を付ける。**URL を知っている人は見られる**ので、URLの共有先に注意
 - リポジトリは公開（無料で Pages を使う条件）。`references/`・`training/`・`materials/`・確認用の画像とPDFは `.gitignore` で入れていない
 - このMacから push するときは、リポジトリだけに書き込める鍵（デプロイキー `~/.ssh/sakura_shell_deploy`）を使う
-- 3Dガイドの確認用ページ（noindex）：`site/longest-bench/`（世界一長いベンチ）→ https://sakura-shell.github.io/longest-bench/ 、`site/togi-michinoeki/`（道の駅とぎ海街道）→ https://sakura-shell.github.io/togi-michinoeki/
+- 3Dガイドの確認用ページ（noindex）：`site/longest-bench/`（世界一長いベンチ）→ https://sakura-shell.github.io/longest-bench/ （スマホ操作の改善版の確認用：`site/longest-bench/step8/` → https://sakura-shell.github.io/longest-bench/step8/ ）、`site/togi-michinoeki/`（道の駅とぎ海街道）→ https://sakura-shell.github.io/togi-michinoeki/
 - **合言葉の画面**：確認用プレビューの間は、最初に合言葉を聞く（一度入れた端末では次から聞かない。全角・半角、大文字・小文字は区別しない）。変更は `python3 tools/set_passphrase.py "新しい合言葉"`、外すときは `--off`。config.json には合言葉そのものではなく、元に戻せない値だけを書く。**ファイル自体は公開の場所にあるので、本当の意味での非公開ではない**（うっかり見られるのを防ぐ程度）。一般公開（mode が public）では出ない
 
 ### 公開前に必ずやること
