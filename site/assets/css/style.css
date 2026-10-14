@@ -1080,22 +1080,6 @@ a.tel { color: var(--navy); font-weight: 700; text-decoration: underline; text-d
 @keyframes pulse { 50% { opacity: .3; } }
 @media (prefers-reduced-motion: reduce) { .ai-status .dot { animation: none; } }
 
-/* 初めて開いた人への導入 */
-dialog.intro { border: 0; padding: 0; width: min(440px, calc(100% - 32px)); max-height: calc(100% - 32px); border-radius: var(--r-xl); background: var(--white); color: var(--ink); box-shadow: 0 20px 60px rgba(20, 30, 80, .3); display: flex; flex-direction: column; }
-dialog.intro:not([open]) { display: none; }
-dialog.intro::backdrop { background: rgba(20, 30, 80, .35); }
-.intro-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px 0 18px; }
-.intro-kicker { margin: 0; font-size: var(--fs-12); font-weight: 700; color: var(--ink-2); }
-.intro-skip { min-height: 44px; }
-.intro-body { padding: 4px 18px 8px; overflow: auto; }
-.intro-body h2 { font-size: var(--fs-20); color: var(--navy); margin: 0 0 12px; line-height: 1.4; }
-.intro-steps { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 10px; }
-.intro-steps li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
-.intro-steps strong { color: var(--navy); }
-.intro-more { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; }
-.intro-more svg { width: 20px; height: 20px; }
-.intro-actions { padding: 8px 18px 16px; border-top: 1px solid var(--line); }
-
 /* ホーム画面に追加の小さな案内 */
 .install-hint {
   position: fixed; left: 12px; right: 12px; bottom: calc(var(--tabbar-h) + var(--safe-b) + 12px); z-index: 40;
@@ -1213,8 +1197,7 @@ a { color: var(--c-heading); text-underline-offset: 3px; text-decoration-thickne
 
 /* ---- 下から出る画面・知らせ・導入 ---- */
 dialog.sheet { border-radius: var(--r-xl) var(--r-xl) 0 0; background: var(--c-surface); color: var(--c-text); box-shadow: var(--shadow-lg); }
-dialog.sheet::backdrop, dialog.intro::backdrop { background: rgba(46, 40, 60, .38); }
-dialog.intro { border-radius: var(--r-xl); box-shadow: var(--shadow-lg); }
+dialog.sheet::backdrop { background: rgba(46, 40, 60, .38); }
 .toast { background: var(--c-heading); color: var(--c-white); border-radius: var(--r-pill); box-shadow: var(--shadow-lg); }
 .install-hint { border: 1.5px solid var(--c-sakura-soft); border-radius: var(--r-lg); box-shadow: var(--shadow-lg); }
 .step-no { background: var(--c-sakura-soft); color: var(--c-sakura-ink); }
@@ -1226,4 +1209,67 @@ dialog.intro { border-radius: var(--r-xl); box-shadow: var(--shadow-lg); }
 .page.enter > *:not(.topbar) { animation-duration: var(--dur); animation-timing-function: var(--ease); }
 @media (prefers-reduced-motion: reduce) {
   .btn, .tab-ic { transition: none; }
+}
+
+/* =====================================================================
+   はじめの案内（views/welcome.js）
+   ・動かすのは透明度と位置（transform）だけ（スマホで軽い）。移動は小さく、ゆっくり
+   ・隠してから現れる演出は .js-anim のときだけ。動きを減らす設定では、動かさずに全部見せる
+   ===================================================================== */
+.page.welcome { position: relative; padding-top: calc(env(safe-area-inset-top, 0px) + 8px); padding-bottom: calc(var(--safe-b) + 40px); overflow-x: clip; }
+.page.welcome.enter > * { animation: none; } /* 画面の切り替えの動きは使わない（この画面の演出と重ねない） */
+.page.welcome > * + * { margin-top: var(--sp-5); }
+.welcome-skip { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 6px); z-index: 5; display: flex; justify-content: flex-end; height: 0; margin: 0 -8px; }
+.welcome-skip .btn { background: rgba(255, 253, 251, .9); box-shadow: var(--shadow-sm); border: 1px solid var(--c-line); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+/* 背景：貝の模様がゆっくり流れ、下に波 */
+.welcome-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; margin-top: 0; }
+.welcome-bg .drift { position: absolute; inset: -80px; background: url("../img/brand/pattern.svg") 0 0 / 300px 300px; opacity: .9; animation: welcome-drift 48s linear infinite alternate; }
+.welcome-bg .waves {
+  position: absolute; left: 0; right: 0; top: 0; height: 520px;
+  background: linear-gradient(180deg, var(--c-sea-pale) 0%, rgba(238, 248, 249, .6) 55%, rgba(255, 253, 251, 0) 100%);
+}
+@keyframes welcome-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-40px, 30px, 0); } }
+
+/* 1. ロゴと見出し */
+.welcome-hero { text-align: center; padding-top: var(--sp-5); }
+.welcome-logo { width: min(320px, 82%); margin: 0 auto; border-radius: var(--r-xl); overflow: hidden; border: 6px solid var(--c-white); box-shadow: var(--shadow); }
+.welcome-logo img { width: 100%; height: auto; aspect-ratio: 685 / 464; }
+.welcome-title { margin-top: var(--sp-5); font-size: var(--fs-26); letter-spacing: .04em; line-height: 1.4; color: var(--c-heading); }
+.welcome-lead { margin-top: var(--sp-2); font-size: var(--fs-16); color: var(--c-sakura-ink); font-weight: 700; }
+.welcome-scroll { margin-top: var(--sp-4); display: flex; justify-content: center; color: var(--c-text-2); }
+.welcome-scroll svg { width: 26px; height: 26px; transform: rotate(90deg); }
+.float-in { animation: welcome-float 1.2s var(--ease) both; animation-delay: var(--d, 0s); }
+@keyframes welcome-float { from { opacity: 0; transform: translate3d(0, 14px, 0); } to { opacity: 1; transform: none; } }
+.welcome-scroll.float-in { animation: welcome-float 1.2s var(--ease) both, welcome-nudge 2.4s ease-in-out 2.2s 2; animation-delay: var(--d, 0s), 2.2s; }
+@keyframes welcome-nudge { 50% { transform: translate3d(0, 5px, 0); } }
+
+/* 2. 紹介・写真 */
+.welcome-text { font-size: var(--fs-16); line-height: 1.9; text-align: center; }
+.welcome-photos { margin-top: var(--sp-4); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); }
+.welcome-photo { margin: 0; background: var(--c-white); border-radius: var(--r-md); box-shadow: var(--shadow); border: 1px solid var(--c-line); padding: 6px 6px 4px; text-align: center; }
+.welcome-photo img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--r-sm); }
+.welcome-photo figcaption { font-size: var(--fs-12); font-weight: 700; color: var(--c-heading); margin-top: 4px; }
+
+/* 3. 参加の3ステップ */
+.welcome-steps { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: var(--sp-4); }
+.welcome-steps li { display: flex; gap: var(--sp-3); align-items: flex-start; line-height: 1.6; }
+.welcome-steps .step-no { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; }
+.welcome-steps strong { color: var(--c-heading); }
+.welcome-link-art { width: 40px; height: 40px; flex: none; }
+.welcome-cta { text-align: center; }
+.welcome-cta > * + * { margin-top: var(--sp-2); }
+
+/* 下へ読み進めると、ふわっと現れる（一度だけ） */
+.js-anim .reveal { opacity: 0; transform: translate3d(0, 16px, 0); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+.js-anim .reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .float-in, .welcome-scroll.float-in { animation: none; }
+  .welcome-bg .drift { animation: none; }
+  .js-anim .reveal { opacity: 1; transform: none; transition: none; }
+}
+@media (min-width: 700px) {
+  .page.welcome { max-width: 560px; }
+  .welcome-title { font-size: var(--fs-30); }
 }

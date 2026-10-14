@@ -2,8 +2,8 @@
 import { loadData, setDevFromQuery, setStaffFromQuery, isDev } from './data.js';
 import { gateNeeded, showGate } from './lib/gate.js';
 import { identifierEnabled, prepareIdentifier } from './lib/identify.js';
-import { maybeShowInstallHint } from './lib/install.js'; // ホーム画面に追加の知らせ（beforeinstallprompt）を最初から受け取る
-import { introNeeded, showIntro } from './lib/intro.js';
+import './lib/install.js'; // ホーム画面に追加の知らせ（beforeinstallprompt）を最初から受け取る
+import { noteEntry } from './lib/intro.js';
 import { h, ic } from './ui.js';
 import * as home from './views/home.js';
 import * as list from './views/list.js';
@@ -15,6 +15,7 @@ import * as scan from './views/scan.js';
 import * as about from './views/about.js';
 import * as guide from './views/guide.js';
 import * as collect from './views/collect.js';
+import * as welcome from './views/welcome.js';
 
 const routes = [
   { re: /^\/$/, view: home, tab: 'home' },
@@ -27,6 +28,7 @@ const routes = [
   { re: /^\/about$/, view: about, tab: 'home' },
   { re: /^\/guide$/, view: guide, tab: 'home' },
   { re: /^\/collect$/, view: collect, tab: 'identify' },
+  { re: /^\/welcome$/, view: welcome, tab: 'home' }, // はじめの案内（ホームの「はじめの案内を見る」から）
 ];
 
 const TABS = [
@@ -193,12 +195,9 @@ async function boot() {
   window.addEventListener('beforeunload', (e) => {
     if (current?.dirty?.()) { e.preventDefault(); e.returnValue = ''; }
   });
-  await render();
-  warmUpAI(); // 導入を出していても、AIの準備は裏で進める
-  // 初めて開いた人への短い導入（ホームから開いたときだけ。閉じたら、ホーム画面に追加の小さな案内を一度だけ）
-  if (parseHash().path === '/' && introNeeded()) {
-    showIntro(data, (how) => { if (how !== 'guide') maybeShowInstallHint('intro', 600); });
-  }
+  noteEntry(parseHash().path); // 図鑑などのアドレスから開いたときは、訪問済みにする（初めての方への案内は出さない）
+  await render(); // 通常のトップを初めて開いたときは、ホームの代わりに案内画面（views/welcome.js）
+  warmUpAI(); // 案内を出していても、AIの準備は裏で進める
 }
 
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {

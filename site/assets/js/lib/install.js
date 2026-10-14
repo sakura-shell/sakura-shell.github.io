@@ -14,7 +14,8 @@ window.addEventListener('beforeinstallprompt', (e) => {
   deferred = e;
   window.dispatchEvent(new CustomEvent('m36:installable'));
 });
-window.addEventListener('appinstalled', () => { deferred = null; });
+// 追加が終わったとブラウザが知らせたときだけ「追加しました」と出す（ボタンを押しただけでは出さない）
+window.addEventListener('appinstalled', () => { deferred = null; toast('ホーム画面に追加しました'); });
 
 // ホーム画面から開いているか（追加済み）
 export function isStandalone() {
@@ -30,9 +31,21 @@ export function platform() {
 }
 
 // 案内の欄（初めての方へ・このサイトについて で使う）。追加済みなら短い一文だけ
-export function installSection(data) {
+// Android：使っているブラウザに合わせた手順
+function androidSteps() {
+  const ua = navigator.userAgent;
+  const [name, steps] = /SamsungBrowser/.test(ua)
+    ? ['Android（Samsung Internet）', ['下の「≡」（メニュー）を押す', '「ページを追加」→「ホーム画面」を押す']]
+    : /Firefox/.test(ua)
+      ? ['Android（Firefox）', ['右上の「︙」（メニュー）を押す', '「インストール」または「ホーム画面に追加」を押す']]
+      : ['Android（Chrome）', ['右上の「︙」（メニュー）を押す', '「ホーム画面に追加」または「アプリをインストール」を押す']];
+  return h('div', { class: 'stack-sm' }, h('p', { class: 'small strong' }, name), h('ol', { class: 'small plain-steps' }, steps.map((t) => h('li', null, t))));
+}
+
+// compact：初めての方への案内画面用。使っている端末の手順だけを短く
+export function installSection(data, { compact = false, className = 'card stack-sm' } = {}) {
   if (isStandalone()) {
-    return h('section', { class: 'card stack-sm' },
+    return h('section', { class: className },
       h('h3', { class: 'section-title' }, 'ホーム画面から開いています'),
       h('p', { class: 'small' }, '記録はこの端末の中に保存されます。ほかの端末やブラウザとは同じになりません。'));
   }
@@ -44,8 +57,7 @@ export function installSection(data) {
         const ev = deferred;
         deferred = null;
         ev.prompt();
-        const choice = await ev.userChoice.catch(() => null);
-        if (choice?.outcome === 'accepted') toast('ホーム画面に追加しました');
+        await ev.userChoice.catch(() => null); // やめても、そのまま使える
         drawButton();
       } }, ic('plus'), 'ホーム画面に追加する')
       : '');
@@ -66,7 +78,17 @@ export function installSection(data) {
       h('li', null, '右上の「︙」（メニュー）を押す'),
       h('li', null, '「ホーム画面に追加」または「アプリをインストール」を押す')));
   const gate = data?.config?.previewGate && data.preview;
-  return h('section', { class: 'card stack-sm' },
+  if (compact) {
+    // はじめの案内の中：ボタンで追加できる環境ではボタン、手順は「追加方法を見る」で開く（初めの画面を長くしない）
+    const steps = pf === 'ios' ? [ios] : pf === 'android' ? [androidSteps()] : [ios, android];
+    return h('section', { class: className },
+      h('h2', { class: 'section-title' }, 'ホーム画面に追加すると、次からすぐ開けます'),
+      h('p', { class: 'small' }, 'スマートフォンのホーム画面にアイコンを追加して、海岸でもすぐに使えます。追加せずに使うこともできます。'),
+      btnHolder,
+      h('details', { class: 'tips-more' }, h('summary', null, '追加方法を見る'), h('div', { class: 'stack-sm' }, ...steps)),
+      h('p', { class: 'xsmall muted' }, 'ホーム画面への追加と、集めた記録の保存は別のものです。記録は、追加しなくてもこの端末に保存されます。'));
+  }
+  return h('section', { class: className },
     h('h3', { class: 'section-title' }, 'ホーム画面に追加すると便利です'),
     h('p', { class: 'small' }, 'アプリのように、ホーム画面のアイコンからすぐ開けます。追加しなくても、記録はこの端末に保存されます。'),
     btnHolder,
@@ -83,6 +105,11 @@ let hintEl = null;
 
 function hintSeen() { try { return !!localStorage.getItem(HINT_KEY); } catch { return true; } }
 
+// 案内画面で追加の方法を見せたときは、あとから小さな案内を出さない（同じことを何度も勧めない）
+export function markInstallHintShown(reason) {
+  try { if (!localStorage.getItem(HINT_KEY)) localStorage.setItem(HINT_KEY, `${reason}:${new Date().toISOString().slice(0, 10)}`); } catch { /* 何もしない */ }
+}
+
 // reason：'intro'（導入を閉じた）| 'record'（初めて記録した）。delay：ほかの知らせと重ならないよう待つ時間
 export function maybeShowInstallHint(reason, delay = 0) {
   if (isStandalone() || hintSeen() || hintEl) return;
@@ -97,8 +124,7 @@ export function maybeShowInstallHint(reason, delay = 0) {
       ? h('button', { class: 'btn small', type: 'button', onclick: async () => {
         const ev = deferred; deferred = null; close();
         ev.prompt();
-        const choice = await ev.userChoice.catch(() => null);
-        if (choice?.outcome === 'accepted') toast('ホーム画面に追加しました');
+        await ev.userChoice.catch(() => null); // やめても、そのまま使える
       } }, '追加する')
       : h('button', { class: 'btn small', type: 'button', onclick: () => { close(); showSteps(pf); } }, '追加のしかた');
     hintEl = h('aside', { class: 'install-hint', role: 'status', 'aria-label': 'ホーム画面に追加' },
@@ -117,9 +143,7 @@ function showSteps(pf) {
       ? h('ol', { class: 'small plain-steps' },
         h('li', null, '画面下（iPad は上）の共有ボタン（四角から上向きの矢印）を押す'),
         h('li', null, '「ホーム画面に追加」→「追加」を押す'))
-      : h('ol', { class: 'small plain-steps' },
-        h('li', null, '右上の「︙」（メニュー）を押す'),
-        h('li', null, '「ホーム画面に追加」または「アプリをインストール」を押す')),
+      : androidSteps(),
     pf === 'ios' ? h('p', { class: 'xsmall muted' }, 'iPhone では、ホーム画面から開いたときと Safari で開いたときで、記録が別々になることがあります。') : null,
     h('p', { class: 'xsmall muted' }, '追加しなくても、記録はこの端末に保存されます。くわしくは「初めての方へ」にもあります。'),
     h('button', { class: 'btn block secondary', type: 'button', onclick: close }, '閉じる')));

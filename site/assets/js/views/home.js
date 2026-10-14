@@ -2,8 +2,15 @@ import { h, ic, svg, formatDate, phrase, ring } from '../ui.js';
 import { artIcon } from '../icons.js';
 import { loadBox, counts, storageAvailable, isTemp } from '../store.js';
 import { brandShown } from '../data.js';
+import { introNeeded, markIntro } from '../lib/intro.js';
+import * as welcome from './welcome.js';
 
 export function render(ctx) {
+  // 通常のトップを初めて開いたときだけ、はじめの案内（表示した時点で印を残し、次からはふつうのホーム）
+  if (introNeeded()) {
+    markIntro('shown');
+    return welcome.render(ctx);
+  }
   const { data } = ctx;
   const rec = loadBox();
   const c = counts(rec);
@@ -52,6 +59,7 @@ export function render(ctx) {
   }
 
   right.append(h('div', { class: 'footer-links' },
+    h('a', { href: '#/welcome' }, 'はじめの案内を見る'),
     h('a', { href: '#/about' }, 'このサイトについて')));
   return main;
 }
