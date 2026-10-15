@@ -1323,3 +1323,12 @@ dialog.celebrate::backdrop { background: rgba(46, 40, 60, .45); }
 .badge-strip { flex-wrap: wrap; row-gap: 2px; }
 .badge-strip .small { white-space: nowrap; flex: 1 0 auto; }
 @media (max-width: 380px) { .badge-strip img { width: 28px; height: 28px; } }
+.celebrate-title-name { font-size: var(--fs-22); color: var(--c-sakura-deep); margin: 2px 0; }
+.celebrate-name { font-size: var(--fs-16); }
+.badge-current { color: var(--c-sakura-ink); font-size: var(--fs-16); }
+@media (max-height: 640px) {
+  .celebrate-card { padding-top: var(--sp-4); }
+  .celebrate-badge { width: min(140px, 42vw); }
+  .celebrate-card h2 { font-size: var(--fs-22); margin-top: var(--sp-2); }
+  .celebrate-actions { margin-top: var(--sp-3); }
+}

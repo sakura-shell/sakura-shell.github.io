@@ -4,6 +4,9 @@ import { icon, shapeIcon } from '../icons.js';
 import { BADGES, PRIZE_NOTE, earnedBadges, nextBadge } from '../lib/badges.js';
 import { counts } from '../store.js';
 
+// いまの称号（もらった中でいちばん上）
+const current = (earned) => [...BADGES].reverse().find((b) => earned[b.n]) || null;
+
 const md = (iso) => { const d = new Date(iso); return Number.isNaN(d) ? '' : `${d.getMonth() + 1}月${d.getDate()}日`; };
 
 // もらった瞬間のお祝い。紙ふぶきのように、淡い貝がゆっくり舞う（動きを減らす設定では舞わない）
@@ -21,10 +24,10 @@ export function celebrate(badge, filled, others = 0) {
     }, svg(shapes[i % shapes.length]))));
   dlg.append(confetti, h('div', { class: 'celebrate-card' },
     h('img', { class: 'celebrate-badge', src: badge.img, alt: `バッジ「${badge.name}」`, width: 256, height: 256 }),
-    h('h2', { id: 'celebrate-title' }, 'バッジをゲット！'),
+    h('h2', { id: 'celebrate-title' }, others === BADGES.indexOf(badge) ? '称号をゲット！' : '称号アップ！'), // 初めての称号なら「ゲット」
     h('p', { class: 'celebrate-count' }, `${filled >= 36 ? '36種類 すべて' : `${badge.n}種類`} 集めました`),
-    h('p', { class: 'celebrate-name' }, badge.name),
-    others ? h('p', { class: 'small' }, `ほかに${others}つのバッジも、もらいました`) : null,
+    h('p', { class: 'celebrate-name' }, 'あなたは', h('span', { class: 'block celebrate-title-name' }, `「${badge.name}」`), 'になりました'),
+    others ? h('p', { class: 'small' }, `とちゅうの称号のバッジ（${others}つ）も、バッジ帳に入りました`) : null,
     h('p', { class: 'xsmall muted' }, PRIZE_NOTE),
     h('div', { class: 'stack-sm celebrate-actions' },
       h('button', { class: 'btn block', type: 'button', onclick: close }, '続ける'),
@@ -42,7 +45,8 @@ export function badgeBook(rec) {
   const next = nextBadge(rec);
   return h('section', { class: 'card stack-sm badge-book', id: 'badges', 'aria-labelledby': 'badge-book-title' },
     h('h2', { class: 'section-title', id: 'badge-book-title' }, 'バッジ帳'),
-    next ? h('p', { class: 'small' }, `あと${next.left}種類で、次のバッジ「${next.badge.name}」`) : h('p', { class: 'small' }, '4つのバッジが、すべてそろいました！'),
+    current(earned) ? h('p', { class: 'small' }, 'いまの称号：', h('strong', { class: 'badge-current' }, current(earned).name)) : null,
+    next ? h('p', { class: 'small' }, `あと${next.left}種類で「${next.badge.name}」に${current(earned) ? '昇格' : 'なれます'}`) : h('p', { class: 'small' }, 'すべての称号がそろいました。あなたは三十六歌仙です！'),
     h('ul', { class: 'badge-grid' }, BADGES.map((b) => {
       const got = earned[b.n];
       return h('li', { class: got ? 'got' : 'locked' },
@@ -57,9 +61,9 @@ export function badgeBook(rec) {
 // まとめの欄に置く、小さなバッジの列（押すとバッジ帳へ）
 export function badgeStrip(rec, onOpen) {
   const earned = earnedBadges();
-  const got = BADGES.filter((b) => earned[b.n]).length;
-  return h('button', { class: 'badge-strip', type: 'button', 'aria-label': `バッジ帳を見る（${got} / ${BADGES.length}）`, onclick: onOpen },
+  const cur = current(earned);
+  return h('button', { class: 'badge-strip', type: 'button', 'aria-label': `バッジ帳を見る（いまの称号：${cur ? cur.name : 'まだありません'}）`, onclick: onOpen },
     h('span', { class: 'badge-strip-icons' }, BADGES.map((b) => h('img', { src: b.img, alt: '', width: 36, height: 36, class: earned[b.n] ? 'got' : 'locked' }))),
-    h('span', { class: 'small strong' }, `バッジ ${got} / ${BADGES.length}`),
+    h('span', { class: 'small strong' }, cur ? cur.name : '称号はまだ'),
     h('span', { class: 'go-label' }, 'バッジ帳'));
 }

@@ -6,10 +6,11 @@
 // ・この機能を入れる前から記録している人には、収集箱を開いたときに静かに渡す（お祝いの画面は、記録した瞬間だけ）
 import { counts, loadBox, isTemp } from '../store.js';
 
+// 称号：段階が上がるにつれて貝がら博士へ。すべて集めると三十六歌仙（2026-10-16 依頼者が決定）
 export const BADGES = [
-  { n: 10, id: 'hama', name: 'はじめての浜', img: 'assets/img/badges/badge-10.webp' },
-  { n: 20, id: 'shiosai', name: '潮騒', ruby: 'しおさい', img: 'assets/img/badges/badge-20.webp' },
-  { n: 30, id: 'mekiki', name: '浜の目利き', img: 'assets/img/badges/badge-30.webp' },
+  { n: 10, id: 'minarai', name: '貝がら見習い', img: 'assets/img/badges/badge-10.webp' },
+  { n: 20, id: 'kenkyuin', name: '貝がら研究員', img: 'assets/img/badges/badge-20.webp' },
+  { n: 30, id: 'hakase', name: '貝がら博士', img: 'assets/img/badges/badge-30.webp' },
   { n: 36, id: 'kasen', name: '三十六歌仙', img: 'assets/img/badges/badge-36.webp' },
 ];
 
