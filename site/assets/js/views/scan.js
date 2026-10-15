@@ -10,6 +10,8 @@ import {
 } from '../lib/boxreader.js';
 import { page } from './common.js';
 import { zoomableBox, legend } from './boxgrid.js';
+import { syncBadges } from '../lib/badges.js';
+import { celebrate } from './badgeview.js';
 
 const RECT_W = 1260;
 const STEP_NAMES = ['撮影', '範囲・向き', '確認・保存'];
@@ -442,7 +444,9 @@ export function render(ctx) {
     }
     s.step = 'start'; // 保存済みなので離脱の確認は不要
     toast(res.droppedImages ? '保存しました（容量のため箱の写真は省きました）' : '保存しました');
+    const fresh = syncBadges(res.record); // 読み取りで集めた数が届いたら、バッジのお祝い
     ctx.navigate('#/box', { replace: true });
+    if (fresh.length) celebrate(fresh[fresh.length - 1], counts(res.record).filled, fresh.length - 1);
   }
 
   function useTempAndGo() {

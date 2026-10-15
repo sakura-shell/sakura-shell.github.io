@@ -9,7 +9,7 @@
 //   TensorFlow.js と MobileNet は中身が変わらないので、保存済みを先に使う（毎回の確認をしない）。
 //   入れ替えるときは AI_VERSION を上げる。分類器（models/classifier.json）は保存済みを先に使い、裏で新しいものに更新する
 // ・収集箱の記録（localStorage）には触れない
-const VERSION = '2026.10.14-r22';
+const VERSION = '2026.10.15-r23';
 const AI_VERSION = 'tfjs-mobilenet050-1';
 const SCOPE = new URL(self.registration.scope).pathname;
 const PREFIX = `m36shells:${SCOPE}:`;
@@ -56,6 +56,12 @@ const CORE = [
   'assets/js/lib/install.js',
   'assets/js/lib/intro.js',
   'assets/js/views/welcome.js',
+  'assets/js/views/badgeview.js',
+  'assets/js/lib/badges.js',
+  'assets/img/badges/badge-10.webp',
+  'assets/img/badges/badge-20.webp',
+  'assets/img/badges/badge-30.webp',
+  'assets/img/badges/badge-36.webp',
   'data/shells.json',
   'data/config.json',
   'assets/img/brand/hero.jpg',

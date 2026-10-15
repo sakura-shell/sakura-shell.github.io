@@ -1273,3 +1273,53 @@ dialog.sheet::backdrop { background: rgba(46, 40, 60, .38); }
   .page.welcome { max-width: 560px; }
   .welcome-title { font-size: var(--fs-30); }
 }
+
+/* =====================================================================
+   デジタルバッジ（lib/badges.js・views/badgeview.js）
+   まだのバッジは、カラーの絵を灰色にして薄く表示する（形がそろい、画像も半分で済む）
+   ===================================================================== */
+.badge-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-4) var(--sp-3); }
+.badge-grid li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px; }
+.badge-grid img { width: min(128px, 100%); height: auto; aspect-ratio: 1; }
+.badge-grid .badge-name { font-weight: 700; color: var(--c-heading); font-size: var(--fs-16); margin-top: var(--sp-1); }
+.badge-grid .locked img, .badge-strip img.locked { filter: grayscale(1) contrast(.85) brightness(1.06); opacity: .55; }
+.badge-grid .locked .badge-name { color: var(--c-text-2); }
+@media (min-width: 560px) { .badge-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.badge-strip {
+  display: flex; align-items: center; gap: var(--sp-2); width: 100%; min-height: 48px; padding: 6px 10px;
+  border-radius: var(--r-md); border: 1px solid var(--c-line); background: var(--c-sakura-pale); color: var(--c-text); cursor: pointer; text-align: left;
+}
+.badge-strip-icons { display: flex; gap: 2px; flex: none; }
+.badge-strip img { width: 32px; height: 32px; }
+.badge-strip .small { flex: 1; min-width: 0; margin: 0; }
+.badge-strip .go-label { font-size: var(--fs-14); font-weight: 700; color: var(--c-sakura-ink); white-space: nowrap; }
+.badge-strip .go-label::after { content: " ›"; }
+
+/* お祝い：中央のカードとバッジ、まわりに貝の紙ふぶき */
+dialog.celebrate { border: 0; padding: 0; background: transparent; width: 100%; max-width: 100%; height: 100%; max-height: 100%; margin: 0; overflow: hidden; display: grid; place-items: center; }
+dialog.celebrate:not([open]) { display: none; }
+dialog.celebrate::backdrop { background: rgba(46, 40, 60, .45); }
+.celebrate-card {
+  position: relative; z-index: 1; width: min(360px, calc(100% - 32px)); max-height: calc(100% - 32px); overflow: auto;
+  background: var(--c-surface); border-radius: var(--r-xl); box-shadow: var(--shadow-lg); padding: var(--sp-5) var(--sp-4) var(--sp-4); text-align: center;
+  animation: celebrate-in .5s var(--ease) both;
+}
+.celebrate-badge { width: min(200px, 60vw); height: auto; margin: 0 auto; animation: celebrate-badge .9s var(--ease) .1s both; }
+.celebrate-card h2 { margin-top: var(--sp-3); font-size: var(--fs-26); color: var(--c-sakura-deep); letter-spacing: .04em; }
+.celebrate-count { margin-top: var(--sp-1); font-weight: 700; color: var(--c-heading); }
+.celebrate-name { margin: var(--sp-1) 0 var(--sp-2); font-size: var(--fs-20); font-weight: 700; color: var(--c-heading); }
+.celebrate-actions { margin-top: var(--sp-4); }
+@keyframes celebrate-in { from { opacity: 0; transform: translate3d(0, 18px, 0) scale(.96); } }
+@keyframes celebrate-badge { 0% { opacity: 0; transform: scale(.6) rotate(-8deg); } 70% { opacity: 1; transform: scale(1.04) rotate(2deg); } 100% { transform: none; } }
+.confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.confetti .piece { position: absolute; top: -48px; left: var(--x); width: 34px; height: 34px; opacity: .9; transform: rotate(var(--r)) scale(var(--s)); animation: confetti-fall 5.5s linear var(--d) 2 both; }
+.confetti .piece svg { width: 100%; height: 100%; }
+@keyframes confetti-fall { to { transform: translate3d(-24px, calc(100vh + 96px), 0) rotate(calc(var(--r) + 220deg)) scale(var(--s)); } }
+@media (prefers-reduced-motion: reduce) {
+  .celebrate-card, .celebrate-badge { animation: none; }
+  .confetti { display: none; }
+}
+.badge-strip { flex-wrap: wrap; row-gap: 2px; }
+.badge-strip .small { white-space: nowrap; flex: 1 0 auto; }
+@media (max-width: 380px) { .badge-strip img { width: 28px; height: 28px; } }

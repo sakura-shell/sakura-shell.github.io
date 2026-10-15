@@ -3,6 +3,8 @@
 import { h, ic, toast, toastAction, openSheet, formatDate, shellImg } from '../ui.js';
 import { loadBox, setCell, restoreCell, useTemp, STATE_LABEL, cellState } from '../store.js';
 import { maybeShowInstallHint } from '../lib/install.js';
+import { syncBadges } from '../lib/badges.js';
+import { celebrate } from './badgeview.js';
 
 // 記録の状態は2つ：「箱に入れた（貝あり）」と「空き」
 export const FOUND_LABEL = '見つけた！箱に入れる';
@@ -37,8 +39,13 @@ export function recordCell(data, no, state, onDone) {
     toast(back.ok ? '元に戻しました' : '元に戻せませんでした', 2600);
     onDone?.();
   });
+  if (state !== 'filled') return;
+  // 集めた数が 10・20・30・36 に届いたら、バッジを渡してお祝い（同時に届いたときは一番上の段階）
+  const rec = loadBox();
+  const fresh = syncBadges(rec);
+  if (fresh.length) { celebrate(fresh[fresh.length - 1], Object.keys(rec?.cells || {}).length, fresh.length - 1); return; }
   // 初めて貝を記録したあとに、ホーム画面に追加の小さな案内を一度だけ（「取り消す」の知らせが消えてから）
-  if (state === 'filled') maybeShowInstallHint('record', 6500);
+  maybeShowInstallHint('record', 6500);
 }
 
 // 大きな選択ボタン：空きなら「見つけた！箱に入れる」、入れてあれば「箱から出す」

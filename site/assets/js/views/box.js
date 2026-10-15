@@ -5,6 +5,8 @@ import { scanAvailable, scanIsPublic } from '../data.js';
 import { page } from './common.js';
 import { zoomableBox, legend } from './boxgrid.js';
 import { choiceButtons, openChoiceSheet, STATE_HELP } from './record.js';
+import { syncBadges, clearBadges } from '../lib/badges.js';
+import { badgeBook, badgeStrip } from './badgeview.js';
 
 const VIEW_KEY = 'm36shells:box-view';
 
@@ -22,6 +24,9 @@ export function render(ctx) {
   const body = h('div', { class: 'stack' });
   main.append(body);
 
+  // この機能を入れる前から記録している人にも、届いているバッジを渡しておく（お祝いの画面は出さない）
+  syncBadges(rec);
+  const showBadges = query.get('badges') === '1';
   const stateOf = (no) => (rec?.cells?.[no]?.s === 'filled' ? 'filled' : 'empty');
   let boxView = null;
   let focusPanel = !!selected;
@@ -82,7 +87,8 @@ export function render(ctx) {
           rec ? h('p', { class: 'xsmall muted' }, isTemp(rec) ? '一時記録・ページを閉じると消えます' : `${formatDate(rec.savedAt)} 保存`) : null)),
       h('p', { class: 'xsmall muted' },
         storageAvailable() ? '押すとすぐ、この端末の中に保存されます（送信・同期はしません）。' : 'この環境では保存できないため、ページを閉じるまでの一時記録になります。',
-        '実物の箱は変わりません。')));
+        '実物の箱は変わりません。'),
+      badgeStrip(rec, () => document.getElementById('badges')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))));
 
     // 表示の切り替え
     body.append(h('div', { class: 'seg seg-wide', role: 'group', 'aria-label': '表示の切り替え' },
@@ -111,6 +117,9 @@ export function render(ctx) {
       focusPanel = false;
     }
 
+    // バッジ帳（10・20・30・36種類で、もらえる）
+    body.append(badgeBook(rec));
+
     // 状態の意味
     body.append(h('section', { class: 'card flat stack-sm' },
       h('h3', { class: 'section-title' }, '記録の意味'),
@@ -131,8 +140,9 @@ export function render(ctx) {
     } else if (rec) {
       body.append(h('div', { class: 'center' },
         h('button', { class: 'btn ghost small', type: 'button', onclick: async () => {
-          if (!(await confirmSheet({ title: 'この端末の記録をすべて消しますか？', body: 'このブラウザに保存した収集箱の記録を消します。実物の箱の中身は変わりません。消した記録は元に戻せません。', ok: '消す', cancel: 'やめる', danger: true }))) return;
+          if (!(await confirmSheet({ title: 'この端末の記録をすべて消しますか？', body: 'このブラウザに保存した収集箱の記録と、もらったバッジを消します。実物の箱の中身は変わりません。消した記録は元に戻せません。', ok: '消す', cancel: 'やめる', danger: true }))) return;
           if (!clearBox()) { toast('記録を消せませんでした。もう一度お試しください。', 4000); return; }
+          clearBadges();
           rec = null;
           selected = null;
           toast('記録を消しました');
@@ -179,5 +189,7 @@ export function render(ctx) {
   }
 
   draw();
+  // お祝いの「バッジ帳を見る」から来たときは、バッジ帳まで動かす
+  if (showBadges) requestAnimationFrame(() => document.getElementById('badges')?.scrollIntoView({ block: 'start' }));
   return main;
 }
