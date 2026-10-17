@@ -1,17 +1,63 @@
-// 初めて開いた人への案内画面（通常のトップ #/ を最初に開いたときだけ。views/home.js から出す）
+// はじめの案内：初めて開いた人への案内画面であり、参加の案内のページ（ホームの「はじめの案内を見る」から。以前の #/guide もここ）
+//   通常のトップ #/ を最初に開いたときは、ホームの代わりにこの画面を出す（views/home.js）
 //
-// 上から：ロゴと見出し → 体験の短い紹介 → 参加の3ステップ → 参加方法・受け取り場所へ → ホーム画面に追加 → 「貝さがしをはじめる」
-// ・下へ読み進めると、紹介・ステップ・追加の案内が順にふわっと現れる（透明から少し上へ。動きは小さく、ゆっくり）
+// 上から：ロゴと見出し → 体験の短い紹介 → 参加の3ステップ → 収集箱を受け取れる施設 → 景品 → ホーム画面に追加
+//   → お問い合わせ・案内の時点 → 「貝さがしをはじめる」
+// ・下へ読み進めると、各欄が順にふわっと現れる（透明から少し上へ。動きは小さく、ゆっくり）
 // ・背景の貝と波は、読む邪魔にならない程度にゆっくり動く
 // ・動きを減らす設定の端末では、動かさずに最初から表示する
-// ・料金・景品の条件は、確認済みのイベント設定（config.json の event）から表示する（画面に直接書かない）
+// ・料金・施設・景品の条件は、確認済みのイベント設定（config.json の event）から表示する（画面に直接書かない）
 // ・「スキップ」はいつでも押せる位置に置く
-import { h, ic, svg, shellImg } from '../ui.js';
-import { artIcon } from '../icons.js';
+import { h, ic, shellImg } from '../ui.js';
 import { markIntro } from '../lib/intro.js';
 import { installSection, markInstallHintShown } from '../lib/install.js';
 
 const PHOTO_NOS = [5, 9, 7]; // さくら貝・なでしこ貝・紫貝（ピンク・オレンジ・むらさき）
+
+const mapUrl = (place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} 石川県${place.address || '志賀町'}`)}`;
+const telLink = (tel) => h('a', { class: 'tel', href: `tel:${tel.replace(/-/g, '')}` }, `TEL ${tel}`);
+const jpDate = (d) => d.replace(/^(\d+)-0?(\d+)-0?(\d+)$/, '$1年$2月$3日');
+
+// 収集箱を受け取れる施設（住所・電話・地図）と参加費・アクセス
+function placesSection(ev) {
+  return h('section', { class: 'welcome-section card stack-sm reveal', id: 'welcome-places', 'aria-labelledby': 'welcome-places-title' },
+    h('h2', { class: 'section-title', id: 'welcome-places-title' }, '収集箱を受け取れる施設'),
+    ev.fee ? h('p', { class: 'guide-fee' }, '参加費 ', h('strong', null, ev.fee)) : null,
+    h('ul', { class: 'guide-places' }, ev.pickup.map((p) => {
+      const place = typeof p === 'string' ? { name: p } : p;
+      return h('li', null,
+        h('span', { class: 'grow' },
+          h('span', { class: 'block place-name' }, place.name),
+          place.address ? h('span', { class: 'small block' }, place.address) : null,
+          place.tel ? h('span', { class: 'small block' }, telLink(place.tel)) : null),
+        h('a', { class: 'btn small soft', href: mapUrl(place), target: '_blank', rel: 'noopener' }, ic('map'), '地図'));
+    })),
+    ev.access ? h('p', { class: 'small guide-access' }, h('strong', null, 'アクセス'), `　${ev.access}`) : null);
+}
+
+// 景品（集めた種類の数に応じて）と、このサイトのバッジ
+function prizesSection(ev) {
+  return h('section', { class: 'welcome-section card stack-sm reveal', 'aria-labelledby': 'welcome-prizes-title' },
+    h('h2', { class: 'section-title', id: 'welcome-prizes-title' }, '景品（集めた種類の数に応じて）'),
+    h('ul', { class: 'guide-prizes' }, ev.prizes.map((p) => h('li', null,
+      h('span', { class: 'prize-n' }, h('strong', null, p.n), '種'),
+      h('span', { class: 'grow' }, h('span', { class: 'block' }, p.text), p.note ? h('span', { class: 'xsmall muted block' }, `※${p.note}`) : null)))),
+    ev.prizeNotes?.length ? h('ul', { class: 'small plain-list' }, ev.prizeNotes.map((t) => h('li', null, t))) : null,
+    h('p', { class: 'small welcome-badge-note' }, 'このサイトの収集箱に記録すると、10・20・30・36種類で称号のバッジももらえます。景品は、実物の収集箱を施設で確認してもらうと、もらえます。'));
+}
+
+// お問い合わせと、案内の時点・最新情報
+function contactSection(ev) {
+  if (!ev.contact && !ev.checkedAt) return null;
+  return h('section', { class: 'welcome-section card stack-sm reveal', 'aria-labelledby': 'welcome-contact-title' },
+    h('h2', { class: 'section-title', id: 'welcome-contact-title' }, 'お問い合わせ'),
+    ev.contact ? h('div', null,
+      h('p', { class: 'place-name' }, ev.contact.name),
+      h('p', { class: 'small' }, telLink(ev.contact.tel)),
+      ev.contact.address ? h('p', { class: 'xsmall muted' }, ev.contact.address) : null) : null,
+    ev.checkedAt ? h('p', { class: 'xsmall muted' }, `この案内は ${jpDate(ev.checkedAt)} 時点の内容です。`,
+      ev.official ? h('span', null, '最新の情報は ', h('a', { href: ev.official.url, target: '_blank', rel: 'noopener' }, ev.official.label), ' でご確認ください。') : null) : null);
+}
 
 export function render(ctx) {
   const { data } = ctx;
@@ -38,7 +84,7 @@ export function render(ctx) {
   // 隠してから現れる演出は、動きを減らす設定でなく、現れる合図（IntersectionObserver）が使えるときだけ（js-anim）。
   // それ以外は、最初から全部見える
   const anim = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window;
-  const main = h('main', { class: `page welcome${anim ? ' js-anim' : ''}`, id: 'main', dataset: { tabbar: 'hide', title: 'ようこそ' } },
+  const main = h('main', { class: `page welcome${anim ? ' js-anim' : ''}`, id: 'main', dataset: { tabbar: 'hide', title: 'はじめの案内' } },
     h('div', { class: 'welcome-bg', 'aria-hidden': 'true' }, h('span', { class: 'drift' }), h('span', { class: 'waves' })),
     h('div', { class: 'welcome-skip' },
       h('button', { class: 'btn small ghost', type: 'button', onclick: () => finish('skip') }, 'スキップ')),
@@ -63,22 +109,27 @@ export function render(ctx) {
         h('span', { class: 'step-no' }, i + 1),
         h('span', null, h('strong', { class: 'block' }, t), sub ? h('span', { class: 'small muted' }, sub) : null))))),
 
-    // 4. 参加方法・受け取り場所
-    h('a', { class: 'guide-link reveal', href: '#/guide', onclick: () => markIntro('guide') },
-      svg(artIcon('box'), 'welcome-link-art'),
-      h('span', { class: 'grow' }, h('strong', { class: 'block' }, '参加方法・収集箱の受け取り場所'), h('span', { class: 'small' }, '施設の場所・地図・景品の条件はこちら')),
-      ic('chevron')),
+    // 4. 収集箱を受け取れる施設 ／ 5. 景品
+    ev ? placesSection(ev) : null,
+    ev ? prizesSection(ev) : null,
 
-    // 5. ホーム画面に追加
+    // 6. ホーム画面に追加
     installSection(data, { compact: true, className: 'welcome-section card stack-sm reveal' }),
 
-    // 6. はじめる
+    // 7. お問い合わせ・案内の時点
+    ev ? contactSection(ev) : null,
+
+    // 8. はじめる
     h('section', { class: 'welcome-cta reveal' },
       h('button', { class: 'btn block found-btn', type: 'button', onclick: () => finish('start') }, '貝さがしをはじめる'),
       h('p', { class: 'xsmall muted center' }, '集めた記録は、この端末の中だけに保存されます。')),
   );
 
   // 下へ読み進めたら、ふわっと現れる。一度現れたものは、スクロールを戻しても消さない・くり返さない
+  // 以前の「初めての方へ」（#/guide）から来たときは、受け取れる施設の欄から見せる
+  if (location.hash.startsWith('#/guide')) {
+    requestAnimationFrame(() => main.querySelector('#welcome-places')?.scrollIntoView({ block: 'start' }));
+  }
   if (anim) {
     requestAnimationFrame(() => {
       const io = new IntersectionObserver((entries) => {

@@ -35,7 +35,7 @@ if "--all" in sys.argv:
     PAGES += [
         ("box-list", "収集箱（番号順リスト）", "#/box?view=list", "sample"),
         ("compare", "見比べる", "#/compare/5/6", "sample"),
-        ("guide", "初めての方へ", "#/guide", "sample"),
+        ("guide", "はじめの案内（施設の欄から）", "#/guide", "sample"),
         ("about", "このサイトについて", "#/about", "sample"),
     ]
 

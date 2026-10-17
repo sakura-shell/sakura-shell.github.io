@@ -30,7 +30,7 @@ export function platform() {
   return 'other';
 }
 
-// 案内の欄（初めての方へ・このサイトについて で使う）。追加済みなら短い一文だけ
+// 案内の欄（はじめの案内・このサイトについて で使う）。追加済みなら短い一文だけ
 // Android：使っているブラウザに合わせた手順
 function androidSteps() {
   const ua = navigator.userAgent;
@@ -145,6 +145,6 @@ function showSteps(pf) {
         h('li', null, '「ホーム画面に追加」→「追加」を押す'))
       : androidSteps(),
     pf === 'ios' ? h('p', { class: 'xsmall muted' }, 'iPhone では、ホーム画面から開いたときと Safari で開いたときで、記録が別々になることがあります。') : null,
-    h('p', { class: 'xsmall muted' }, '追加しなくても、記録はこの端末に保存されます。くわしくは「初めての方へ」にもあります。'),
+    h('p', { class: 'xsmall muted' }, '追加しなくても、記録はこの端末に保存されます。くわしくは「はじめの案内」にもあります。'),
     h('button', { class: 'btn block secondary', type: 'button', onclick: close }, '閉じる')));
 }

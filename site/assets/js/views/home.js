@@ -47,12 +47,6 @@ export function render(ctx) {
     action('#/box', 'sky half', 'box', '収集箱', '集めた貝の記録'),
   ));
 
-  if (data.config.event?.status === 'confirmed') {
-    right.append(h('a', { class: 'guide-link', href: '#/guide' }, ic('guide'),
-      h('span', { class: 'grow' }, h('strong', { class: 'block' }, '初めての方へ'), h('span', { class: 'small' }, phrase('参加のしかた・', '箱の受け取り・', '景品'))),
-      ic('chevron')));
-  }
-
   if (!storageAvailable()) {
     right.append(h('div', { class: 'notice warn' }, ic('alert'),
       h('p', null, 'この画面では記録を保存できません（プライベートモードなど）。記録は「この画面を開いている間だけ」使えます。')));

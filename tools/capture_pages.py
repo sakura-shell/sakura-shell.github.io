@@ -184,7 +184,7 @@ def pages(only):
     out = [
         ("home", "ホーム（記録なし）", "#/", "clear"),
         ("home-rec", "ホーム（記録あり：見本）", "#/", "sample"),
-        ("guide", "初めての方へ", "#/guide", "sample"),
+        ("guide", "はじめの案内（施設の欄から）", "#/guide", "sample"),
         ("list", "貝の図鑑（一覧）", "#/list", "sample"),
     ]
     for sp in data["species"]:

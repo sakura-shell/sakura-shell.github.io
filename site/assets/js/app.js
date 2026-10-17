@@ -14,7 +14,6 @@ import * as identify from './views/identify.js';
 import * as box from './views/box.js';
 import * as scan from './views/scan.js';
 import * as about from './views/about.js';
-import * as guide from './views/guide.js';
 import * as collect from './views/collect.js';
 import * as welcome from './views/welcome.js';
 
@@ -27,7 +26,7 @@ const routes = [
   { re: /^\/box$/, view: box, tab: 'box' },
   { re: /^\/scan$/, view: scan, tab: 'box' },
   { re: /^\/about$/, view: about, tab: 'home' },
-  { re: /^\/guide$/, view: guide, tab: 'home' },
+  { re: /^\/guide$/, view: welcome, tab: 'home' }, // 以前の「初めての方へ」：はじめの案内にまとめた（受け取れる施設の欄から表示）
   { re: /^\/collect$/, view: collect, tab: 'identify' },
   { re: /^\/welcome$/, view: welcome, tab: 'home' }, // はじめの案内（ホームの「はじめの案内を見る」から）
 ];
