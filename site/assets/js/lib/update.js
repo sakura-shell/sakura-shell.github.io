@@ -1,6 +1,6 @@
 // 新しい版の知らせ（修正や新しい機能を公開したとき）
 //
-// ・新しい版は裏で準備される（sw.js の install）。準備ができたら「新しい版があります。更新しますか？」と聞き、
+// ・新しい版は裏で準備される（sw.js の install）。準備ができたら「更新データがあります。更新しますか？」と聞き、
 //   「更新する」を押したときだけ切り替えて、開き直す。押すまでは今の版のまま使える
 // ・初めて開いたとき（まだ古い版がない）は聞かない
 // ・撮影中・記録の途中・ほかの画面（お祝い・案内など）が開いているときは、終わるまで待ってから聞く
@@ -60,8 +60,8 @@ function offer() {
   const later = h('button', { class: 'btn block secondary', type: 'button', onclick: close }, 'あとで');
   const go = h('button', { class: 'btn block', type: 'button', onclick: () => apply(go, later) }, '更新する');
   dlg.append(h('div', { class: 'update-card' },
-    h('h2', { id: 'update-title' }, '新しい版があります'),
-    h('p', { id: 'update-text' }, '修正や新しい機能が入った版に更新します。よろしいですか？'),
+    h('h2', { id: 'update-title' }, '更新データがあります'),
+    h('p', { id: 'update-text' }, 'アプリの修正や新しい機能が届いています。更新しますか？'),
     h('p', { class: 'small muted' }, '更新しても、集めた記録やバッジは消えません。'),
     h('div', { class: 'stack-sm update-actions' }, go, later)));
   dlg.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
