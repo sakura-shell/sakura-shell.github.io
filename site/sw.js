@@ -4,12 +4,15 @@
 // ・削除するのは、このアプリ・この公開パスの古い版だけ
 // ・画像は保存済みを先に使う。ページ・データは通信を優先するが、3秒で返らなければ保存済みを使う
 // ・版（VERSION）を上げると、基本のファイルを取り直す。データや写真を差し替えたら VERSION を上げること
+// ・新しい版は裏で準備して待たせ、画面で「更新する」を押したときに切り替える（lib/update.js）。
+//   それまでは今の版の保存済みのファイル（CORE）を使う（新旧のファイルが混ざらない・電波が弱くてもすぐ開く）。
+//   初めて開いたとき（古い版がない）は、そのまま使い始める
 // ・AI判定のファイル（TensorFlow.js・MobileNet・分類器 約7MB）は、基本のファイルとは別の保管場所（AI_CACHE）に、
 //   画面が先回りの準備で読み込んだときに保存する（install では取らない。容量不足・通信失敗でも基本の画面は使える）。
 //   TensorFlow.js と MobileNet は中身が変わらないので、保存済みを先に使う（毎回の確認をしない）。
 //   入れ替えるときは AI_VERSION を上げる。分類器（models/classifier.json）は保存済みを先に使い、裏で新しいものに更新する
 // ・収集箱の記録（localStorage）には触れない
-const VERSION = '2026.10.15-r23';
+const VERSION = '2026.10.17-r24';
 const AI_VERSION = 'tfjs-mobilenet050-1';
 const SCOPE = new URL(self.registration.scope).pathname;
 const PREFIX = `m36shells:${SCOPE}:`;
@@ -58,6 +61,7 @@ const CORE = [
   'assets/js/views/welcome.js',
   'assets/js/views/badgeview.js',
   'assets/js/lib/badges.js',
+  'assets/js/lib/update.js',
   'assets/img/badges/badge-10.webp',
   'assets/img/badges/badge-20.webp',
   'assets/img/badges/badge-30.webp',
@@ -92,8 +96,12 @@ self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const c = await caches.open(CACHE);
     await c.addAll(CORE.map((u) => new Request(u, { cache: 'reload' })));
-    await self.skipWaiting();
+    // ここでは切り替えない（画面で「更新する」が押されたら skip-waiting が届く）
   })());
+});
+
+self.addEventListener('message', (e) => {
+  if (e.data?.type === 'skip-waiting') self.skipWaiting();
 });
 
 // 図鑑の写真（約5MB）の保存。画面から頼まれたときに、まだ保存していない写真だけ取る。
@@ -158,9 +166,22 @@ self.addEventListener('message', (e) => {
       for (const u of need) if (!(await a.match(new URL(u, self.registration.scope).href, { ignoreSearch: true }))) return false;
       return true;
     }).catch(() => false);
-    e.ports[0].postMessage({ ready: cached === CORE.length, cached, total: CORE.length, version: VERSION, ai });
+    e.ports[0].postMessage({ ready: cached === CORE.length, cached, total: CORE.length, version: VERSION, ai, prompt: true });
   });
 });
+
+// 今の版の基本のファイル（CORE）。ページを開くとき（トップ・index.html）は index.html を使う
+const CORE_URLS = new Set(CORE.map((u) => new URL(u, self.registration.scope).href));
+const PAGE_URLS = new Set([SCOPE, `${SCOPE}index.html`].map((p) => new URL(p, self.location.origin).href));
+
+// 今の版の保存済みを先に使う。なければ通信して保存（保存場所が消されたときなど）
+function coreCacheFirst(req, key) {
+  return caches.open(CACHE).then((c) => c.match(key, { ignoreSearch: true }).then((hit) => hit
+    || fetch(req, req.mode === 'navigate' ? undefined : { cache: 'no-cache' }).then((res) => {
+      if (res.ok && !res.redirected) c.put(key, res.clone()).catch(() => {});
+      return res;
+    })));
+}
 
 function fromCache(req) {
   return caches.open(CACHE).then((c) => c.match(req, { ignoreSearch: true }));
@@ -231,7 +252,14 @@ self.addEventListener('fetch', (e) => {
     e.respondWith(fromCache(req).then((hit) => hit || fetch(req).then((res) => put(req, res))));
     return;
   }
-  // ページ・プログラム・データ：通信を優先（HTTP キャッシュは使わず確認する）
+  // 基本のファイル（ページ・プログラム・データ）：今の版の保存済みを先に使う
+  const plain = url.origin + url.pathname;
+  if (sameScope && req.mode === 'navigate' && PAGE_URLS.has(plain)) {
+    e.respondWith(coreCacheFirst(req, new URL('index.html', self.registration.scope).href));
+    return;
+  }
+  if (sameScope && req.mode !== 'navigate' && CORE_URLS.has(plain)) { e.respondWith(coreCacheFirst(req, plain)); return; }
+  // それ以外（同じ場所に置いたほかのページなど）：通信を優先（HTTP キャッシュは使わず確認する）
   const fetchReq = () => (req.mode === 'navigate' ? fetch(req) : fetch(req, { cache: 'no-cache' }));
   e.respondWith(networkFirst(req, fetchReq));
 });

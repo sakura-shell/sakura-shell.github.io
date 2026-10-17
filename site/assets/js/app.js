@@ -4,6 +4,7 @@ import { gateNeeded, showGate } from './lib/gate.js';
 import { identifierEnabled, prepareIdentifier } from './lib/identify.js';
 import './lib/install.js'; // ホーム画面に追加の知らせ（beforeinstallprompt）を最初から受け取る
 import { noteEntry } from './lib/intro.js';
+import { setupUpdates } from './lib/update.js';
 import { h, ic } from './ui.js';
 import * as home from './views/home.js';
 import * as list from './views/list.js';
@@ -202,7 +203,11 @@ async function boot() {
 
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(() => { /* オフライン対応なしで続行 */ });
+    navigator.serviceWorker.register('sw.js')
+      // 新しい版の知らせ。撮影中・記録の途中・ほかの画面が開いているとき・はじめの案内の間は、あとで聞く
+      .then((reg) => setupUpdates(reg, { busy: () => !data || !current || !!current?.dirty?.() || !!document.querySelector('dialog[open]')
+        || ['/scan', '/identify', '/collect', '/welcome'].includes(parseHash().path) || !!document.querySelector('.welcome') }))
+      .catch(() => { /* オフライン対応なしで続行 */ });
   });
 }
 
