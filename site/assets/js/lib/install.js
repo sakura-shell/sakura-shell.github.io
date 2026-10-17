@@ -44,11 +44,7 @@ function androidSteps() {
 
 // compact：初めての方への案内画面用。使っている端末の手順だけを短く
 export function installSection(data, { compact = false, className = 'card stack-sm' } = {}) {
-  if (isStandalone()) {
-    return h('section', { class: className },
-      h('h3', { class: 'section-title' }, 'ホーム画面から開いています'),
-      h('p', { class: 'small' }, '記録はこの端末の中に保存されます。ほかの端末やブラウザとは同じになりません。'));
-  }
+  if (isStandalone()) return null; // ホーム画面から開いているとき（追加済み）は、この欄を出さない
   const pf = platform();
   const btnHolder = h('div');
   const drawButton = () => {

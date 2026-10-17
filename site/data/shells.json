@@ -5644,27 +5644,6 @@
     {
      "view": "photo",
      "label": "写真1",
-     "src": "assets/img/shells/35-p1.jpg",
-     "thumb": "assets/img/shells/35-p1-s.jpg",
-     "source": "志賀町（2026年10月 撮影）",
-     "sourceFile": "34.小貝1.jpg",
-     "mapping": {
-      "status": "confirmed",
-      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
-      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
-      "reviewedAt": "2026-10-05"
-     },
-     "rights": {
-      "status": "confirmed",
-      "source": "志賀町",
-      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
-      "reviewedAt": "2026-10-05"
-     },
-     "quality": "high"
-    },
-    {
-     "view": "photo",
-     "label": "写真2",
      "src": "assets/img/shells/35-p2.jpg",
      "thumb": "assets/img/shells/35-p2-s.jpg",
      "source": "志賀町（2026年10月 撮影）",
@@ -5685,7 +5664,7 @@
     },
     {
      "view": "photo",
-     "label": "写真3",
+     "label": "写真2",
      "src": "assets/img/shells/35-p3.jpg",
      "thumb": "assets/img/shells/35-p3-s.jpg",
      "source": "志賀町（2026年10月 撮影）",
@@ -5706,7 +5685,7 @@
     },
     {
      "view": "photo",
-     "label": "写真4",
+     "label": "写真3",
      "src": "assets/img/shells/35-p4.jpg",
      "thumb": "assets/img/shells/35-p4-s.jpg",
      "source": "志賀町（2026年10月 撮影）",
@@ -5727,7 +5706,7 @@
     },
     {
      "view": "photo",
-     "label": "写真5",
+     "label": "写真4",
      "src": "assets/img/shells/35-p5.jpg",
      "thumb": "assets/img/shells/35-p5-s.jpg",
      "source": "志賀町（2026年10月 撮影）",
@@ -5748,7 +5727,7 @@
     },
     {
      "view": "photo",
-     "label": "写真6",
+     "label": "写真5",
      "src": "assets/img/shells/35-p6.jpg",
      "thumb": "assets/img/shells/35-p6-s.jpg",
      "source": "志賀町（2026年10月 撮影）",
@@ -5769,7 +5748,7 @@
     },
     {
      "view": "photo",
-     "label": "写真7",
+     "label": "写真6",
      "src": "assets/img/shells/35-p7.jpg",
      "thumb": "assets/img/shells/35-p7-s.jpg",
      "source": "志賀町（2026年10月 撮影）",
@@ -5790,7 +5769,7 @@
     },
     {
      "view": "photo",
-     "label": "写真8",
+     "label": "写真7",
      "src": "assets/img/shells/35-p8.jpg",
      "thumb": "assets/img/shells/35-p8-s.jpg",
      "source": "志賀町（2026年10月 撮影）",
@@ -5811,11 +5790,32 @@
     },
     {
      "view": "photo",
-     "label": "写真9",
+     "label": "写真8",
      "src": "assets/img/shells/35-p9.jpg",
      "thumb": "assets/img/shells/35-p9-s.jpg",
      "source": "志賀町（2026年10月 撮影）",
      "sourceFile": "34.小貝9.jpg",
+     "mapping": {
+      "status": "confirmed",
+      "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "rights": {
+      "status": "confirmed",
+      "source": "志賀町",
+      "reviewedBy": "運営（撮影者・2026-10-05 チラシと照合）",
+      "reviewedAt": "2026-10-05"
+     },
+     "quality": "high"
+    },
+    {
+     "view": "photo",
+     "label": "写真9",
+     "src": "assets/img/shells/35-p1.jpg",
+     "thumb": "assets/img/shells/35-p1-s.jpg",
+     "source": "志賀町（2026年10月 撮影）",
+     "sourceFile": "34.小貝1.jpg",
      "mapping": {
       "status": "confirmed",
       "source": "写真のファイル名の貝の名前で対応（tools/photo_names.json）",

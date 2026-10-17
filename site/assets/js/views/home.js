@@ -47,13 +47,17 @@ export function render(ctx) {
     action('#/box', 'sky half', 'box', '収集箱', '集めた貝の記録'),
   ));
 
+  // 参加の案内（受け取れる施設・景品など）は「はじめの案内」にまとめた（2026-10-17）
+  right.append(h('a', { class: 'guide-link', href: '#/welcome' }, ic('guide'),
+    h('span', { class: 'grow' }, h('strong', { class: 'block' }, 'はじめの案内を見る'), h('span', { class: 'small' }, phrase('参加のしかた・', '受け取れる施設・', '景品'))),
+    ic('chevron')));
+
   if (!storageAvailable()) {
     right.append(h('div', { class: 'notice warn' }, ic('alert'),
       h('p', null, 'この画面では記録を保存できません（プライベートモードなど）。記録は「この画面を開いている間だけ」使えます。')));
   }
 
   right.append(h('div', { class: 'footer-links' },
-    h('a', { href: '#/welcome' }, 'はじめの案内を見る'),
     h('a', { href: '#/about' }, 'このサイトについて')));
   return main;
 }

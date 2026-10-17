@@ -85,9 +85,8 @@ export function render(ctx) {
           h('p', { class: 'summary-title' }, phrase('36種類のうち、', `${c.filled}種類を集めました`)),
           h('p', { class: 'small muted' }, `空き ${c.empty}`),
           rec ? h('p', { class: 'xsmall muted' }, isTemp(rec) ? '一時記録・ページを閉じると消えます' : `${formatDate(rec.savedAt)} 保存`) : null)),
-      h('p', { class: 'xsmall muted' },
-        storageAvailable() ? '押すとすぐ、この端末の中に保存されます（送信・同期はしません）。' : 'この環境では保存できないため、ページを閉じるまでの一時記録になります。',
-        '実物の箱は変わりません。'),
+      // 保存できない環境のときだけ注意を出す（ふだんの保存の説明は、分かりにくいので出さない。2026-10-17 依頼者の指示）
+      storageAvailable() ? null : h('p', { class: 'xsmall muted' }, 'この環境では保存できないため、ページを閉じるまでの一時記録になります。'),
       badgeStrip(rec, () => document.getElementById('badges')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))));
 
     // 表示の切り替え

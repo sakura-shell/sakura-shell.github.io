@@ -1350,3 +1350,25 @@ dialog.update-dlg::backdrop { background: rgba(46, 40, 60, .45); }
 /* はじめの案内：以前の「初めての方へ」（#/guide）から来たとき、施設の欄の見出しが「スキップ」に隠れないように */
 .welcome-section { scroll-margin-top: 56px; }
 .welcome-badge-note { margin-top: var(--sp-2); padding-top: var(--sp-2); border-top: 1px dashed var(--c-line); }
+
+/* ホーム（スマホ）：画面の下半分が空かないように、画面の高さいっぱいに並べる（2026-10-17）
+   ・「このサイトについて」は下のタブのすぐ上へ
+   ・縦に長い画面では、ロゴを切り出さずに大きく、ボタンも少し大きく */
+@media (max-width: 699px) {
+  .page.home { min-height: 100vh; min-height: 100dvh; grid-template-rows: auto 1fr; padding-bottom: calc(var(--tabbar-h) + var(--safe-b) + 12px); }
+  .page.home .home-actions { display: flex; flex-direction: column; justify-content: space-between; } /* 余った高さは、カードの間に均等に */
+  .page.home .home-actions > .footer-links { padding-top: 4px; }
+}
+@media (max-width: 699px) and (min-height: 741px) {
+  .page.home .hero, .page.home .hero.compact { max-width: 340px; }
+  .page.home .hero img { aspect-ratio: 685 / 464; object-position: center; }
+  .page.home .home-actions > * + * { margin-top: 14px; }
+  .page.home .action.primary { min-height: 112px; }
+  .page.home .action.half { min-height: 96px; }
+  .page.home .guide-link { padding: 14px 16px; }
+}
+@media (max-width: 699px) and (min-height: 861px) {
+  .page.home .hero, .page.home .hero.compact { max-width: 380px; }
+  .page.home .action.primary { min-height: 124px; }
+  .page.home .action.half { min-height: 108px; }
+}

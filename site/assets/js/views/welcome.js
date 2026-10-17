@@ -2,7 +2,7 @@
 //   通常のトップ #/ を最初に開いたときは、ホームの代わりにこの画面を出す（views/home.js）
 //
 // 上から：ロゴと見出し → 体験の短い紹介 → 参加の3ステップ → 収集箱を受け取れる施設 → 景品 → ホーム画面に追加
-//   → お問い合わせ・案内の時点 → 「貝さがしをはじめる」
+//   → お問い合わせ → 「貝さがしをはじめる」
 // ・下へ読み進めると、各欄が順にふわっと現れる（透明から少し上へ。動きは小さく、ゆっくり）
 // ・背景の貝と波は、読む邪魔にならない程度にゆっくり動く
 // ・動きを減らす設定の端末では、動かさずに最初から表示する
@@ -16,9 +16,8 @@ const PHOTO_NOS = [5, 9, 7]; // さくら貝・なでしこ貝・紫貝（ピン
 
 const mapUrl = (place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} 石川県${place.address || '志賀町'}`)}`;
 const telLink = (tel) => h('a', { class: 'tel', href: `tel:${tel.replace(/-/g, '')}` }, `TEL ${tel}`);
-const jpDate = (d) => d.replace(/^(\d+)-0?(\d+)-0?(\d+)$/, '$1年$2月$3日');
 
-// 収集箱を受け取れる施設（住所・電話・地図）と参加費・アクセス
+// 収集箱を受け取れる施設（住所・電話・地図）と参加費（アクセスは施設ごとに違うので書かない）
 function placesSection(ev) {
   return h('section', { class: 'welcome-section card stack-sm reveal', id: 'welcome-places', 'aria-labelledby': 'welcome-places-title' },
     h('h2', { class: 'section-title', id: 'welcome-places-title' }, '収集箱を受け取れる施設'),
@@ -31,8 +30,7 @@ function placesSection(ev) {
           place.address ? h('span', { class: 'small block' }, place.address) : null,
           place.tel ? h('span', { class: 'small block' }, telLink(place.tel)) : null),
         h('a', { class: 'btn small soft', href: mapUrl(place), target: '_blank', rel: 'noopener' }, ic('map'), '地図'));
-    })),
-    ev.access ? h('p', { class: 'small guide-access' }, h('strong', null, 'アクセス'), `　${ev.access}`) : null);
+    })));
 }
 
 // 景品（集めた種類の数に応じて）と、このサイトのバッジ
@@ -46,17 +44,16 @@ function prizesSection(ev) {
     h('p', { class: 'small welcome-badge-note' }, 'このサイトの収集箱に記録すると、10・20・30・36種類で称号のバッジももらえます。景品は、実物の収集箱を施設で確認してもらうと、もらえます。'));
 }
 
-// お問い合わせと、案内の時点・最新情報
+// お問い合わせと、最新情報の確かめ先
 function contactSection(ev) {
-  if (!ev.contact && !ev.checkedAt) return null;
+  if (!ev.contact) return null;
   return h('section', { class: 'welcome-section card stack-sm reveal', 'aria-labelledby': 'welcome-contact-title' },
     h('h2', { class: 'section-title', id: 'welcome-contact-title' }, 'お問い合わせ'),
-    ev.contact ? h('div', null,
+    h('div', null,
       h('p', { class: 'place-name' }, ev.contact.name),
       h('p', { class: 'small' }, telLink(ev.contact.tel)),
-      ev.contact.address ? h('p', { class: 'xsmall muted' }, ev.contact.address) : null) : null,
-    ev.checkedAt ? h('p', { class: 'xsmall muted' }, `この案内は ${jpDate(ev.checkedAt)} 時点の内容です。`,
-      ev.official ? h('span', null, '最新の情報は ', h('a', { href: ev.official.url, target: '_blank', rel: 'noopener' }, ev.official.label), ' でご確認ください。') : null) : null);
+      ev.contact.address ? h('p', { class: 'xsmall muted' }, ev.contact.address) : null),
+    ev.official ? h('p', { class: 'xsmall muted' }, '最新の情報は ', h('a', { href: ev.official.url, target: '_blank', rel: 'noopener' }, ev.official.label), ' でご確認ください。') : null);
 }
 
 export function render(ctx) {
@@ -116,13 +113,12 @@ export function render(ctx) {
     // 6. ホーム画面に追加
     installSection(data, { compact: true, className: 'welcome-section card stack-sm reveal' }),
 
-    // 7. お問い合わせ・案内の時点
+    // 7. お問い合わせ
     ev ? contactSection(ev) : null,
 
     // 8. はじめる
     h('section', { class: 'welcome-cta reveal' },
-      h('button', { class: 'btn block found-btn', type: 'button', onclick: () => finish('start') }, '貝さがしをはじめる'),
-      h('p', { class: 'xsmall muted center' }, '集めた記録は、この端末の中だけに保存されます。')),
+      h('button', { class: 'btn block found-btn', type: 'button', onclick: () => finish('start') }, '貝さがしをはじめる')),
   );
 
   // 下へ読み進めたら、ふわっと現れる。一度現れたものは、スクロールを戻しても消さない・くり返さない

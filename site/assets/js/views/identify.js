@@ -89,7 +89,7 @@ export async function render(ctx) {
       body.append(...[
         h('section', { class: 'card stack-sm identify-start' },
           h('p', { class: 'identify-lead' }, ai
-            ? phrase('AIが写真から', '似ている貝を探します。', '最後は図鑑の写真と見比べてね。')
+            ? phrase('写真から', '似ている貝を探します。', '最後は図鑑の写真と見比べてね。')
             : phrase('撮った写真と', '図鑑を見比べて探します。')),
           h('p', { class: 'small identify-tip' }, ic('shell'), phrase('貝を1つだけ、', '近づいて大きく撮ってね')),
           ai ? statusEl : null,
