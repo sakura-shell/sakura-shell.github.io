@@ -131,11 +131,8 @@ async function render() {
   }
   if (currentHash !== (location.hash || '#/')) return; // 描画中に別の画面へ移った
   const hideTabbar = el.dataset?.tabbar === 'hide';
-  const banner = data.preview || isDev()
-    ? h('div', { class: 'preview-banner', role: 'note' },
-      data.preview ? '確認用プレビュー：照合待ちの情報を含みます' : '',
-      isDev() ? '（開発用モード）' : '')
-    : '';
+  // 上の帯は開発用モードのときだけ（確認用プレビューの帯は、分かりにくいので出さない。2026-10-17 依頼者の指示）
+  const banner = isDev() ? h('div', { class: 'preview-banner', role: 'note' }, '開発用モード') : '';
   root.replaceChildren(banner, el, hideTabbar ? '' : tabbar(el.dataset?.tab || route.tab));
   if (el.classList?.contains('page')) el.classList.add('enter'); // ふわっと現れる（動きを減らす設定では止まる）
   // ブラウザの「戻る」では、前に見ていた位置に戻す（一覧の探し直しを減らす）

@@ -1037,7 +1037,7 @@ a.tel { color: var(--navy); font-weight: 700; text-decoration: underline; text-d
   .page.home { gap: 10px; align-content: start; }
   .record-strip .xsmall { display: none; } /* 保存日時は収集箱の画面で */
   .page.home .hero, .page.home .hero.compact { width: auto; max-width: 320px; margin: 8px auto 0; border-width: 5px; border-radius: var(--r-lg); }
-  .page.home .hero img { aspect-ratio: 685 / 290; object-fit: cover; object-position: center 66%; }
+  .page.home .hero img { aspect-ratio: 685 / 310; object-fit: cover; object-position: center 81%; } /* 下の「Beachcombing SHIKA TOWN NOTO ISHIKAWA」まで切らずに見せる */
   .page.home .hero::after { display: none; }
   .page.home .wave-band { height: 8px; background-size: 16px 8px; margin-top: 0; }
   .page.home .lead { font-size: var(--fs-18); line-height: 1.45; margin: 0; }
