@@ -117,10 +117,11 @@ export function setDevFromQuery(query) {
   } catch { /* 何もしない */ }
 }
 
-// 箱の自動読み取りを使えるか。"preview"＝確認用プレビューで試験版として使う（実物試験に合格したら "public"）
+// 箱の自動読み取りを使えるか。"preview"＝確認用プレビューで試験版として使う／"trial"＝一般公開でも試験版として使う
+// （どちらも画面に「試験版」と出す。実物試験に合格したら "public"）
 export function scanAvailable(data) {
   const f = data.config.features?.boxScan;
-  return f === 'public' || (f === 'preview' && (data.preview || isDev())) || (f === 'dev' && isDev());
+  return f === 'public' || f === 'trial' || (f === 'preview' && (data.preview || isDev())) || (f === 'dev' && isDev());
 }
 
 export function scanIsPublic(data) {
