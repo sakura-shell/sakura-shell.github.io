@@ -1,5 +1,5 @@
 {
- "appVersion": "2026.10.17-r26",
+ "appVersion": "2026.10.18-r27",
  "contentUpdated": "2026-10-05",
  "mode": "preview",
  "modeNote": "preview＝確認用（照合待ちの情報・許諾確認中の写真を表示）。public＝一般公開用（confirmed の情報と許諾済みの素材だけを表示）",
@@ -26,11 +26,6 @@
   "tel": "0767-32-9341",
   "status": "confirmed",
   "source": "チラシ（2026-10-05 運営が確認）"
- },
- "previewGate": {
-  "salt": "435be5b0c24dac96",
-  "hash": "bc6edaec440da37040b6a94fb49d88d7913a3f8fc258a4a62fdff8541c0ad665",
-  "note": "確認用プレビューの合言葉（tools/set_passphrase.py で設定。合言葉そのものは書かない）"
  },
  "event": {
   "status": "confirmed",
