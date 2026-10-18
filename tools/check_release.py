@@ -81,7 +81,13 @@ def main():
     print(f"AI判定の公開設定: {ident}")
     if ident == "public":
         if not ev or not ev.get("val") or ev["val"]["n"] < 72:
-            blockers.append("AI判定を public にするには、学習に使っていない実物の写真（目安：各種類2枚以上・計72枚以上）での評価が必要")
+            msg = "AI判定を public にするには、学習に使っていない実物の写真（目安：各種類2枚以上・計72枚以上）での評価が必要"
+            # 依頼者が評価の途中で公開を決めたとき（config.json の features.identifyApproval）は、止めずに注意として出す
+            approval = cfg.get("features", {}).get("identifyApproval")
+            if approval and approval.get("by") and approval.get("at"):
+                print(f"注意: {msg}。{approval['at']} {approval['by']}の判断で、評価の途中で公開しています（{approval.get('note', '')}）")
+            else:
+                blockers.append(msg)
         print("注意: AI判定を一般公開にしています。運営が決めた正解率の基準を満たしているか確認してください。")
 
     print()
