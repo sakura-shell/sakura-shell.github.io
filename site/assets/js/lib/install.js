@@ -4,7 +4,8 @@
 // ・ホーム画面から開いているとき（追加済み）は、ボタンも手順も出さない
 // ・iPhone の Safari にはボタンを出す仕組みがないので、手順だけを載せる
 // ・インストールを強制する表示はしない。開いた直後には出さない
-// ・小さな案内（maybeShowInstallHint）は、導入を閉じたあとか、初めて貝を記録したあとに一度だけ。閉じたら自動では出さない
+// ・はじめの案内では、いちばん上（ロゴのすぐ下）に追加の案内を出す（2026-11-09 依頼者の指示：最初に表示）
+// ・小さな案内（maybeShowInstallHint）は、ホームを開いたときか、初めて貝を記録したあとに一度だけ。閉じたら自動では出さない
 import { h, ic, toast, openSheet } from '../ui.js';
 
 let deferred = null; // ブラウザの「インストールできます」の知らせ（beforeinstallprompt）
@@ -78,15 +79,15 @@ export function installSection(data, { compact = false, className = 'card stack-
     // はじめの案内の中：ボタンで追加できる環境ではボタン、手順は「追加方法を見る」で開く（初めの画面を長くしない）
     const steps = pf === 'ios' ? [ios] : pf === 'android' ? [androidSteps()] : [ios, android];
     return h('section', { class: className },
-      h('h2', { class: 'section-title' }, 'ホーム画面に追加すると、次からすぐ開けます'),
-      h('p', { class: 'small' }, 'スマートフォンのホーム画面にアイコンを追加して、海岸でもすぐに使えます。追加せずに使うこともできます。'),
+      h('h2', { class: 'section-title' }, 'はじめに、ホーム画面に追加しておくと安心です'),
+      h('p', { class: 'small' }, 'アプリのように、ホーム画面のアイコンからすぐ開けます。集めた記録も消えにくくなります。'),
       btnHolder,
-      h('details', { class: 'tips-more' }, h('summary', null, '追加方法を見る'), h('div', { class: 'stack-sm' }, ...steps)),
-      h('p', { class: 'xsmall muted' }, 'ホーム画面への追加と、集めた記録の保存は別のものです。記録は、追加しなくてもこの端末に保存されます。'));
+      h('details', { class: 'tips-more', open: pf === 'ios' || pf === 'android' }, h('summary', null, '追加方法を見る'), h('div', { class: 'stack-sm' }, ...steps)),
+      pf === 'ios' ? h('p', { class: 'xsmall muted' }, 'iPhone の Safari では、しばらく開かないでいると、記録が消えることがあります。ホーム画面から開けば、消えにくくなります。') : null);
   }
   return h('section', { class: className },
     h('h3', { class: 'section-title' }, 'ホーム画面に追加すると便利です'),
-    h('p', { class: 'small' }, 'アプリのように、ホーム画面のアイコンからすぐ開けます。追加しなくても、記録はこの端末に保存されます。'),
+    h('p', { class: 'small' }, 'アプリのように、ホーム画面のアイコンからすぐ開けます。集めた記録も消えにくくなります。'),
     btnHolder,
     ...(pf === 'android' ? [android, ios] : [ios, android]),
     h('ul', { class: 'xsmall muted plain-list' },
@@ -124,8 +125,8 @@ export function maybeShowInstallHint(reason, delay = 0) {
       } }, '追加する')
       : h('button', { class: 'btn small', type: 'button', onclick: () => { close(); showSteps(pf); } }, '追加のしかた');
     hintEl = h('aside', { class: 'install-hint', role: 'status', 'aria-label': 'ホーム画面に追加' },
-      h('p', { class: 'small' }, h('strong', { class: 'block' }, 'ホーム画面に追加すると、次からすぐ開けます'),
-        '集めた記録はこの端末に保存されます。'),
+      h('p', { class: 'small' }, h('strong', { class: 'block' }, 'ホーム画面に追加しておくと安心です'),
+        '次からすぐ開けて、集めた記録も消えにくくなります。'),
       h('div', { class: 'install-hint-actions' }, action,
         h('button', { class: 'icon-btn', type: 'button', 'aria-label': '閉じる', onclick: close }, ic('close'))));
     document.body.append(hintEl);
@@ -143,4 +144,30 @@ function showSteps(pf) {
     pf === 'ios' ? h('p', { class: 'xsmall muted' }, 'iPhone では、ホーム画面から開いたときと Safari で開いたときで、記録が別々になることがあります。') : null,
     h('p', { class: 'xsmall muted' }, '追加しなくても、記録はこの端末に保存されます。くわしくは「はじめの案内」にもあります。'),
     h('button', { class: 'btn block secondary', type: 'button', onclick: close }, '閉じる')));
+}
+
+// ---- 画面が縮小されて表示されているとき ----
+// Safari の「ページの拡大/縮小」を小さくしている、または「デスクトップ用Webサイトを表示」になっていると、
+// スマホなのに横幅が実際の2倍近くあるように描かれ、文字もボタンも小さくなる（2026-11-09 依頼者の端末で発生）。
+// サイトの側では直せないので、直し方を知らせる（スマホの大きさの画面だけ。タブレット・パソコンでは出さない）
+export function looksZoomedOut() {
+  if (!(navigator.maxTouchPoints > 0)) return false;
+  const short = Math.min(screen.width, screen.height);
+  const long = Math.max(screen.width, screen.height);
+  if (!short || short > 500) return false;
+  const deviceWidth = window.innerWidth > window.innerHeight ? long : short;
+  return window.innerWidth > deviceWidth * 1.3;
+}
+
+export function zoomedOutNotice() {
+  if (!looksZoomedOut()) return null;
+  const ios = platform() === 'ios';
+  return h('div', { class: 'notice warn zoom-notice' }, ic('alert'),
+    h('div', { class: 'small' },
+      h('strong', { class: 'block' }, '画面が小さく表示されています'),
+      ios
+        ? (isStandalone()
+          ? '設定アプリ →「アプリ」→「Safari」の「ページの拡大/縮小」と「デスクトップ用Webサイトを表示」で、このサイトを元（100%・オフ）に戻してから、開き直してください。'
+          : 'Safari のアドレス欄の「ぁあ」から、文字の大きさを100%に戻すか、「モバイル用Webサイトを表示」を選んでください。')
+        : 'ブラウザの拡大・縮小を100%に戻すか、「PC版サイト」の表示をオフにしてください。'));
 }

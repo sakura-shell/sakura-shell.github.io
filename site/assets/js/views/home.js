@@ -3,6 +3,7 @@ import { artIcon } from '../icons.js';
 import { loadBox, counts, storageAvailable, isTemp } from '../store.js';
 import { brandShown } from '../data.js';
 import { introNeeded, markIntro } from '../lib/intro.js';
+import { maybeShowInstallHint, zoomedOutNotice } from '../lib/install.js';
 import * as welcome from './welcome.js';
 
 export function render(ctx) {
@@ -51,6 +52,12 @@ export function render(ctx) {
   right.append(h('a', { class: 'guide-link', href: '#/welcome' }, ic('guide'),
     h('span', { class: 'grow' }, h('strong', { class: 'block' }, 'はじめの案内を見る'), h('span', { class: 'small' }, phrase('参加のしかた・', '受け取れる施設・', '景品'))),
     ic('chevron')));
+
+  // 画面が縮小されて表示されているときは、直し方を上に出す
+  const zoomNote = zoomedOutNotice();
+  if (zoomNote) right.prepend(zoomNote);
+  // ホーム画面に追加していない人には、一度だけ追加の案内を出す（はじめの案内で見せた人には出さない）
+  maybeShowInstallHint('home', 1500);
 
   if (!storageAvailable()) {
     right.append(h('div', { class: 'notice warn' }, ic('alert'),

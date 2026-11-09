@@ -923,7 +923,7 @@ h1, h2, h3, .btn, .chip { text-wrap: balance; }
 @media (min-width: 700px) { .shell-grid.big { grid-template-columns: repeat(3, 1fr); } }
 
 /* ---------- ホーム：主操作・初めての方へ・パソコンでは2列 ---------- */
-.page.home { display: grid; gap: 16px; }
+.page.home { display: grid; gap: 16px; align-content: start; } /* 幅の広い画面で行が縦に引き伸ばされ、大きな空きが出ないように */
 .action.primary { min-height: 112px; border-width: 3px; }
 .action.primary .label { font-size: var(--fs-22); }
 .guide-link {
@@ -1372,3 +1372,9 @@ dialog.update-dlg::backdrop { background: rgba(46, 40, 60, .45); }
   .page.home .action.primary { min-height: 124px; }
   .page.home .action.half { min-height: 108px; }
 }
+
+/* 画面が縮小されて表示されているときの知らせ（lib/install.js） */
+.zoom-notice { align-items: flex-start; }
+.zoom-notice .small { margin: 0; line-height: 1.6; }
+/* はじめの案内：ロゴのすぐ下の「ホーム画面に追加」（最初から見せるので、ふわっと現れる演出は付けない） */
+.welcome-install { border: 2px solid var(--c-sakura); }

@@ -1,7 +1,7 @@
 // はじめの案内：初めて開いた人への案内画面であり、参加の案内のページ（ホームの「はじめの案内を見る」から。以前の #/guide もここ）
 //   通常のトップ #/ を最初に開いたときは、ホームの代わりにこの画面を出す（views/home.js）
 //
-// 上から：ロゴと見出し → 体験の短い紹介 → 参加の3ステップ → 収集箱を受け取れる施設 → 景品 → ホーム画面に追加
+// 上から：ロゴと見出し → ホーム画面に追加 → 体験の短い紹介 → 参加の3ステップ → 収集箱を受け取れる施設 → 景品
 //   → お問い合わせ → 「貝さがしをはじめる」
 // ・下へ読み進めると、各欄が順にふわっと現れる（透明から少し上へ。動きは小さく、ゆっくり）
 // ・背景の貝と波は、読む邪魔にならない程度にゆっくり動く
@@ -94,24 +94,25 @@ export function render(ctx) {
       h('p', { class: 'welcome-lead float-in', style: { '--d': '.5s' } }, 'ひとつ拾うたび、自分だけのコレクションに。'),
       h('p', { class: 'welcome-scroll float-in', style: { '--d': '.9s' }, 'aria-hidden': 'true' }, ic('chevron'))),
 
-    // 2. 体験の短い紹介
+    // 2. ホーム画面に追加（最初に見せる。追加済みなら出さない）
+    installSection(data, { compact: true, className: 'welcome-section card stack-sm welcome-install' }),
+
+    // 3. 体験の短い紹介
     h('section', { class: 'welcome-section reveal' },
       h('p', { class: 'welcome-text' }, '増穂浦の海岸で、36種類の貝を探してみませんか。拾った貝を調べて、集めた思い出をこのサイトに記録できます。'),
       photos.length ? h('div', { class: 'welcome-photos' }, photos) : null),
 
-    // 3. 参加の3ステップ
+    // 4. 参加の3ステップ
     h('section', { class: 'welcome-section card reveal' },
       h('h2', { class: 'section-title' }, '参加の3ステップ'),
       h('ol', { class: 'welcome-steps' }, steps.map(([t, sub], i) => h('li', { class: 'reveal', style: { '--d': `${0.12 * i}s` } },
         h('span', { class: 'step-no' }, i + 1),
         h('span', null, h('strong', { class: 'block' }, t), sub ? h('span', { class: 'small muted' }, sub) : null))))),
 
-    // 4. 収集箱を受け取れる施設 ／ 5. 景品
+    // 5. 収集箱を受け取れる施設 ／ 6. 景品
     ev ? placesSection(ev) : null,
     ev ? prizesSection(ev) : null,
 
-    // 6. ホーム画面に追加
-    installSection(data, { compact: true, className: 'welcome-section card stack-sm reveal' }),
 
     // 7. お問い合わせ
     ev ? contactSection(ev) : null,
