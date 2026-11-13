@@ -5,6 +5,7 @@ import { identifierEnabled, prepareIdentifier } from './lib/identify.js';
 import './lib/install.js'; // ホーム画面に追加の知らせ（beforeinstallprompt）を最初から受け取る
 import { noteEntry } from './lib/intro.js';
 import { setupUpdates } from './lib/update.js';
+import { applyDisplay } from './lib/display.js';
 import { h, ic } from './ui.js';
 import * as home from './views/home.js';
 import * as list from './views/list.js';
@@ -31,12 +32,22 @@ const routes = [
   { re: /^\/welcome$/, view: welcome, tab: 'home' }, // はじめの案内（ホームの「はじめの案内を見る」から）
 ];
 
+// 下のタブ：ホーム／調べる／図鑑／収集箱（2026-11-13 並びと名前を整理。絵と色は今までどおり）
 const TABS = [
   { key: 'home', href: '#/', label: 'ホーム', icon: 'home' },
+  { key: 'identify', href: '#/identify', label: '調べる', icon: 'camera', aria: '写真で調べる' },
   { key: 'list', href: '#/list', label: '図鑑', icon: 'search' },
-  { key: 'identify', href: '#/identify', label: '写真で調べる', icon: 'camera' },
   { key: 'box', href: '#/box', label: '収集箱', icon: 'box' },
 ];
+
+// 表示の設定（標準・大きめ）を、最初の画面を描く前に反映する
+applyDisplay();
+// 画面の高さ：ふつうは CSS の 100dvh を使う。dvh を知らない古いブラウザだけ、見えている高さを数で渡す
+if (!window.CSS?.supports?.('height', '100dvh')) {
+  const setAppHeight = () => document.documentElement.style.setProperty('--app-h', `${window.innerHeight}px`);
+  setAppHeight();
+  window.addEventListener('resize', setAppHeight);
+}
 
 const root = document.getElementById('app');
 let data = null;
@@ -77,7 +88,7 @@ export function goBack(fallback = '#/') {
 function tabbar(activeKey) {
   return h('nav', { class: 'tabbar', 'aria-label': 'メインメニュー' },
     h('ul', null, TABS.map((t) => h('li', null,
-      h('a', { href: t.href, 'aria-current': t.key === activeKey ? 'page' : null },
+      h('a', { href: t.href, 'aria-current': t.key === activeKey ? 'page' : null, 'aria-label': t.aria || null },
         h('span', { class: 'tab-ic' }, ic(t.icon)), t.label)))));
 }
 

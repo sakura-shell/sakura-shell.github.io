@@ -7,7 +7,7 @@
 // ・背景の貝と波は、読む邪魔にならない程度にゆっくり動く
 // ・動きを減らす設定の端末では、動かさずに最初から表示する
 // ・料金・施設・景品の条件は、確認済みのイベント設定（config.json の event）から表示する（画面に直接書かない）
-// ・「スキップ」はいつでも押せる位置に置く
+// ・「あとで読む」はいつでも押せる位置に置き、ロゴの下にも「貝さがしをはじめる」「あとで読む」を置く（最後まで読まなくても進める）
 import { h, ic, shellImg } from '../ui.js';
 import { markIntro } from '../lib/intro.js';
 import { installSection, markInstallHintShown } from '../lib/install.js';
@@ -84,7 +84,7 @@ export function render(ctx) {
   const main = h('main', { class: `page welcome${anim ? ' js-anim' : ''}`, id: 'main', dataset: { tabbar: 'hide', title: 'はじめの案内' } },
     h('div', { class: 'welcome-bg', 'aria-hidden': 'true' }, h('span', { class: 'drift' }), h('span', { class: 'waves' })),
     h('div', { class: 'welcome-skip' },
-      h('button', { class: 'btn small ghost', type: 'button', onclick: () => finish('skip') }, 'スキップ')),
+      h('button', { class: 'btn small ghost', type: 'button', onclick: () => finish('skip') }, 'あとで読む')),
 
     // 1. ロゴと見出し
     h('header', { class: 'welcome-hero' },
@@ -92,10 +92,14 @@ export function render(ctx) {
         h('img', { src: 'assets/img/brand/hero.jpg', alt: 'MASUHOGAURA 36 shells Collection　Beachcombing SHIKA TOWN NOTO ISHIKAWA', width: 685, height: 464 })),
       h('h1', { class: 'welcome-title float-in', style: { '--d': '.25s' } }, '海辺の小さな宝探しへ。'),
       h('p', { class: 'welcome-lead float-in', style: { '--d': '.5s' } }, 'ひとつ拾うたび、自分だけのコレクションに。'),
+      // 長い案内を最後まで読まなくても、ここからホームへ進める（案内は、ホームの「このサイトについて」からいつでも読める）
+      h('div', { class: 'welcome-start float-in', style: { '--d': '.7s' } },
+        h('button', { class: 'btn block found-btn', type: 'button', onclick: () => finish('start') }, '貝さがしをはじめる'),
+        h('button', { class: 'btn block ghost small', type: 'button', onclick: () => finish('skip') }, 'あとで読む')),
       h('p', { class: 'welcome-scroll float-in', style: { '--d': '.9s' }, 'aria-hidden': 'true' }, ic('chevron'))),
 
-    // 2. ホーム画面に追加（最初に見せる。追加済みなら出さない）
-    installSection(data, { compact: true, className: 'welcome-section card stack-sm welcome-install' }),
+    // 2. ホーム画面に追加（短い案内。手順は「追加方法を見る」を開いたときだけ。追加済みなら出さない）
+    installSection(data, { compact: true, className: 'welcome-section card stack-sm reveal' }),
 
     // 3. 体験の短い紹介
     h('section', { class: 'welcome-section reveal' },

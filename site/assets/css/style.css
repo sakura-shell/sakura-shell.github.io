@@ -1378,3 +1378,118 @@ dialog.update-dlg::backdrop { background: rgba(46, 40, 60, .45); }
 .zoom-notice .small { margin: 0; line-height: 1.6; }
 /* はじめの案内：ロゴのすぐ下の「ホーム画面に追加」（最初から見せるので、ふわっと現れる演出は付けない） */
 .welcome-install { border: 2px solid var(--c-sakura); }
+
+
+/* ==========================================================================
+   2026-11-13 改修：ホームを1画面に／下のタブを少し大きく／表示の設定（標準・大きめ）
+   色・書体・角の丸み・影・アイコンは今までのものを使う（新しい絵や飾りは足さない）
+   ========================================================================== */
+
+/* ---- 下のタブ：少し大きく（文字 14px・アイコン 29px・高さ 72px。絵・選んだときの色と丸い背景はそのまま） ---- */
+:root { --tabbar-h: 72px; }
+.tabbar a { font-size: var(--fs-14); gap: 3px; }
+.tabbar a svg { width: 29px; height: 29px; }
+.tab-ic { width: 58px; height: 34px; }
+
+/* ---- 表示の設定「大きめ」：文字・下のタブを一段ずつ大きく（アプリの中の表示だけ。html[data-display] は lib/display.js） ---- */
+html[data-display="large"] {
+  --fs-9: 10px; --fs-11: 12.5px; --fs-12: 14px; --fs-14: 16px; --fs-16: 18.5px; --fs-18: 20.5px;
+  --fs-20: 23px; --fs-22: 25px; --fs-26: 30px; --fs-30: 34px;
+  --tabbar-h: 82px;
+}
+html[data-display="large"] .tabbar a svg { width: 33px; height: 33px; }
+html[data-display="large"] .tab-ic { width: 64px; height: 38px; }
+html[data-display="large"] .btn { min-height: 52px; }
+html[data-display="large"] .btn.small { min-height: 46px; }
+.display-control .seg button { font-size: var(--fs-16); }
+.zoom-note { margin: 0; padding: var(--sp-2) var(--sp-3); border-radius: var(--r-sm); background: var(--c-gold-pale); color: var(--c-text); line-height: 1.6; }
+.zoom-note strong { display: block; color: var(--c-heading); }
+
+/* ---- ホーム（1画面で完結。スクロールさせない） ----
+   高さは見えている画面に合わせる（100dvh）。ロゴは残った高さに合わせて全体を縮め、
+   下の段は views/home.js の fit() が data-fit（0〜3）で段階的にまとめる */
+.home2 {
+  height: 100vh; height: 100dvh; height: var(--app-h, 100dvh);
+  max-width: 560px; margin: 0 auto;
+  padding: env(safe-area-inset-top, 0px) 0 calc(var(--tabbar-h) + var(--safe-b));
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.h2-hero { flex: 0 1 auto; width: 100%; aspect-ratio: 685 / 464; min-height: 72px; position: relative; background: var(--c-white); }
+.h2-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; } /* 全体を見せる（切らない・引き伸ばさない） */
+.h2-hero.text { aspect-ratio: auto; display: grid; place-items: center; padding: var(--sp-4); background: transparent; }
+.h2-body { flex: 1 0 auto; min-height: 0; display: flex; flex-direction: column; justify-content: space-evenly; gap: 8px; padding: 8px 16px 6px; }
+.h2-body > * { flex: none; }
+
+/* 最近記録した貝：明るい淡い色の面に、写真を小さめに置く */
+.h2-recent h2 { margin: 0 0 4px; font-size: var(--fs-16); color: var(--c-heading); letter-spacing: .04em; }
+.h2-recent ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.h2-recent a { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 6px 6px; border-radius: var(--r-md); text-decoration: none; min-height: 48px; }
+.h2-recent .tone-0 { background: var(--c-sakura-pale); }
+.h2-recent .tone-1 { background: var(--c-gold-pale); }
+.h2-recent .tone-2 { background: var(--c-sea-pale); }
+.h2-recent .ph { width: 56px; height: 56px; flex: none; border-radius: var(--r-xs); overflow: hidden; background: var(--c-white); display: grid; place-items: center; }
+.h2-recent .ph img { width: 100%; height: 100%; object-fit: cover; }
+.h2-recent .ph .no-photo { font-size: 0; }
+.h2-recent .ph .no-photo svg { width: 28px; height: 28px; }
+.h2-recent .nm { font-size: var(--fs-14); font-weight: 700; color: var(--c-heading); line-height: 1.3; text-align: center; word-break: keep-all; overflow-wrap: anywhere; }
+.h2-recent.empty p { margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px 12px; border-radius: var(--r-md); background: var(--c-sakura-pale); color: var(--c-heading); font-weight: 700; font-size: var(--fs-14); text-align: center; }
+.h2-recent.empty svg { width: 26px; height: 26px; flex: none; }
+
+/* おもな操作：写真で調べる（大きく1つ）・図鑑と収集箱（横に2つ） */
+.h2-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.h2-card { display: flex; text-decoration: none; color: var(--c-text); border: 1.5px solid var(--c-line); border-radius: var(--r-lg); box-shadow: var(--shadow); background: var(--c-surface); }
+.h2-card:active { transform: translateY(1px); box-shadow: var(--shadow-sm); }
+.h2-card .label { display: block; font-weight: 700; color: var(--c-heading); line-height: 1.3; }
+.h2-card .desc { display: block; font-size: var(--fs-14); color: var(--c-text-2); line-height: 1.4; }
+.h2-card.primary { grid-column: 1 / -1; align-items: center; gap: 12px; min-height: 76px; padding: 10px 14px; background: var(--c-sakura-pale); border-color: var(--c-sakura-soft); border-width: 2px; }
+.h2-card.primary .art { width: 52px; height: 52px; flex: none; }
+.h2-card.primary .label { font-size: var(--fs-22); }
+.h2-card.primary .go { width: 24px; height: 24px; flex: none; color: var(--c-heading); }
+.h2-card.half { flex-direction: column; justify-content: center; gap: 4px; min-height: 84px; padding: 10px 12px; }
+.h2-card.half.cream { background: var(--c-gold-pale); border-color: var(--c-gold-soft); }
+.h2-card.half.sky { background: var(--c-sea-pale); border-color: var(--c-sea-soft); }
+.h2-card .head { display: flex; align-items: center; gap: 8px; }
+.h2-card .head svg { width: 24px; height: 24px; flex: none; color: var(--c-heading); }
+.h2-card.half .label { font-size: var(--fs-20); }
+.h2-card .count { color: var(--c-sea-deep); font-size: var(--fs-16); font-weight: 700; line-height: 1.2; }
+.h2-card .count strong { font-size: var(--fs-26); margin-right: 2px; }
+
+/* 控えめな補助の行：ホーム画面に追加／このサイトについて・表示 */
+.h2-install-holder:empty { display: none; }
+.h2-row { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--c-line); border-radius: var(--r-md); background: var(--c-surface); color: var(--c-heading); font: inherit; font-size: var(--fs-14); font-weight: 700; text-align: left; cursor: pointer; }
+.h2-row svg { width: 20px; height: 20px; flex: none; }
+.h2-aux { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; }
+.h2-aux a, .h2-aux button { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 6px; border: 0; background: none; font: inherit; font-size: var(--fs-14); color: var(--c-text-2); text-decoration: none; cursor: pointer; }
+.h2-aux a { text-decoration: underline; text-underline-offset: 3px; }
+.h2-aux button { color: var(--c-heading); font-weight: 700; }
+.h2-aux svg { width: 20px; height: 20px; }
+.h2-temp { flex: 1; min-width: 0; font-size: var(--fs-12); color: var(--warn-ink); text-align: center; line-height: 1.3; }
+
+/* 段階1：最近の貝を、小さな写真つきの1行に */
+.home2[data-fit="1"] .h2-recent h2, .home2[data-fit="2"] .h2-recent h2 { font-size: var(--fs-14); margin-bottom: 2px; }
+.home2[data-fit="1"] .h2-recent a, .home2[data-fit="2"] .h2-recent a { flex-direction: row; justify-content: flex-start; gap: 6px; padding: 4px 6px; min-height: 44px; }
+.home2[data-fit="1"] .h2-recent .ph, .home2[data-fit="2"] .h2-recent .ph { width: 34px; height: 34px; }
+.home2[data-fit="1"] .h2-recent .nm, .home2[data-fit="2"] .h2-recent .nm { text-align: left; font-size: var(--fs-12); }
+.home2[data-fit="1"] .h2-recent ul, .home2[data-fit="2"] .h2-recent ul { gap: 6px; }
+/* 段階2：「ホーム画面に追加」は「このサイトについて」の中だけに（入口は残る） */
+.home2[data-fit="2"] .h2-install-holder, .home2[data-fit="3"] .h2-install-holder { display: none; }
+.home2[data-fit="2"] .h2-card.primary, .home2[data-fit="3"] .h2-card.primary { min-height: 64px; padding-top: 6px; padding-bottom: 6px; }
+.home2[data-fit="2"] .h2-card.half, .home2[data-fit="3"] .h2-card.half { min-height: 68px; padding-top: 6px; padding-bottom: 6px; }
+/* 段階3：最近の貝をしまい（収集箱から見られる）、説明の文をしまう。おもな操作と補助の入口は残す */
+.home2[data-fit="3"] .h2-recent { display: none; }
+.home2[data-fit="3"] .h2-card .desc { display: none; }
+.home2[data-fit="3"] .h2-card.primary .art { width: 40px; height: 40px; }
+.home2[data-fit="3"] .h2-card.half { min-height: 56px; flex-direction: row; align-items: center; justify-content: space-between; }
+.home2[data-fit="3"] .h2-body { gap: 6px; padding-top: 6px; padding-bottom: 4px; }
+.home2[data-fit="3"] .h2-hero { min-height: 48px; }
+
+/* 横向きの低い画面：ロゴを左、操作を右に */
+.home2.land { flex-direction: row; max-width: none; }
+.home2.land .h2-hero { flex: 0 0 40%; width: 40%; aspect-ratio: auto; height: 100%; min-height: 0; }
+.home2.land .h2-body { flex: 1 1 0; min-width: 0; }
+
+/* はじめの案内：ロゴの下の「貝さがしをはじめる」「あとで読む」 */
+.welcome-start { margin: var(--sp-4) auto 0; max-width: 320px; display: grid; gap: var(--sp-2); }
+/* 「大きめ」の表示や幅の狭い画面で、施設の行の「地図」ボタンがはみ出さないように（折り返す） */
+.guide-places li { flex-wrap: wrap; }
+.guide-places li .btn { margin-left: auto; }

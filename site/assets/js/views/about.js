@@ -1,7 +1,8 @@
-import { h } from '../ui.js';
+import { h, ic } from '../ui.js';
 import { scanAvailable, isDev } from '../data.js';
 import { page } from './common.js';
-import { installSection } from '../lib/install.js';
+import { installSection, zoomedOutNotice } from '../lib/install.js';
+import { displayControl } from '../lib/display.js';
 
 export function render(ctx) {
   const { data } = ctx;
@@ -27,15 +28,24 @@ export function render(ctx) {
           contact || data.preview ? h('dd', null, contact || '（確認中）', cfg.contact?.status === 'confirmed' && cfg.contact.tel ? h('a', { class: 'tel block', href: `tel:${cfg.contact.tel.replace(/-/g, '')}` }, '電話をかける') : null) : null,
           h('dt', null, '内容の更新日'), h('dd', null, cfg.contentUpdated),
           h('dt', null, '版'), h('dd', null, cfg.appVersion))),
+      h('section', { class: 'card stack-sm', id: 'display' },
+        h('h3', { class: 'section-title' }, '表示（文字やボタンの大きさ）'),
+        displayControl(),
+        zoomedOutNotice()),
+      h('section', { class: 'card stack-sm' },
+        h('h3', { class: 'section-title' }, 'はじめの案内'),
+        h('p', { class: 'small' }, '参加のしかた、収集箱を受け取れる施設、景品の案内です。'),
+        h('a', { class: 'btn block secondary', href: '#/welcome' }, ic('guide'), 'はじめの案内を見る')),
       h('section', { class: 'card stack-sm' },
         h('h3', { class: 'section-title' }, '収集箱の記録について'),
         ul('記録はこの端末のこのブラウザの中だけに保存します。ログインや登録はありません。ほかの端末・ほかのブラウザとは同期しません。',
           'ブラウザのデータを消したとき、別の端末・別のブラウザでは記録が残りません。実物の箱を見ながら、いつでも記録し直せます。',
           '保存できない環境では「この画面を開いている間だけ使う」を選べます（閉じると消えます）。',
+          'ホーム画面に追加しても、記録の保存のしかたは変わりません（バックアップや、端末どうしの同期にはなりません）。',
           '記録は目安です。実物の箱を確かめてください。')),
       h('section', { class: 'card stack-sm' },
         h('h3', { class: 'section-title' }, '写真と通信について'),
-        ul('撮った写真は、この端末の中だけで使います。どこにも送信しません。',
+        ul('写真で調べるために選んだ写真は、この端末の中だけで処理します。どこにも送信しません。',
           'ページを開くときは、このサイトのファイルを読み込みます。文字の表示に Google Fonts を使います（写真は含みません）。',
           models ? '3D表示を開いたときだけ、表示用の部品を jsDelivr から読み込みます（写真は含みません）。' : null,
           'アクセス解析・広告・位置情報の取得はしていません。')),

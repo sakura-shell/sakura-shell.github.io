@@ -4,8 +4,11 @@
 // ・ホーム画面から開いているとき（追加済み）は、ボタンも手順も出さない
 // ・iPhone の Safari にはボタンを出す仕組みがないので、手順だけを載せる
 // ・インストールを強制する表示はしない。開いた直後には出さない
-// ・はじめの案内では、いちばん上（ロゴのすぐ下）に追加の案内を出す（2026-11-09 依頼者の指示：最初に表示）
-// ・小さな案内（maybeShowInstallHint）は、ホームを開いたときか、初めて貝を記録したあとに一度だけ。閉じたら自動では出さない
+// ・追加すると「次からすぐ開ける」ことだけを伝える。記録が安全・永久に残るとは書かない
+//   （記録は端末の中だけ。バックアップや端末どうしの同期ではない。くわしくは「このサイトについて」）
+// ・ホームには、控えめな1行の入口（「ホーム画面に追加」）を置く。ホーム画面から開いているときは出さない
+// ・はじめの案内では、ロゴの下に短く案内し、手順は「追加方法を見る」を開いたときだけ見せる
+// ・小さな案内（maybeShowInstallHint）は、初めて貝を記録したあとに一度だけ。閉じたら自動では出さない
 import { h, ic, toast, openSheet } from '../ui.js';
 
 let deferred = null; // ブラウザの「インストールできます」の知らせ（beforeinstallprompt）
@@ -79,20 +82,19 @@ export function installSection(data, { compact = false, className = 'card stack-
     // はじめの案内の中：ボタンで追加できる環境ではボタン、手順は「追加方法を見る」で開く（初めの画面を長くしない）
     const steps = pf === 'ios' ? [ios] : pf === 'android' ? [androidSteps()] : [ios, android];
     return h('section', { class: className },
-      h('h2', { class: 'section-title' }, 'はじめに、ホーム画面に追加しておくと安心です'),
-      h('p', { class: 'small' }, 'アプリのように、ホーム画面のアイコンからすぐ開けます。集めた記録も消えにくくなります。'),
+      h('h2', { class: 'section-title' }, 'ホーム画面に追加すると、次からすぐ開けます'),
+      h('p', { class: 'small' }, 'アイコンから、この貝さがしガイドを開けます。追加せずにそのまま使うこともできます。'),
       btnHolder,
-      h('details', { class: 'tips-more', open: pf === 'ios' || pf === 'android' }, h('summary', null, '追加方法を見る'), h('div', { class: 'stack-sm' }, ...steps)),
-      pf === 'ios' ? h('p', { class: 'xsmall muted' }, 'iPhone の Safari では、しばらく開かないでいると、記録が消えることがあります。ホーム画面から開けば、消えにくくなります。') : null);
+      h('details', { class: 'tips-more' }, h('summary', null, '追加方法を見る'), h('div', { class: 'stack-sm' }, ...steps)));
   }
   return h('section', { class: className },
-    h('h3', { class: 'section-title' }, 'ホーム画面に追加すると便利です'),
-    h('p', { class: 'small' }, 'アプリのように、ホーム画面のアイコンからすぐ開けます。集めた記録も消えにくくなります。'),
+    h('h3', { class: 'section-title' }, 'ホーム画面に追加すると、次からすぐ開けます'),
+    h('p', { class: 'small' }, 'アイコンから、この貝さがしガイドを開けます。追加せずにそのまま使うこともできます。'),
     btnHolder,
     ...(pf === 'android' ? [android, ios] : [ios, android]),
     h('ul', { class: 'xsmall muted plain-list' },
-      h('li', null, '記録はこの端末の中だけに保存されます。ほかの端末やブラウザとは同じになりません（同期はしません）。'),
-      pf === 'ios' ? h('li', null, 'iPhone では、ホーム画面から開いたときと Safari で開いたときで、記録が別々になることがあります。ホーム画面から開くようにすると迷いません。') : null,
+      h('li', null, '追加しても、記録の保存のしかたは変わりません。記録はこの端末の中だけに保存され、バックアップや、ほかの端末との同期はしません。'),
+      pf === 'ios' ? h('li', null, 'iPhone では、ホーム画面のアイコンから開いたときと Safari で開いたときで、記録が別々になることがあります。') : null,
       gate ? h('li', null, '確認用プレビューでは、ホーム画面から初めて開いたときに、合言葉をもう一度聞かれることがあります。') : null));
 }
 
@@ -125,12 +127,29 @@ export function maybeShowInstallHint(reason, delay = 0) {
       } }, '追加する')
       : h('button', { class: 'btn small', type: 'button', onclick: () => { close(); showSteps(pf); } }, '追加のしかた');
     hintEl = h('aside', { class: 'install-hint', role: 'status', 'aria-label': 'ホーム画面に追加' },
-      h('p', { class: 'small' }, h('strong', { class: 'block' }, 'ホーム画面に追加しておくと安心です'),
-        '次からすぐ開けて、集めた記録も消えにくくなります。'),
+      h('p', { class: 'small' }, h('strong', { class: 'block' }, 'ホーム画面に追加すると、次からすぐ開けます'),
+        '追加せずにそのまま使うこともできます。'),
       h('div', { class: 'install-hint-actions' }, action,
         h('button', { class: 'icon-btn', type: 'button', 'aria-label': '閉じる', onclick: close }, ic('close'))));
     document.body.append(hintEl);
   }, delay);
+}
+
+// ホームの「ホーム画面に追加」の1行から開く。ブラウザが追加の確認を出せるときはそれを、出せないときは手順を見せる
+// （押しただけで「追加しました」とは出さない。追加をやめても、そのまま使える）
+export function canOfferInstall() {
+  return !isStandalone() && (!!deferred || platform() !== 'other');
+}
+
+export async function openInstallGuide() {
+  if (deferred) {
+    const ev = deferred; deferred = null;
+    ev.prompt();
+    await ev.userChoice.catch(() => null);
+    window.dispatchEvent(new CustomEvent('m36:installable'));
+    return;
+  }
+  showSteps(platform());
 }
 
 function showSteps(pf) {
@@ -142,14 +161,14 @@ function showSteps(pf) {
         h('li', null, '「ホーム画面に追加」→「追加」を押す'))
       : androidSteps(),
     pf === 'ios' ? h('p', { class: 'xsmall muted' }, 'iPhone では、ホーム画面から開いたときと Safari で開いたときで、記録が別々になることがあります。') : null,
-    h('p', { class: 'xsmall muted' }, '追加しなくても、記録はこの端末に保存されます。くわしくは「はじめの案内」にもあります。'),
+    h('p', { class: 'xsmall muted' }, '追加せずにそのまま使うこともできます。くわしくは「このサイトについて」にあります。'),
     h('button', { class: 'btn block secondary', type: 'button', onclick: close }, '閉じる')));
 }
 
 // ---- 画面が縮小されて表示されているとき ----
 // Safari の「ページの拡大/縮小」を小さくしている、または「デスクトップ用Webサイトを表示」になっていると、
 // スマホなのに横幅が実際の2倍近くあるように描かれ、文字もボタンも小さくなる（2026-11-09 依頼者の端末で発生）。
-// サイトの側では直せないので、直し方を知らせる（スマホの大きさの画面だけ。タブレット・パソコンでは出さない）
+// 端末・ブラウザ側の設定なので、サイトからは戻せない。見分けは補助（推定）で、これを理由に表示設定を勝手に変えない
 export function looksZoomedOut() {
   if (!(navigator.maxTouchPoints > 0)) return false;
   const short = Math.min(screen.width, screen.height);
@@ -159,15 +178,15 @@ export function looksZoomedOut() {
   return window.innerWidth > deviceWidth * 1.3;
 }
 
+// 起動直後の警告にはしない（2026-11-13 依頼者の指示）。「このサイトについて」の「表示」の欄にだけ、補足として出す
 export function zoomedOutNotice() {
   if (!looksZoomedOut()) return null;
   const ios = platform() === 'ios';
-  return h('div', { class: 'notice warn zoom-notice' }, ic('alert'),
-    h('div', { class: 'small' },
-      h('strong', { class: 'block' }, '画面が小さく表示されています'),
-      ios
-        ? (isStandalone()
-          ? '設定アプリ →「アプリ」→「Safari」の「ページの拡大/縮小」と「デスクトップ用Webサイトを表示」で、このサイトを元（100%・オフ）に戻してから、開き直してください。'
-          : 'Safari のアドレス欄の「ぁあ」から、文字の大きさを100%に戻すか、「モバイル用Webサイトを表示」を選んでください。')
-        : 'ブラウザの拡大・縮小を100%に戻すか、「PC版サイト」の表示をオフにしてください。'));
+  return h('p', { class: 'small zoom-note' },
+    h('strong', null, 'この端末では、画面が実際より小さく描かれているようです。'),
+    ios
+      ? (isStandalone()
+        ? '設定アプリ →「アプリ」→「Safari」の「ページの拡大/縮小」と「デスクトップ用Webサイトを表示」で、このサイトを100%・オフに戻すと、元の大きさになります。'
+        : 'Safari のアドレス欄の「ぁあ」から、大きさを100%に戻すか、「モバイル用Webサイトを表示」を選ぶと、元の大きさになります。')
+      : 'ブラウザの拡大・縮小を100%に戻すか、「PC版サイト」の表示をオフにすると、元の大きさになります。');
 }
