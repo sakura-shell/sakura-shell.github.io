@@ -6,7 +6,7 @@ import { fileToCanvas, pickImageFile, drawScaled } from './image.js';
 
 const HINTS = {
   box: { title: '箱の四すみまで枠に入れて撮ってください', one: null },
-  shell: { title: '貝を1つ、枠の中に大きく写してください', one: null },
+  shell: { title: '貝を1つ、手のひらか白い紙にのせて、枠いっぱいに写してください', one: null },
 };
 
 export function openCamera({ mode = 'box', maxSide = 1600 } = {}) {

@@ -1493,3 +1493,39 @@ html[data-display="large"] .btn.small { min-height: 46px; }
 /* 「大きめ」の表示や幅の狭い画面で、施設の行の「地図」ボタンがはみ出さないように（折り返す） */
 .guide-places li { flex-wrap: wrap; }
 .guide-places li .btn { margin-left: auto; }
+
+/* ==========================================================================
+   2026-11-16 写真で調べる：AIに自信がないときは「形と色で探す」へ（views/identify.js）
+   ========================================================================== */
+.ai-go { flex: none; font-size: var(--fs-14); font-weight: 700; color: var(--c-sakura-ink); }
+.ai-hints summary { font-size: var(--fs-14); }
+.ai-hints .ai-list { margin-top: var(--sp-2); }
+.find-btn { min-height: 52px; }
+.find-guide { scroll-margin-top: 150px; } /* 上に固定した撮った写真の下に、見出しが来るように */
+.find-step { display: flex; align-items: center; gap: 8px; margin: var(--sp-2) 0 0; font-weight: 700; color: var(--c-heading); font-size: var(--fs-16); }
+.find-step .n { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--c-sakura-deep); color: var(--c-white); font-size: var(--fs-14); }
+.find-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.find-choice {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 48px; padding: 6px 14px;
+  border: 1.5px solid var(--c-line-strong); border-radius: var(--r-pill); background: var(--c-surface);
+  font: inherit; font-size: var(--fs-16); font-weight: 700; color: var(--c-heading); cursor: pointer;
+}
+.find-row.shapes .find-choice { flex: 1 1 calc(50% - 8px); justify-content: center; border-radius: var(--r-md); min-height: 56px; }
+.find-choice svg { width: 28px; height: 28px; flex: none; }
+.find-choice .dot { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, .15); flex: none; }
+.find-choice[aria-pressed="true"] { background: var(--c-sakura-pale); border-color: var(--c-sakura-deep); box-shadow: inset 0 0 0 1.5px var(--c-sakura-deep); }
+.find-choice.any { color: var(--c-text-2); }
+.find-count { margin-top: var(--sp-3); color: var(--c-text); font-weight: 700; }
+.pre-pick { padding: var(--sp-3); border-radius: var(--r-md); background: var(--c-sakura-pale); }
+.pre-pick .find-step { margin-top: var(--sp-1); }
+.ai-filtered { margin: 0; color: var(--c-sea-deep); font-weight: 700; }
+/* 撮る前の形・色：「カメラで撮る」が最初の画面に見えるよう、小さめにまとめる */
+.pre-pick { gap: 6px; padding: var(--sp-2) var(--sp-3) var(--sp-3); }
+.pre-pick > p { margin: 0; }
+.pre-pick .find-step { font-size: var(--fs-14); margin: 2px 0 0; }
+.pre-pick .find-step .n { width: 22px; height: 22px; font-size: var(--fs-12); }
+.pre-pick .find-row { gap: 6px; }
+.pre-pick .find-row.shapes .find-choice { flex: 1 1 0; min-width: 0; flex-direction: column; gap: 0; min-height: 56px; padding: 4px 2px; font-size: var(--fs-14); border-radius: var(--r-sm); }
+.pre-pick .find-row.shapes .find-choice svg { width: 24px; height: 24px; }
+.pre-pick .find-row.colors .find-choice { min-height: 44px; padding: 4px 10px; font-size: var(--fs-14); }
+.pre-pick .find-row.colors .find-choice .dot { width: 14px; height: 14px; }
