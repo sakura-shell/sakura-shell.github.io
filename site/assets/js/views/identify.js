@@ -31,7 +31,7 @@ function filterText(data, f) {
   return [f.shape && data.shapes[f.shape]?.label, f.color && data.colorPalette[f.color]?.label].filter(Boolean).join('・');
 }
 
-// ①形 ②色 をえらぶ部品。onChange は選ぶたびに呼ぶ
+// ①形 ②色 をえらぶ部品。onChange は選ぶたびに呼ぶ。選んだボタンをもう一度押すと外れる（「わからない」のボタンは置かない）
 function pickers(data, f, onChange) {
   const shapes = availableShapes(data);
   const colors = availableColors(data);
@@ -42,12 +42,10 @@ function pickers(data, f, onChange) {
   const colorRow = h('div', { class: 'find-row colors', role: 'group', 'aria-label': '色をえらぶ' });
   const draw = () => {
     shapeRow.replaceChildren(
-      ...shapes.map((k) => choice(data.shapes[k].label, f.shape === k, () => { f.shape = f.shape === k ? '' : k; draw(); onChange(); }, shapeIc(k))),
-      choice('わからない', !f.shape, () => { f.shape = ''; draw(); onChange(); }, null, 'any'));
+      ...shapes.map((k) => choice(data.shapes[k].label, f.shape === k, () => { f.shape = f.shape === k ? '' : k; draw(); onChange(); }, shapeIc(k))));
     colorRow.replaceChildren(
       ...colors.map((k) => choice(data.colorPalette[k].label, f.color === k, () => { f.color = f.color === k ? '' : k; draw(); onChange(); },
-        h('span', { class: 'dot', style: { background: data.colorPalette[k].hex } }))),
-      choice('わからない', !f.color, () => { f.color = ''; draw(); onChange(); }, null, 'any'));
+        h('span', { class: 'dot', style: { background: data.colorPalette[k].hex } }))));
   };
   draw();
   return [
@@ -154,7 +152,7 @@ export async function render(ctx) {
           errorText ? notice('warn', 'alert', h('p', null, errorText)) : null,
           ai ? h('div', { class: 'stack-sm pre-pick' },
             h('p', { class: 'small strong' }, '先に、形と色をえらんでください'),
-            h('p', { class: 'xsmall muted' }, 'えらぶと、その中からAIが探すので当たりやすくなります。わからなければ、そのまま撮ってOKです。'),
+            h('p', { class: 'xsmall muted' }, 'えらぶと、その中からAIが探すので、当たりやすくなります。'),
             ...pickers(data, session.filters, () => {})) : null,
           h('button', { class: 'btn block', type: 'button', onclick: () => addPhoto(true) }, ic('camera'), 'カメラで撮る'),
           h('button', { class: 'btn block secondary', type: 'button', onclick: () => addPhoto(false) }, ic('image'), '写真を選ぶ'),
@@ -218,7 +216,7 @@ export async function render(ctx) {
     };
     sec.append(
       h('h2', { class: 'section-title', id: 'find-title' }, '形と色で探す'),
-      h('p', { class: 'small' }, '貝を見ながら、形と色を選んでください。候補がしぼれます。'),
+      h('p', { class: 'small' }, '貝を見ながら、形と色を選んでください。候補がしぼれます。選んだボタンをもう一度押すと外れます。'),
       ...pickers(data, f, update),
       count, grid);
     update();
@@ -259,15 +257,6 @@ function candidateList(data, cands) {
   }));
 }
 
-function evaluationNote(ev) {
-  if (!ev) return null;
-  const parts = [];
-  if (ev.val) parts.push(`学習に使っていない写真${ev.val.n}枚で、1位が正解 ${Math.round(ev.val.top1)}%`);
-  if (ev.box) parts.push(`見本の箱の写真${ev.box.n}枚で、1位が正解 ${Math.round(ev.box.top1)}%・3位以内 ${Math.round(ev.box.top3)}%`);
-  if (!parts.length) return null;
-  return h('p', { class: 'xsmall muted' }, `AIの成績（${ev.date?.slice(0, 10) || ''}）：${parts.join('、')}`);
-}
-
 // AIの判定の表示。％は「この写真がその貝である見込み」の目安
 export function resultPanel(data, result) {
   const cand = result.candidates || [];
@@ -276,7 +265,6 @@ export function resultPanel(data, result) {
   const findBtn = (primary) => h('button', { class: `btn block ${primary ? '' : 'secondary'} find-btn`, type: 'button', onclick: goFind },
     ic('search'), primary ? '形と色で探す' : '候補にない・ちがうときは、形と色で探す');
   const footer = [
-    evaluationNote(IDENTIFIER.evaluation),
     IDENTIFIER.mode === 'dev' ? h('p', { class: 'xsmall dev-note' }, h('span', { class: 'dev-label' }, '開発用'), '一般の利用者には表示していません（精度を確かめてから公開）') : null,
     IDENTIFIER.mode === 'preview' ? h('p', { class: 'xsmall dev-note' }, h('span', { class: 'dev-label' }, '試験版'), '確認用プレビューだけで表示しています（実物の写真で精度を確かめてから公開）') : null,
   ];
