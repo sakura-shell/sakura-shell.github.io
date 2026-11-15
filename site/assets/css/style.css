@@ -1529,3 +1529,9 @@ html[data-display="large"] .btn.small { min-height: 46px; }
 .pre-pick .find-row.shapes .find-choice svg { width: 24px; height: 24px; }
 .pre-pick .find-row.colors .find-choice { min-height: 44px; padding: 4px 10px; font-size: var(--fs-14); }
 .pre-pick .find-row.colors .find-choice .dot { width: 14px; height: 14px; }
+/* AIの候補：1つずつ「見比べる」と「これ！箱に入れる」 */
+.ai-item { display: grid; gap: 6px; padding: 6px; border-radius: var(--r-md); background: var(--sky-50); }
+.ai-item .ai-row { background: transparent; padding: 2px; min-height: 56px; }
+.ai-pick { width: 100%; min-height: 44px; }
+.ai-recorded { margin: 0; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; color: var(--ok); font-weight: 700; font-size: var(--fs-14); }
+.ai-recorded svg { width: 18px; height: 18px; }

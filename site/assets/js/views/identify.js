@@ -1,12 +1,12 @@
 // この貝はなんだろう：拾った貝を撮って、AIの判定（使えるとき）と図鑑の写真との見比べで調べる
 import { h, ic, notice, lightbox, confirmSheet, openSheet, shellImg, phrase, shapeIc } from '../ui.js';
-import { loadBox } from '../store.js';
+import { loadBox, cellState } from '../store.js';
 import { openCamera } from '../lib/camera.js';
 import { fileToCanvas, pickImageFile, canvasToDataURL } from '../lib/image.js';
 import { identify, identifierEnabled, prepareIdentifier, aiStatus, IDENTIFIER } from '../lib/identify.js';
 import { page } from './common.js';
 import { isStaff } from '../data.js';
-import { foundBlock } from './record.js';
+import { recordCell } from './record.js';
 import { shellCard } from './parts.js';
 import { availableShapes, availableColors } from '../data.js';
 
@@ -244,23 +244,35 @@ function goFind() {
   document.getElementById('find')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// 候補の一覧（写真・番号・名前）。％や棒は出さない（数字が答えの確からしさに見えてしまうため）
+// 候補の一覧。1つずつ「見比べる」（撮った写真と並べる）と「これ！箱に入れる」を置く
+// ・1位だけを特別あつかいしない（2位や3位が正解のこともあるため）。同じものがあれば、その候補を押して箱に入れる
+// ・％や棒は出さない（数字が答えの確からしさに見えてしまうため）
 function candidateList(data, cands) {
-  return h('ol', { class: 'ai-list' }, cands.map(({ no }) => {
-    const sp = data.byNo[no];
-    return h('li', null,
-      h('a', { class: 'ai-row', href: `#/compare/photo/${no}`, 'aria-label': `${no}番 ${sp.v.name}。撮った写真と見比べる` },
-        h('span', { class: 'ph' }, shellImg(sp)),
-        h('span', { class: 'grow' }, h('span', { class: 'ai-name' }, h('span', { class: 'no-badge' }, no), sp.v.name)),
-        h('span', { class: 'ai-go' }, '見比べる'),
-        ic('chevron', 'go')));
-  }));
+  const list = h('ol', { class: 'ai-list' });
+  const draw = (savedNo) => {
+    const rec = loadBox();
+    list.replaceChildren(...cands.map(({ no }) => {
+      const sp = data.byNo[no];
+      const filled = cellState(rec, no) === 'filled';
+      return h('li', { class: 'ai-item' },
+        h('a', { class: 'ai-row', href: `#/compare/photo/${no}`, 'aria-label': `${no}番 ${sp.v.name}。撮った写真と並べて見比べる` },
+          h('span', { class: 'ph' }, shellImg(sp)),
+          h('span', { class: 'grow' }, h('span', { class: 'ai-name' }, h('span', { class: 'no-badge' }, no), sp.v.name)),
+          h('span', { class: 'ai-go' }, '見比べる'),
+          ic('chevron', 'go')),
+        filled
+          ? h('p', { class: 'ai-recorded' }, ic('check'), savedNo === no ? '箱に入れたと記録しました' : '箱に入れてあります')
+          : h('button', { class: 'btn small secondary ai-pick', type: 'button', 'aria-label': `これ！ ${no}番 ${sp.v.name}を箱に入れたと記録する`,
+            onclick: () => recordCell(data, no, 'filled', () => draw(no)) }, ic('check'), 'これ！箱に入れる'));
+    }));
+  };
+  draw(null);
+  return list;
 }
 
 // AIの判定の表示。％は「この写真がその貝である見込み」の目安
 export function resultPanel(data, result) {
   const cand = result.candidates || [];
-  const top = cand[0] && data.byNo[cand[0].no];
   const sure = result.status === 'likely' && cand[0]?.p >= SURE;
   const findBtn = (primary) => h('button', { class: `btn block ${primary ? '' : 'secondary'} find-btn`, type: 'button', onclick: goFind },
     ic('search'), primary ? '形と色で探す' : '候補にない・ちがうときは、形と色で探す');
@@ -282,11 +294,11 @@ export function resultPanel(data, result) {
     case 'similar':
     case 'unclear':
       if (sure) {
-        return card(phrase(`「${top.v.name}」に`, '近そうです'),
-          h('p', { class: 'small' }, phrase('AIの判定は目安です。', '押して、図鑑の写真と見比べて確かめてね。')),
+        return card(phrase('この3つのどれかの', '可能性が高いです'),
+          h('p', { class: 'small' }, phrase('撮った貝と見比べて、', '同じものがあれば', '「これ！箱に入れる」を押してください。')),
           candidateList(data, cand.slice(0, 3)),
           findBtn(false),
-          h('div', { class: 'quick-record' }, foundBlock(data, top, { onNext: nextShell, lead: phrase(`見比べて「${top.v.name}」で合っていたら、`, 'そのまま記録できます。') })));
+          h('button', { class: 'btn block ghost small', type: 'button', onclick: nextShell }, ic('camera'), '次の貝を調べる'));
       }
       return card(phrase('AIでは、', 'はっきりしません'),
         h('p', { class: 'small' }, phrase('形と色で探すと確実です。', '下で選んでみてください。')),
