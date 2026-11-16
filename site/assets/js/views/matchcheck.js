@@ -1,8 +1,7 @@
 // 「この貝で合っているかな？」見比べチェック
 // 利用者が写真を見比べて、項目ごとに「似ている／ちがう／わからない」を選ぶ。
 // 表示するのは本人が選んだ結果の数だけ（自動の判定ではない）。
-//
-// AIの判定を使っているときは、その貝の％も並べて出す。
+// （自動判別の％は出さない：2026-11-16 依頼者の判断）
 import { h, ic, lightbox } from '../ui.js';
 import { foundBlock } from './record.js';
 import { nextShell } from './identify.js';
@@ -84,17 +83,6 @@ export function matchCheck(data, sp, session) {
     pair,
     list,
     summary,
-    h('p', { class: 'xsmall muted' }, 'この結果は、あなたが見比べて選んだものです。自動の判定ではありません。'),
-    aiScore(sp, session));
+    h('p', { class: 'xsmall muted' }, 'この結果は、あなたが見比べて選んだものです。自動の判定ではありません。'));
 }
 
-// AIの判定があるとき：この貝の％と順位
-function aiScore(sp, session) {
-  const all = session.result?.all;
-  if (!all) return null;
-  const i = all.findIndex((x) => x.no === sp.no);
-  if (i < 0) return null;
-  return h('div', { class: 'ai-mini' },
-    h('p', null, ic('magic'), ' 自動判別：', h('strong', null, `${Math.round(all[i].p * 100)}%`), `（36種類中 ${i + 1}番目）`),
-    h('p', { class: 'xsmall muted' }, '自動判別は目安です。見比べチェックと合わせて確かめてね。'));
-}
