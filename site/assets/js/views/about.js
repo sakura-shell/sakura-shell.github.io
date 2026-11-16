@@ -51,7 +51,7 @@ export function render(ctx) {
           'アクセス解析・広告・位置情報の取得はしていません。')),
       h('section', { class: 'card stack-sm' },
         h('h3', { class: 'section-title' }, 'オフラインで使うには'),
-        h('p', { class: 'small' }, '一度、電波のある場所でこのサイトを開くと、基本の画面・データ・写真（AI判定を使えるときは、その準備のファイルも）が端末に保存され、電波が弱くても使えるようになります。'),
+        h('p', { class: 'small' }, '一度、電波のある場所でこのサイトを開くと、基本の画面・データ・写真（自動判別を使えるときは、その準備のファイルも）が端末に保存され、電波が弱くても使えるようになります。'),
         h('p', { class: 'small' }, 'この端末の準備：', offline)),
       installSection(data),
       h('section', { class: 'card stack-sm' },
@@ -84,7 +84,7 @@ async function checkOffline(el) {
       ch.port1.onmessage = (e) => { clearTimeout(timer); resolve(e.data); };
       sw.postMessage({ type: 'status' }, [ch.port2]);
     });
-    set(res.ready ? `準備できています${res.ai ? '（AI判定も使えます）' : ''}` : `準備中（${res.cached} / ${res.total}）。電波のある場所でしばらく開いたままにしてください`);
+    set(res.ready ? `準備できています${res.ai ? '（自動判別も使えます）' : ''}` : `準備中（${res.cached} / ${res.total}）。電波のある場所でしばらく開いたままにしてください`);
   } catch {
     set('確認できませんでした');
   }

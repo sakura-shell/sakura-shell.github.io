@@ -102,10 +102,10 @@ export async function render(ctx) {
     const st = aiStatus();
     statusEl.dataset.state = st;
     statusEl.replaceChildren(...({
-      loading: [h('span', { class: 'dot' }), 'AIの準備中…（このまま撮れます）'],
-      ready: [ic('check'), 'AIの準備ができました'],
-      failed: ['AIの準備ができませんでした。', h('a', { href: '#/list' }, '図鑑で見比べて探す')],
-      idle: ['撮ると、AIの準備を始めます'],
+      loading: [h('span', { class: 'dot' }), '自動判別の準備中…（このまま撮れます）'],
+      ready: [ic('check'), '自動判別の準備ができました'],
+      failed: ['自動判別の準備ができませんでした。', h('a', { href: '#/list' }, '図鑑で見比べて探す')],
+      idle: ['撮ると、自動判別の準備を始めます'],
     }[st] || []));
   };
   drawStatus();
@@ -152,7 +152,7 @@ export async function render(ctx) {
           errorText ? notice('warn', 'alert', h('p', null, errorText)) : null,
           ai ? h('div', { class: 'stack-sm pre-pick' },
             h('p', { class: 'small strong' }, '先に、形と色をえらんでください'),
-            h('p', { class: 'xsmall muted' }, 'えらぶと、その中からAIが探すので、当たりやすくなります。'),
+            h('p', { class: 'xsmall muted' }, 'えらぶと、その中から自動で探すので、当たりやすくなります。'),
             ...pickers(data, session.filters, () => {})) : null,
           h('button', { class: 'btn block', type: 'button', onclick: () => addPhoto(true) }, ic('camera'), 'カメラで撮る'),
           h('button', { class: 'btn block secondary', type: 'button', onclick: () => addPhoto(false) }, ic('image'), '写真を選ぶ'),
@@ -182,7 +182,7 @@ export async function render(ctx) {
       if (busy) {
         body.append(h('section', { class: 'card stack-sm center ai-loading', 'aria-live': 'polite' },
           h('div', { class: 'spinner' }),
-          h('p', null, 'AIが調べています…'),
+          h('p', null, '自動で調べています…'),
           h('p', { class: 'xsmall muted' }, phrase('はじめて使うときは、', '準備に少し時間がかかります'))));
       } else if (session.result) {
         body.append(resultPanel(data, session.result));
@@ -211,7 +211,7 @@ export async function render(ctx) {
       const order = base?.all ? new Map(base.all.map((r, i) => [r.no, i])) : null;
       const list = data.species.filter((sp) => matchesFilters(sp, f));
       if (order) list.sort((x, y) => (order.get(x.no) ?? 99) - (order.get(y.no) ?? 99));
-      count.textContent = `${list.length}種類${f.shape || f.color ? 'にしぼりました' : ''}。押すと、撮った写真と並べて見比べられます${order ? '（AIが近いと見た順）' : ''}`;
+      count.textContent = `${list.length}種類${f.shape || f.color ? 'にしぼりました' : ''}。押すと、撮った写真と並べて見比べられます${order ? '（自動判別で近い順）' : ''}`;
       grid.replaceChildren(...list.map((sp) => shellCard(data, sp, rec, { href: `#/compare/photo/${sp.no}` })));
     };
     sec.append(
@@ -281,12 +281,12 @@ export function resultPanel(data, result) {
     IDENTIFIER.mode === 'preview' ? h('p', { class: 'xsmall dev-note' }, h('span', { class: 'dev-label' }, '試験版'), '確認用プレビューだけで表示しています（実物の写真で精度を確かめてから公開）') : null,
   ];
   const card = (title, ...kids) => h('section', { class: 'card stack-sm ai-card', 'aria-live': 'polite' },
-    h('p', { class: 'ai-kicker' }, ic('magic'), 'AIの判定'), h('h2', { class: 'ai-title' }, title),
+    h('p', { class: 'ai-kicker' }, ic('magic'), '自動判別'), h('h2', { class: 'ai-title' }, title),
     result.filtered ? h('p', { class: 'xsmall ai-filtered' }, `えらんだ形と色（${result.filtered}）の種類の中で比べました`) : null,
     ...kids.filter(Boolean), ...footer.filter(Boolean));
   // 自信がないときの候補は、たたんで「参考」として見せる
   const hintList = (n) => h('details', { class: 'tips-more ai-hints' },
-    h('summary', null, `AIの近い候補（参考・${Math.min(n, cand.length)}つ）`), candidateList(data, cand.slice(0, n)));
+    h('summary', null, `近い候補（参考・${Math.min(n, cand.length)}つ）`), candidateList(data, cand.slice(0, n)));
   const retake = h('p', { class: 'xsmall muted' }, phrase('撮り直すときは、', '貝を手のひらか白い紙にのせて、', '明るい場所で近づいて撮ると、', '結果が変わることがあります。'));
 
   switch (result.status) {
@@ -300,7 +300,7 @@ export function resultPanel(data, result) {
           findBtn(false),
           h('button', { class: 'btn block ghost small', type: 'button', onclick: nextShell }, ic('camera'), '次の貝を調べる'));
       }
-      return card(phrase('AIでは、', 'はっきりしません'),
+      return card(phrase('自動判別では、', 'はっきりしません'),
         h('p', { class: 'small' }, phrase('形と色で探すと確実です。', '下で選んでみてください。')),
         findBtn(true),
         hintList(5),
@@ -313,7 +313,7 @@ export function resultPanel(data, result) {
         retake);
     case 'error':
       return notice('warn ai-error', 'alert', h('div', { class: 'stack-sm' },
-        h('p', null, 'AIの判定ができませんでした。電波のよい場所で「もう一度試す」を押すか、下の一覧から写真を見比べて探してください。'),
+        h('p', null, '自動判別ができませんでした。電波のよい場所で「もう一度試す」を押すか、下の一覧から写真を見比べて探してください。'),
         h('button', { class: 'btn small', type: 'button', onclick: () => window.dispatchEvent(new CustomEvent('m36:retry-ai')) }, 'もう一度試す'),
         result.message ? h('p', { class: 'xsmall muted' }, `（くわしい理由：${result.message}）`) : null));
     default:

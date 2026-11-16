@@ -22,7 +22,7 @@ let modelPromise = null;
 
 export const IDENTIFIER = {
   available: false,
-  reason: '学習済みのデータがまだないため、AI判定は準備中です。',
+  reason: '学習済みのデータがまだないため、自動判別は準備中です。',
   evaluation: null,
   model: null,
 };
@@ -49,7 +49,7 @@ export function initIdentifier(data) {
   }).catch(() => {
     initPromise = null; // 次に開いたときにもう一度試す
     IDENTIFIER.available = false;
-    IDENTIFIER.reason = '学習済みのデータ（models/classifier.json）を読み込めなかったため、AI判定を使えません。';
+    IDENTIFIER.reason = '学習済みのデータ（models/classifier.json）を読み込めなかったため、自動判別を使えません。';
     return IDENTIFIER;
   });
   return initPromise;

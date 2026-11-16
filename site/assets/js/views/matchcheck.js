@@ -95,6 +95,6 @@ function aiScore(sp, session) {
   const i = all.findIndex((x) => x.no === sp.no);
   if (i < 0) return null;
   return h('div', { class: 'ai-mini' },
-    h('p', null, ic('magic'), ' AIの判定：', h('strong', null, `${Math.round(all[i].p * 100)}%`), `（36種類中 ${i + 1}番目）`),
-    h('p', { class: 'xsmall muted' }, 'AIの判定は目安です。見比べチェックと合わせて確かめてね。'));
+    h('p', null, ic('magic'), ' 自動判別：', h('strong', null, `${Math.round(all[i].p * 100)}%`), `（36種類中 ${i + 1}番目）`),
+    h('p', { class: 'xsmall muted' }, '自動判別は目安です。見比べチェックと合わせて確かめてね。'));
 }
