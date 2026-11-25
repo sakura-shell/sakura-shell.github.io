@@ -46,5 +46,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site
+      - name: アップロードした公開用ファイルが使えるようになるまで待つ
+        run: sleep 30
       - id: deployment
         uses: actions/deploy-pages@v5
