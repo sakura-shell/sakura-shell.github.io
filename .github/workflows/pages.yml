@@ -13,6 +13,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read # 公開の手順が、アップロードした公開用ファイルを読むため
   pages: write
   id-token: write
 concurrency:
