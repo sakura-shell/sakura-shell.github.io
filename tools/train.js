@@ -1,6 +1,7 @@
 // AI判定の学習と評価（開発用）。tools/train.html から読み込む
 import { loadTf, loadBackbone, cropSubject, loadImage, otsu, embedTTA, BACKBONE, DIM } from '../site/assets/js/lib/embed.js';
 import { predictFromFeature, decide } from '../site/assets/js/lib/identify.js';
+import { centerShellCrop } from './shellcrop.js';
 import { detectBox, orderClockwise, guessBoxCorners, rectify, cellRect } from '../site/assets/js/lib/boxreader.js';
 
 const $ = (id) => document.getElementById(id);
@@ -280,22 +281,24 @@ $('run').addEventListener('click', async () => {
     const useVal = $('useVal').checked;
     const nAug = Number($('aug').value);
     const rand = rng(20260930);
-    const trainCanvases = [], trainLabels = [], valSamples = [];
+    const trainCanvases = [], trainLabels = [], valSamples = []; const Xacc = [];
     const labelSet = new Set();
     for (const it of items) {
       let img;
       try { img = await loadImage(it.src); } catch { log(`読み込めない写真: ${it.src}`); continue; }
+      if (/-2026\d{4}-/.test(it.group)) img = centerShellCrop(img); // スタッフが机で撮った写真は、中央の貝のまわりを切り出す
       const base = cropSubject(img);
       labelSet.add(it.label);
       if (it.split === 'val' && useVal) valSamples.push({ label: it.label, canvas: base, group: it.group, img });
       else {
         trainCanvases.push(base); trainLabels.push(it.label);
         for (let k = 0; k < nAug; k++) { trainCanvases.push(augment(base, rand)); trainLabels.push(it.label); }
+        if (trainCanvases.length >= 256) { Xacc.push(...(await embedAll(trainCanvases, ''))); trainCanvases.length = 0; logEl.textContent = logEl.textContent.replace(/\n特徴を計算中.*$/, '') + `\n特徴を計算中（学習用）${Xacc.length}`; }
       }
     }
     const labels = [...labelSet].sort((a, b) => (a === 'other') - (b === 'other') || Number(a) - Number(b));
-    log(`ラベル ${labels.length}種類・学習用の画像 ${trainCanvases.length}枚（水増し込み）・評価用 ${valSamples.length}枚`);
-    const X = await embedAll(trainCanvases, '学習用');
+    log(`ラベル ${labels.length}種類・学習用の画像 ${Xacc.length + trainCanvases.length}枚（水増し込み）・評価用 ${valSamples.length}枚`);
+    const X = Xacc.concat(await embedAll(trainCanvases, '学習用')); trainCanvases.length = 0;
     const Y = trainLabels.map((l) => labels.indexOf(l));
     // 評価用は、サイトと同じ「判定の工夫（4枚の平均）」で特徴を出す
     for (const s of valSamples) { s.x = await embedTTA(s.img); s.x0 = (await embedAll([s.canvas], ''))[0]; }
@@ -324,6 +327,7 @@ $('run').addEventListener('click', async () => {
     if (sims.length >= 20 && labels.includes('other')) openSet = { minSimilarity: +(sims[Math.floor(sims.length * 0.05)] * 0.97).toFixed(4) };
     log(`36種類以外の判定（近さの下限）: ${openSet.minSimilarity ?? '使わない（評価用の写真か、36種類以外の貝の写真が足りない）'}`);
     const m1 = makeModel(w1, protos1, labels, temperature, openSet);
+    window.__m1 = m1; window.__val = valSamples; window.__labels = labels;
     const evaluation = { date: new Date().toISOString(), backbone: BACKBONE, labels: labels.length, trainImages: items.filter((i) => i.split !== 'val' || !useVal).length, augment: nAug, val: null, box: null };
     if (valSamples.length) {
       const ev = evaluate(m1, valSamples);
@@ -372,7 +376,7 @@ $('run').addEventListener('click', async () => {
     exported = json;
     log(`完了。評価用：${evaluation.val ? `1位で正解 ${evaluation.val.top1}%（${evaluation.val.n}枚）` : 'なし'}・見本の箱：${evaluation.box ? `1位で正解 ${evaluation.box.top1}%・3位以内 ${evaluation.box.top3}%・5位以内 ${evaluation.box.top5}%（${evaluation.box.n}枚）` : 'なし'}・別の個体：${evaluation.test ? `1位で正解 ${evaluation.test.top1}%（${evaluation.test.n}枚）` : 'なし'}`);
     $('save').disabled = false;
-    window.__train = { evaluation };
+    window.__train = { evaluation, exported };
   } catch (e) {
     console.error(e);
     log(`エラー: ${e.message}`);
